@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+  var theme = Theme.of(context);
     return Scaffold(
       body: Stack(
        children: [Image.asset('assets/images/fundo.jpeg'),
@@ -20,6 +22,13 @@ class LoginPage extends StatelessWidget {
               child:Image.asset('assets/images/logo.png'),
             ),
           ),
+          TextFormField(
+            maxLength: 25,
+            decoration: InputDecoration(
+              hintText: 'Usuario',
+              hintStyle: theme.textTheme.bodyText1,
+            ),
+          )
           
         ],),
        )
