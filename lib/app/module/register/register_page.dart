@@ -1,8 +1,9 @@
+import 'package:auresgate/app/module/register/register_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +57,7 @@ class RegisterPage extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(8.0))),
                     height: 50,
-                    child: TextField(
+                    child: TextFormField(
                       decoration: InputDecoration(
                         hintText: 'Informe seu e-mail',
                         hintStyle: TextStyle(color: Colors.black),
@@ -65,6 +66,120 @@ class RegisterPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0)),
                       ),
                     ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: Text(
+                      'SENHA',
+                      style: GoogleFonts.bebasNeue(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                    height: 50,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Informe sua senha',
+                        hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                        fillColor: Colors.white70,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: Text(
+                      'CONFIRMAR SENHA',
+                      style: GoogleFonts.bebasNeue(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                    height: 50,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Informe sua senha',
+                        hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                        fillColor: Colors.white70,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: Text(
+                      'ENDEREÇO',
+                      style: GoogleFonts.bebasNeue(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                    height: 50,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Informe sua senha',
+                        hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                        fillColor: Colors.white70,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: Text(
+                      'SENHA',
+                      style: GoogleFonts.bebasNeue(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                    height: 50,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Informe sua senha',
+                        hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                        fillColor: Colors.white70,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: ElevatedButton(
+                        child: Text('Confirmar'),
+                        onPressed: () {},
+                      )),
+                      Expanded(
+                          child: ElevatedButton(
+                        child: Text('Cancelar'),
+                        onPressed: () {},
+                      ))
+                    ],
                   )
                 ],
               )),
