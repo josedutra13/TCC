@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(GetMaterialApp(
-    title: 'AuResgate',
-    getPages: AppPages.routes,
-    initialRoute: Routes.REGISTER,
-    theme: ThemeData.light(),
+  runApp(
+   GestureDetector(
+    onTap:(){ FocusManager.instance.primaryFocus?.unfocus();},
+    child: GetMaterialApp(
+      title: 'AuResgate',
+      getPages: AppPages.routes,
+      initialRoute: Routes.REGISTER,
+      theme: ThemeData.light(),
+    ),
   ));
 }
