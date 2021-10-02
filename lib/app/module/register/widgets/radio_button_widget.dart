@@ -17,6 +17,7 @@ class RadioButton extends StatelessWidget {
     var group = groupT;
     return Row(
        children: [Radio(
+                    activeColor: Colors.white,
                     value: 1,groupValue: group,onChanged: (T){},)
                   ,if(text != null)
                   Text(text!,  style: GoogleFonts.bebasNeue(

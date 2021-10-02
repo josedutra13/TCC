@@ -10,22 +10,25 @@ class RegisterPage extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(children: [
-      Stack(
+        body: SafeArea(
+      child:ListView(
         children: [
-          Image.asset('assets/images/fundo.jpeg'),
+         Stack(
+        children: [
+          Image.asset('assets/images/fundo.png'),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top:8.0),
+                padding: const EdgeInsets.only(top:2.0),
+                //TODO 
                 child: Text('CADASTRAR',style: GoogleFonts.bebasNeue(color: Colors.white,fontSize: 50 )),
               ),
             ],),
           Container(
             width: MediaQuery.of(context).size.width * 1.0,
             child: Padding(
-              padding: const EdgeInsets.only(top: 120, left: 20, right: 20),
+              padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
               child: Form(
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -131,7 +134,7 @@ class RegisterPage extends GetView<RegisterController> {
                   Container(
                     margin: EdgeInsets.only(top: 20),
                     child: Text(
-                      'telefone',
+                      'Telefone',
                       style: GoogleFonts.bebasNeue(
                           color: Colors.white,
                           fontSize: 18,
@@ -178,29 +181,44 @@ class RegisterPage extends GetView<RegisterController> {
                       ),
                     ),
                   ),
-                  // Row(children: [RadioButton(groupT: 1,text: 'ONG',),RadioButton(groupT: 2,text: 'PESSOA',)],)
+                  Row(children: [RadioButton(groupT: 1,text: 'ONG',),RadioButton(groupT: 2,text: 'PESSOA',)],),
                   Padding(
-                    padding: const EdgeInsets.only(top:20.0),
+                    padding: const EdgeInsets.only(top:10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                            child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.red),
-                          child: Text('CANCELAR'),
-                          onPressed: () {},
-                        )),
+                      
+                         Expanded(
+                              child: Container(
+                                height:50,
+                           child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(primary: Colors.red,
+                            shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            side: BorderSide(color: Colors.red,width: 2) )),
+                            child: Text('CANCELAR',style: TextStyle(fontSize: 20),),
+                            onPressed: () {},
+                          ),
+                              )),
+                        
                         
                         Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 5.0),
-                              child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(primary: Colors.green, ),
-                          child: Text('CONFIRMAR'),
-                          onPressed: () {
-                            Get.toNamed(Routes.LOGIN);
-                          },
+                          child: Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Container(
+                            height: 50,
+                            child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                            primary: Colors.green,
+                            shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            side: BorderSide(color: Colors.green,width: 2))),
+                            child: Text('CONFIRMAR',style: TextStyle(fontSize: 20),),
+                            onPressed: () {
+                              Get.offNamed(Routes.LOGIN);
+                            },
                         ),
+                          ),
                             ))
                       ],
                     ),
@@ -211,6 +229,8 @@ class RegisterPage extends GetView<RegisterController> {
           )
         ],
       ),
-    ]));
+      ],) 
+      
+    ));
   }
 }
