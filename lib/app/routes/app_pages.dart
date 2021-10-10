@@ -1,5 +1,6 @@
 import 'package:auresgate/app/module/login/login_binding.dart';
 import 'package:auresgate/app/module/login/login_page.dart';
+import 'package:auresgate/app/module/main/main_binding.dart';
 import 'package:auresgate/app/module/main/main_page.dart';
 import 'package:auresgate/app/module/register/register_binding.dart';
 import 'package:auresgate/app/module/register/register_page.dart';
@@ -18,6 +19,6 @@ class AppPages {
         binding: RegisterBindings()),
     GetPage(
      name: Routes.MAIN,
-     page: () => MenuPage())    
+     page: () => MapPage())  
   ];
 }
