@@ -10,15 +10,11 @@ import 'package:get/get.dart';
 class AppPages {
   static final routes = [
     GetPage(
-    name: Routes.LOGIN,
-     page: () => LoginPage(),
-     binding: LoginBindings()),
+        name: Routes.LOGIN, page: () => LoginPage(), binding: LoginBindings()),
     GetPage(
         name: Routes.REGISTER,
         page: () => RegisterPage(),
         binding: RegisterBindings()),
-    GetPage(
-     name: Routes.MAIN,
-     page: () => MapPage())  
+    GetPage(name: Routes.MAIN, page: () => MapPage())
   ];
 }
