@@ -10,7 +10,7 @@ void main() {
     child: GetMaterialApp(
       title: 'AuResgate',
       getPages: AppPages.routes,
-      initialRoute: Routes.MAIN,
+      initialRoute: Routes.LOGIN,
       theme: ThemeData.light(),
     ),
   ));
