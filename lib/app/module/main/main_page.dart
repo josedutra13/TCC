@@ -1,3 +1,4 @@
+import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:auresgate/app/widgets/appBar_widgets.dart';
 import 'package:auresgate/app/widgets/menu_side_widget.dart';
@@ -13,6 +14,7 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
+  final RequestRescueController _requestRescueController = Get.find();
   //define a posição inicial do mapa
   static const _initialCameraPosition =
       CameraPosition(target: LatLng(-15.777737, -47.878488), zoom: 11.5);
@@ -99,26 +101,22 @@ class _MapPageState extends State<MapPage> {
               FloatingActionButton(
                 backgroundColor: Colors.blue,
                 foregroundColor: Colors.white,
-                onPressed: () => {
-                  
+                onPressed: () {
+                  _requestRescueController.marking
+                      ? _googleMapController.animateCamera(
+                          CameraUpdate.newCameraPosition(
+                              _initialCameraPosition))
+                      : Get.toNamed(Routes.REQUEST_RESCUE);
                 },
-                child: const Icon(
-                  Icons.add,
-                  size: 35,
-                ),
+                child: _requestRescueController.marking
+                    ? const Icon(Icons.center_focus_strong)
+                    : const Icon(
+                        Icons.add,
+                        size: 35,
+                      ),
               ),
               SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
-                child: FloatingActionButton(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
-                  onPressed: () => _googleMapController.animateCamera(
-                      CameraUpdate.newCameraPosition(_initialCameraPosition)),
-                  child: const Icon(Icons.center_focus_strong),
-                ),
+                height: 15,
               ),
             ],
           ),
