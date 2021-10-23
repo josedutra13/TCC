@@ -16,7 +16,7 @@ class LoginPage extends GetView<LoginController> {
           children: [
             Stack(
               children: [
-                Image.asset('assets/images/fundo.jpeg'),
+                Image.asset('assets/images/fundo.png'),
                 Column(
                   children: [
                     Padding(
