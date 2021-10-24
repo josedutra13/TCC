@@ -29,115 +29,127 @@ class RegisterPage extends GetView<RegisterController> {
             ],
           ),
           Container(
-            width: MediaQuery.of(context).size.width * 1.0,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
-              child: Form(
-                  child: Column(
-                children: [
-                  RegisterInput(
-                    label: 'USUÁRIO',
-                    placeholder: 'Informe seu usuário',
-                    onChanged: (value) => {},
-                  ),
-                  RegisterInput(
-                      label: 'E-MAIL',
-                      placeholder: 'Informe seu e-mail',
-                      onChanged: (value) => {}),
-                  Obx(() => PasswordInput(
-                      label: 'SENHA',
-                      placeholder: 'Informe sua senha',
-                      controller: controller.passwordController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      onChanged: (value) => {},
-                      obscureText: !controller.showPassword,
-                      onShowPassword: () {
-                        controller.showPassword = !controller.showPassword;
-                      })),
-                  PasswordInput(
-                    label: 'CONFIRMAR SENHA',
-                    placeholder: 'Confirme sua senha',
-                    obscureText: !controller.showPassword,
-                    obscureTextOption: false,
-                  ),
-                  RegisterInput(
-                      label: 'TELEFONE',
-                      placeholder: 'Informe seu telefone',
-                      onChanged: (value) => {}),
-                  //TODO COLOCAR UM CAMPO TEXT
-                  RegisterInput(
-                      label: 'ESTADO',
-                      placeholder: 'Informe seu estado',
-                      onChanged: (value) => {}),
-                  RegisterInput(
-                      label: 'CIDADE',
-                      placeholder: 'Informe seu cidade',
-                      onChanged: (value) => {}),
-                  Row(
-                    children: [
-                      RadioButton(
-                        groupT: 1,
-                        text: 'ONG',
-                      ),
-                      RadioButton(
-                        groupT: 2,
-                        text: 'PESSOA',
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                            child: Container(
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: Colors.red,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30.0),
-                                    side: BorderSide(
-                                        color: Colors.red, width: 2))),
-                            child: Text(
-                              'CANCELAR',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            onPressed: () {
-                              Get.offNamed(Routes.LOGIN);
-                            },
+              width: MediaQuery.of(context).size.width * 1.0,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
+                child: Obx(
+                  () => Form(
+                      key: controller.formKeyAuth,
+                      child: Column(
+                        children: [
+                          RegisterInput(
+                            label: 'USUÁRIO',
+                            placeholder: 'Informe seu usuário',
+                            onChanged: (value) =>
+                                controller.onChangeUser(nome: value),
                           ),
-                        )),
-                        Expanded(
-                            child: Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Container(
-                            height: 50,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: Colors.green,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      side: BorderSide(
-                                          color: Colors.green, width: 2))),
-                              child: Text(
-                                'CONFIRMAR',
-                                style: TextStyle(fontSize: 20),
+                          RegisterInput(
+                              label: 'E-MAIL',
+                              placeholder: 'Informe seu e-mail',
+                              onChanged: (value) =>
+                                  controller.onChangeUser(email: value)),
+                          PasswordInput(
+                              label: 'SENHA',
+                              placeholder: 'Informe sua senha',
+                              controller: controller.passwordController,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              onChanged: (value) =>
+                                  controller.onChangeUser(senha: value),
+                              obscureText: !controller.showPassword,
+                              onShowPassword: () {
+                                controller.showPassword =
+                                    !controller.showPassword;
+                              }),
+                          PasswordInput(
+                            label: 'CONFIRMAR SENHA',
+                            placeholder: 'Confirme sua senha',
+                            obscureText: !controller.showPassword,
+                            obscureTextOption: false,
+                          ),
+                          RegisterInput(
+                              label: 'TELEFONE',
+                              placeholder: 'Informe seu telefone',
+                              onChanged: (value) =>
+                                  controller.onChangeUser(telefone: value)),
+                          //TODO COLOCAR UM CAMPO TEXT
+                          Text('ENDEREÇO'),
+                          RegisterInput(
+                              label: 'ESTADO',
+                              placeholder: 'Informe seu estado',
+                              onChanged: (value) => {}),
+                          RegisterInput(
+                              label: 'CIDADE',
+                              placeholder: 'Informe seu cidade',
+                              onChanged: (value) => {}),
+                          Row(
+                            children: [
+                              RadioButton(
+                                groupT: 1,
+                                text: 'ONG',
                               ),
-                              onPressed: () {
-                                Get.offNamed(Routes.LOGIN);
-                              },
-                            ),
+                              RadioButton(
+                                groupT: 2,
+                                text: 'PESSOA',
+                              )
+                            ],
                           ),
-                        ))
-                      ],
-                    ),
-                  )
-                ],
-              )),
-            ),
-          )
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                    child: Container(
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.red,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0),
+                                            side: BorderSide(
+                                                color: Colors.red, width: 2))),
+                                    child: Text(
+                                      'CANCELAR',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      Get.offNamed(Routes.LOGIN);
+                                    },
+                                  ),
+                                )),
+                                Expanded(
+                                    child: Padding(
+                                  padding: const EdgeInsets.only(left: 5.0),
+                                  child: Container(
+                                    height: 50,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.green,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30.0),
+                                              side: BorderSide(
+                                                  color: Colors.green,
+                                                  width: 2))),
+                                      child: Text(
+                                        'CONFIRMAR',
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      onPressed: () {
+                                        Get.offNamed(Routes.LOGIN);
+                                      },
+                                    ),
+                                  ),
+                                ))
+                              ],
+                            ),
+                          )
+                        ],
+                      )),
+                ),
+              ))
         ],
       ),
     )));

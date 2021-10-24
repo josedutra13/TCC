@@ -10,17 +10,23 @@ class RequestRescue extends GetView<RequestRescueController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(children: [
-      Stack(
+      body: Stack(
         children: [
-          Image.asset('assets/images/fundo.png'),
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/fundo.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 2.0),
+                  padding: const EdgeInsets.only(top: 40.0),
                   child: Text('SOLICITAR RESGATE',
                       style: GoogleFonts.bebasNeue(
                           color: Colors.white, fontSize: 40)),
@@ -30,11 +36,11 @@ class RequestRescue extends GetView<RequestRescueController> {
           ),
           //CONTAINER DE DESCRIÇÃO
           Padding(
-              padding: const EdgeInsets.only(top: 180.0),
+              padding: const EdgeInsets.only(top: 50.0),
               child: Center(
                   child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.6,
+                height: MediaQuery.of(context).size.height * 0.5,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -55,7 +61,7 @@ class RequestRescue extends GetView<RequestRescueController> {
                       child: Center(
                         child: Container(
                             width: MediaQuery.of(context).size.width * 0.75,
-                            height: MediaQuery.of(context).size.height * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.3,
                             decoration: BoxDecoration(
                                 color: Colors.lightBlue.shade300,
                                 borderRadius:
@@ -78,7 +84,7 @@ class RequestRescue extends GetView<RequestRescueController> {
 
           // IMAGEM DE PERFIL DO ANIMAL
           Padding(
-            padding: const EdgeInsets.only(top: 80.0),
+            padding: const EdgeInsets.only(bottom: 380),
             child: Center(
               //TODO REFACTORY PARA COLOCAR BORDA BRANCA
               child: ClipOval(
@@ -90,8 +96,9 @@ class RequestRescue extends GetView<RequestRescueController> {
               ),
             ),
           ),
+
           Padding(
-            padding: const EdgeInsets.only(top: 650.0),
+            padding: const EdgeInsets.only(top: 610.0),
             child: Column(
               children: [
                 Center(
@@ -146,6 +153,6 @@ class RequestRescue extends GetView<RequestRescueController> {
           )
         ],
       ),
-    ]));
+    );
   }
 }
