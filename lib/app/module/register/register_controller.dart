@@ -17,7 +17,6 @@ class RegisterController extends GetxController {
 
   final _pessoaEditing = Pessoa.empty().obs;
   Pessoa get pessoaEditing => _pessoaEditing.value;
-  set pessoaEditing(Pessoa value) => _pessoaEditing.value = value;
 
   final _showPassword = false.obs;
   bool get showPassword => _showPassword.value;
@@ -50,6 +49,7 @@ class RegisterController extends GetxController {
   }
 
   void onSave() {
+    _pessoa.value = _pessoaEditing.value.copyWith();
     _personsRepository.createUserPerson(pessoa);
   }
 }

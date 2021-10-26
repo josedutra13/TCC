@@ -43,18 +43,20 @@ class Pessoa {
     return Pessoa(
         id: id,
         idade: idade,
-        sexo: sexo,
-        nome: nome,
-        email: email,
-        telefone: telefone,
-        senha: senha,
+        sexo: sexo ?? this.sexo,
+        nome: nome ?? this.nome,
+        email: email ?? this.email,
+        telefone: telefone ?? this.telefone,
+        senha: senha ?? this.senha,
         endereco: Endereco(
-            complemento: complemento,
-            numero: numero,
-            bairro: bairro,
-            cep: cep,
+            complemento: complemento ?? this.endereco?.complemento,
+            numero: numero ?? this.endereco?.numero,
+            bairro: bairro ?? this.endereco?.bairro,
+            cep: cep ?? this.endereco?.cep,
             cidade: Cidade(
-                id: cidade, nome: '', estado: Estado(nome: '', sigla: ''))));
+                id: cidade ?? this.endereco?.cidade!.id,
+                nome: '',
+                estado: Estado(nome: '', sigla: ''))));
   }
 
   fromJson(Map<String, dynamic> json) {
