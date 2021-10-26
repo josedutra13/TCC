@@ -8,7 +8,7 @@ class PersonsRepository extends ApiBase {
     var response = await client.post('', data: pessoa);
 
     if (response.statusCode == 200 && response.data != null) {
-      return Pessoa.fromJson(response.data);
+      return pessoa.fromJson(response.data);
     }
     return null;
   }

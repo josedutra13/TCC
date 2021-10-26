@@ -1,51 +1,63 @@
+import 'package:auresgate/app/data/models/cidade_model.dart';
 import 'package:auresgate/app/data/models/endereco_model.dart';
+import 'package:auresgate/app/data/models/estado_model.dart';
 import 'package:auresgate/app/data/models/user_model.dart';
+import 'package:flutter/foundation.dart';
 
 class Pessoa {
-  late int idade;
-  late String sexo;
+  int? idade;
+  String? sexo;
   int? id;
-  late String nome;
-  late String email;
-  late String telefone;
-  late String senha;
-  late Endereco? endereco;
-
-  Pessoa({
-    int? id,
-    String nome = '',
-    String email = '',
-    String telefone = '',
-    String senha = '',
-    //TODO VERIFICAR ENDERAÇO VAZIO
-    Endereco? endereco,
-    required this.idade,
-    required this.sexo, required String bairro,
-  });
+  String? nome;
+  String? email;
+  String? telefone;
+  String? senha;
+  Endereco? endereco;
 
   Pessoa.empty();
-  Pessoa copyWith({
-    int? idade,
-    String? sexo,
-    int? id,
-    String? nome,
-    String? email,
-    String? telefone,
-    String? senha,
-    String? bairro
-  }) {
+
+  Pessoa(
+      {this.id,
+      required this.nome,
+      required this.email,
+      required this.telefone,
+      required this.senha,
+      //TODO VERIFICAR ENDERAÇO VAZIO
+      required this.endereco,
+      required this.idade,
+      required this.sexo});
+
+  Pessoa copyWith(
+      {int? idade,
+      String? sexo,
+      int? id,
+      String? nome,
+      String? email,
+      String? telefone,
+      String? senha,
+      String? bairro,
+      String? cep,
+      int? numero,
+      String? complemento,
+      int? cidade}) {
     return Pessoa(
         id: id,
-        idade: idade ?? this.idade,
-        sexo: sexo ?? this.sexo,
-        nome: nome ?? this.nome,
-        email: email ?? this.email,
-        telefone: telefone ?? this.telefone,
-        senha: senha ?? this.senha,
-        bairro: endereco!.bairro
+        idade: idade,
+        sexo: sexo,
+        nome: nome,
+        email: email,
+        telefone: telefone,
+        senha: senha,
+        endereco: Endereco(
+            complemento: complemento,
+            numero: numero,
+            bairro: bairro,
+            cep: cep,
+            cidade: Cidade(
+                id: cidade, nome: '', estado: Estado(nome: '', sigla: ''))));
   }
 
-  Pessoa.fromJson(Map<String, dynamic> json) {
+  fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
     this.nome = json['nome'];
     this.email = json['email'];

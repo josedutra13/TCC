@@ -1,3 +1,4 @@
+import 'package:auresgate/app/data/models/endereco_model.dart';
 import 'package:auresgate/app/module/login/login_page.dart';
 import 'package:auresgate/app/module/register/register_controller.dart';
 import 'package:auresgate/app/module/register/widgets/radio_button_widget.dart';
@@ -72,16 +73,34 @@ class RegisterPage extends GetView<RegisterController> {
                               placeholder: 'Informe seu telefone',
                               onChanged: (value) =>
                                   controller.onChangeUser(telefone: value)),
-                          //TODO COLOCAR UM CAMPO TEXT
-                          Text('ENDEREÇO'),
                           RegisterInput(
                               label: 'ESTADO',
                               placeholder: 'Informe seu estado',
                               onChanged: (value) => {}),
                           RegisterInput(
                               label: 'CIDADE',
-                              placeholder: 'Informe seu cidade',
+                              placeholder: 'Informe sua cidade',
                               onChanged: (value) => {}),
+                          RegisterInput(
+                              label: 'BAIRRO',
+                              placeholder: 'Informe seu bairro',
+                              onChanged: (value) =>
+                                  controller.onChangeUser(bairro: value)),
+                          RegisterInput(
+                              label: 'CEP',
+                              placeholder: 'Informe seu cep',
+                              onChanged: (value) =>
+                                  controller.onChangeUser(cep: value)),
+                          RegisterInput(
+                              label: 'NUMERO',
+                              placeholder: 'Informe numero do lote',
+                              onChanged: (value) => controller.onChangeUser(
+                                  numero: int.parse(value))),
+                          RegisterInput(
+                              label: 'COMPLEMENTO',
+                              placeholder: 'Informação complementar',
+                              onChanged: (value) =>
+                                  controller.onChangeUser(complemento: value)),
                           Row(
                             children: [
                               RadioButton(
@@ -138,7 +157,8 @@ class RegisterPage extends GetView<RegisterController> {
                                         style: TextStyle(fontSize: 20),
                                       ),
                                       onPressed: () {
-                                        Get.offNamed(Routes.LOGIN);
+                                        controller.onSave();
+                                        //Get.offNamed(Routes.LOGIN);
                                       },
                                     ),
                                   ),

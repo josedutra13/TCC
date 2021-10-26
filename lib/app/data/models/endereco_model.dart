@@ -3,10 +3,10 @@ import 'package:auresgate/app/data/models/cidade_model.dart';
 class Endereco {
   int? id;
   String? complemento;
-  late int numero;
-  late String bairro;
-  late String cep;
-  late Cidade cidade;
+  int? numero;
+  String? bairro;
+  String? cep;
+  Cidade? cidade;
 
   Endereco(
       {this.id,

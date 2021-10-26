@@ -23,23 +23,30 @@ class RegisterController extends GetxController {
   bool get showPassword => _showPassword.value;
   set showPassword(bool value) => _showPassword.value = value;
 
-  void onChangeUser({
-    int? idade,
-    String? sexo,
-    String? nome,
-    String? email,
-    String? telefone,
-    String? senha,
-    Endereco? endereco,
-  }) {
+  void onChangeUser(
+      {int? idade,
+      String? sexo,
+      String? nome,
+      String? email,
+      String? telefone,
+      String? senha,
+      String? bairro,
+      String? cep,
+      int? numero,
+      String? complemento,
+      int? cidade}) {
     _pessoaEditing.value = _pessoaEditing.value.copyWith(
-      idade: idade,
-      sexo: sexo,
-      nome: nome,
-      email: email,
-      telefone: telefone,
-      senha: senha,
-    );
+        idade: idade,
+        sexo: sexo,
+        nome: nome,
+        email: email,
+        telefone: telefone,
+        senha: senha,
+        bairro: bairro,
+        cep: cep,
+        numero: numero,
+        complemento: complemento,
+        cidade: cidade);
   }
 
   void onSave() {
