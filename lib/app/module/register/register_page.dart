@@ -17,7 +17,6 @@ class RegisterPage extends GetView<RegisterController> {
             child: SingleChildScrollView(
           child: Stack(
             children: [
-              // Image.asset('assets/images/fundo.png'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -82,7 +81,10 @@ class RegisterPage extends GetView<RegisterController> {
                               RegisterInput(
                                   label: 'CIDADE',
                                   placeholder: 'Informe sua cidade',
-                                  onChanged: (value) => {}),
+                                  onChanged: (value) => {
+                                        controller.onChangeUser(
+                                            cidade: int.parse(value))
+                                      }),
                               RegisterInput(
                                   label: 'BAIRRO',
                                   placeholder: 'Informe seu bairro',
@@ -116,7 +118,8 @@ class RegisterPage extends GetView<RegisterController> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
+                                padding: const EdgeInsets.only(
+                                    top: 10.0, bottom: 20),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,

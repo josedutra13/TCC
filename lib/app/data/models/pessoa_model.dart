@@ -54,7 +54,7 @@ class Pessoa {
             bairro: bairro ?? this.endereco?.bairro,
             cep: cep ?? this.endereco?.cep,
             cidade: Cidade(
-                id: cidade ?? this.endereco?.cidade!.id,
+                id: cidade ?? this.endereco?.cidade?.id,
                 nome: '',
                 estado: Estado(nome: '', sigla: ''))));
   }

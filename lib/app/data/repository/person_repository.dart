@@ -5,6 +5,9 @@ import 'package:auresgate/app/data/providers/api.dart';
 class PersonsRepository extends ApiBase {
   PersonsRepository() : super('/pessoas');
   Future<Pessoa?> createUserPerson(Pessoa pessoa) async {
+    print('${pessoa.toJson()}');
+    print('${pessoa.endereco!.toJson()}');
+    print('${pessoa.endereco!.cidade!.toJson()}');
     var response = await client.post('', data: pessoa.toJson());
     if (response.statusCode == 200 && response.data != null) {
       return pessoa.fromJson(response.data);

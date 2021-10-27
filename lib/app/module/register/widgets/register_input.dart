@@ -96,6 +96,7 @@ class PasswordInput extends StatelessWidget {
             height: 45,
             child: TextFormField(
               controller: controller,
+              onChanged: onChanged,
               autovalidateMode: autovalidateMode,
               obscureText: obscureText,
               keyboardType: TextInputType.phone,

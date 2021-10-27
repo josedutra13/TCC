@@ -49,7 +49,7 @@ class RegisterController extends GetxController {
   }
 
   void onSave() {
-    _pessoa.value = _pessoaEditing.value.copyWith();
+    _pessoa.value = _pessoaEditing.value;
     _personsRepository.createUserPerson(pessoa);
   }
 }
