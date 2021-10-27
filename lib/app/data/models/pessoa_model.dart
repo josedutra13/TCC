@@ -42,7 +42,7 @@ class Pessoa {
       int? cidade}) {
     return Pessoa(
         id: id,
-        idade: idade,
+        idade: idade ?? this.idade,
         sexo: sexo ?? this.sexo,
         nome: nome ?? this.nome,
         email: email ?? this.email,

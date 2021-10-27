@@ -35,6 +35,7 @@ class RegisterInput extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(15.0))),
             height: 45,
             child: TextFormField(
+              onChanged: onChanged,
               controller: controller,
               decoration: InputDecoration(
                 hintText: placeholder,
