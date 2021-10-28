@@ -3,4 +3,5 @@ abstract class Routes {
   static const REGISTER = '/register';
   static const MAIN = '/main';
   static const REQUEST_RESCUE = '/request';
+  static const RECOVER_PASS = '/recover';
 }
