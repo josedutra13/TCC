@@ -16,14 +16,14 @@ class LoginPage extends GetView<LoginController> {
         child: SingleChildScrollView(
           child: Stack(
             children: [
-              Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/fundo.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              // Container(
+              //   decoration: const BoxDecoration(
+              //     image: DecorationImage(
+              //       image: AssetImage('assets/images/fundo.png'),
+              //       fit: BoxFit.cover,
+              //     ),
+              //   ),
+              // ),
               Column(
                 children: [
                   Padding(
