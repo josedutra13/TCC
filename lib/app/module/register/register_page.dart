@@ -12,7 +12,7 @@ class RegisterPage extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.lightBlue.shade300,
+        backgroundColor: Colors.cyan[300],
         body: SafeArea(
             child: SingleChildScrollView(
           child: Stack(
