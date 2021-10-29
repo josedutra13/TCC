@@ -1,5 +1,4 @@
 import 'package:auresgate/app/data/models/pessoa_model.dart';
-import 'package:auresgate/app/data/models/user_model.dart';
 import 'package:auresgate/app/data/providers/api.dart';
 
 class PersonsRepository extends ApiBase {
