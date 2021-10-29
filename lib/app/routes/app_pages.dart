@@ -1,6 +1,7 @@
+import 'package:auresgate/app/module/alter_pass/alter_pass_binding.dart';
+import 'package:auresgate/app/module/alter_pass/alter_pass_page.dart';
 import 'package:auresgate/app/module/login/login_binding.dart';
 import 'package:auresgate/app/module/login/login_page.dart';
-import 'package:auresgate/app/module/main/main_binding.dart';
 import 'package:auresgate/app/module/main/main_page.dart';
 import 'package:auresgate/app/module/recover_pass/recover_pass_binding.dart';
 import 'package:auresgate/app/module/recover_pass/recover_pass_page.dart';
@@ -30,6 +31,10 @@ class AppPages {
     GetPage(
         name: Routes.RECOVER_PASS,
         page: () => RecoverPassPage(),
-        binding: RecoverPassBinding())
+        binding: RecoverPassBinding()),
+    GetPage(
+        name: Routes.ALTER_PASS,
+        page: () => AlterPassPage(),
+        binding: AlterPassBinding()),
   ];
 }
