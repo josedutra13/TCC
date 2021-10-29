@@ -4,6 +4,7 @@ import 'package:auresgate/app/widgets/appBar_widgets.dart';
 import 'package:auresgate/app/widgets/menu_side_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapPage extends StatefulWidget {
@@ -93,31 +94,78 @@ class _MapPageState extends State<MapPage> {
           onLongPress: _addMarker,
         ),
         floatingActionButton: Padding(
-          padding: const EdgeInsets.only(right: 300.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+          padding: const EdgeInsets.only(left: 30),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              //TODO COLOCAR LEGENDA DE SOLICITAR RESGATE
-              FloatingActionButton(
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-                onPressed: () {
-                  _requestRescueController.marking
-                      ? _googleMapController.animateCamera(
-                          CameraUpdate.newCameraPosition(
-                              _initialCameraPosition))
-                      : Get.toNamed(Routes.REQUEST_RESCUE);
-                },
-                child: _requestRescueController.marking
-                    ? const Icon(Icons.center_focus_strong)
-                    : const Icon(
-                        Icons.add,
-                        size: 35,
-                      ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  //TODO COLOCAR LEGENDA DE SOLICITAR RESGATE
+                  FloatingActionButton(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    onPressed: () {
+                      _requestRescueController.marking
+                          ? _googleMapController.animateCamera(
+                              CameraUpdate.newCameraPosition(
+                                  _initialCameraPosition))
+                          : Get.toNamed(Routes.REQUEST_RESCUE);
+                    },
+                    child: _requestRescueController.marking
+                        ? const Icon(Icons.center_focus_strong)
+                        : const Icon(
+                            Icons.add,
+                            size: 35,
+                          ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 15,
-              ),
+              if (_requestRescueController.marking)
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 32),
+                  child: Container(
+                    width: 110,
+                    height: 32,
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            shadowColor: Colors.green[200],
+                            primary: Colors.green[400],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            )),
+                        child: Text(
+                          'Confirmar',
+                          style: GoogleFonts.bebasNeue(
+                              color: Colors.white, fontSize: 20),
+                        )),
+                  ),
+                ),
+              if (_requestRescueController.marking)
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 32),
+                  child: Container(
+                    width: 110,
+                    height: 32,
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            shadowColor: Colors.red[300],
+                            primary: Colors.red[400],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            )),
+                        child: Text(
+                          'Cancelar',
+                          style: GoogleFonts.bebasNeue(
+                              color: Colors.white, fontSize: 20),
+                        )),
+                  ),
+                ),
             ],
           ),
         ));
