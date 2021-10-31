@@ -1,12 +1,15 @@
-import 'package:auresgate/app/module/recover_pass/recover_pass_controller.dart';
+import 'package:auresgate/app/module/alter_pass/alter_pass_controller.dart';
+import 'package:auresgate/app/module/alter_pass/widgets/alter_pass_input.dart';
 import 'package:auresgate/app/module/recover_pass/widgets/recover_input.dart';
+import 'package:auresgate/app/module/register/widgets/register_input.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RecoverPassPage extends GetView<RecoverPassController> {
-  const RecoverPassPage({Key? key}) : super(key: key);
+class AlterPassPage extends GetView<AlterPassController> {
+  const AlterPassPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class RecoverPassPage extends GetView<RecoverPassController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('RECUPERAR SENHA',
+                    Text('ALTERAR SENHA',
                         style: GoogleFonts.bebasNeue(
                             color: Colors.white, fontSize: 30)),
                   ],
@@ -44,20 +47,42 @@ class RecoverPassPage extends GetView<RecoverPassController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          RecoverInput(
-                            label: 'EMAIL',
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: AlterPassInput(
+                              label: 'NOVA SENHA',
+                              controller: controller.passwordController,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              obscureText: !controller.showPassoword,
+                              onShowPassword: () {
+                                controller.showPassoword =
+                                    !controller.showPassoword;
+                              },
+                              onChanged: (_) {},
+                              placeholder: '',
+                            ),
+                          ),
+                          AlterPassInput(
+                            label: 'CONFIRMAR SENHA',
+                            controller: controller.passwordController,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            obscureText: !controller.showPassoword,
+                            onShowPassword: () {
+                              controller.showPassoword =
+                                  !controller.showPassoword;
+                            },
                             onChanged: (_) {},
                             placeholder: '',
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 5, top: 60),
+                            padding: const EdgeInsets.only(left: 5, top: 30),
                             child: Container(
                               width: 220,
                               height: 25,
                               child: ElevatedButton(
-                                  onPressed: () {
-                                    Get.offNamed(Routes.ALTER_PASS);
-                                  },
+                                  onPressed: () {},
                                   style: ElevatedButton.styleFrom(
                                       shadowColor: Colors.cyan[300],
                                       primary: Colors.cyan[300],
