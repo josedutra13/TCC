@@ -1,14 +1,38 @@
+import 'package:auresgate/app/data/models/cidade_model.dart';
 import 'package:auresgate/app/data/models/endereco_model.dart';
+import 'package:auresgate/app/data/models/estado_model.dart';
 import 'package:auresgate/app/module/login/login_page.dart';
 import 'package:auresgate/app/module/register/register_controller.dart';
 import 'package:auresgate/app/module/register/widgets/radio_button_widget.dart';
-import 'package:auresgate/app/module/register/widgets/register_input.dart';
+import 'package:auresgate/app/input_widgets/register_input.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RegisterPage extends GetView<RegisterController> {
+  List<DropdownMenuItem<String>> statesOptions(List<Estado> states) {
+    List<DropdownMenuItem<String>> list = [];
+
+    for (Estado state in states) {
+      list.add(DropdownMenuItem<String>(
+          value: state.id.toString(), child: Text(state.nome)));
+    }
+
+    return list;
+  }
+
+  List<DropdownMenuItem<String>> cityOptions(List<Cidade> citys) {
+    List<DropdownMenuItem<String>> list = [];
+
+    for (Cidade city in citys) {
+      list.add(DropdownMenuItem<String>(
+          value: city.id.toString(), child: Text(city.nome)));
+    }
+
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,27 +98,36 @@ class RegisterPage extends GetView<RegisterController> {
                                   placeholder: 'Informe seu telefone',
                                   onChanged: (value) =>
                                       controller.onChangeUser(telefone: value)),
-                              RegisterInput(
-                                  label: 'ESTADO',
-                                  placeholder: 'Informe seu estado',
-                                  onChanged: (value) => {}),
-                              RegisterInput(
+                              Obx(() => SelectInput(
+                                    label: 'ESTADO',
+                                    dropDownvalue: controller.isSelectedState
+                                        ? controller.selectedStates.id
+                                            .toString()
+                                        : null,
+                                    onChanged: (value) {
+                                      controller.selectedState(value);
+                                    },
+                                    items: statesOptions(controller.states),
+                                  )),
+                              Obx(() => SelectInput(
                                   label: 'CIDADE',
-                                  placeholder: 'Informe sua cidade',
-                                  onChanged: (value) => {
-                                        controller.onChangeUser(
-                                            cidade: int.parse(value))
-                                      }),
+                                  dropDownvalue: controller.isSelectedState &&
+                                          controller.isSelectedCity
+                                      ? controller.selectedCity.id.toString()
+                                      : null,
+                                  onChanged: (value) {
+                                    controller.selectedCitys(value);
+                                    controller.onChangeUser(
+                                        cidade: int.parse(value!));
+                                  },
+                                  items: controller.isSelectedState
+                                      ? cityOptions(controller.citys)
+                                      : null)),
                               RegisterInput(
                                   label: 'BAIRRO',
                                   placeholder: 'Informe seu bairro',
                                   onChanged: (value) =>
                                       controller.onChangeUser(bairro: value)),
-                              RegisterInput(
-                                  label: 'CEP',
-                                  placeholder: 'Informe seu cep',
-                                  onChanged: (value) =>
-                                      controller.onChangeUser(cep: value)),
                               RegisterInput(
                                   label: 'NUMERO',
                                   placeholder: 'Informe numero do lote',

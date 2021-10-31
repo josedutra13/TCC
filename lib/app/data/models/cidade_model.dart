@@ -10,8 +10,10 @@ class Cidade {
   Cidade.fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
     this.nome = json['nome'];
-    this.estado = json['estado'];
+    this.estado = Estado.fromJson(json['estado']);
   }
+
+  Cidade.empty();
 
   @override
   Map<String, dynamic> toJson() {

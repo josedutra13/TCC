@@ -52,6 +52,59 @@ class RegisterInput extends StatelessWidget {
   }
 }
 
+class SelectInput extends StatelessWidget {
+  final String label;
+  final void Function(String?)? onChanged;
+  // final String? Function(String?, FocusNode?)? validator;
+  final TextEditingController? controller;
+  final List<DropdownMenuItem<String>>? items;
+  final String? dropDownvalue;
+  final bool? isSelected;
+  const SelectInput(
+      {Key? key,
+      required this.label,
+      required this.onChanged,
+      this.controller,
+      this.items,
+      required this.dropDownvalue,
+      this.isSelected})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: GoogleFonts.bebasNeue(
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+          ),
+          Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              height: 45,
+              child: DropdownButton<String>(
+                icon: Icon(Icons.arrow_drop_down),
+                isExpanded: true,
+                value: dropDownvalue,
+                elevation: 16,
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
+                onChanged: onChanged,
+                items: items,
+              )),
+        ],
+      ),
+    );
+  }
+}
+
 class PasswordInput extends StatelessWidget {
   final String label;
   final String placeholder;

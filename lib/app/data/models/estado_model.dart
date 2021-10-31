@@ -11,6 +11,8 @@ class Estado {
     this.sigla = json['sigla'];
   }
 
+  Estado.empty();
+
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

@@ -134,12 +134,12 @@ class LoginPage extends GetView<LoginController> {
                                 flex: 2,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: Colors.cyan[400],
+                                      primary: Colors.cyan[300],
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(30.0),
                                           side: BorderSide(
-                                              color: Colors.cyan, width: 2))),
+                                              color: Colors.white, width: 2))),
                                   child: Text('Esqueci a senha',
                                       style: TextStyle(fontSize: 15)),
                                   onPressed: () {
@@ -152,12 +152,13 @@ class LoginPage extends GetView<LoginController> {
                                   padding: const EdgeInsets.only(left: 20.0),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                        primary: Colors.cyan[400],
+                                        primary: Colors.cyan[300],
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
                                             side: BorderSide(
-                                                color: Colors.cyan, width: 2))),
+                                                color: Colors.white,
+                                                width: 2))),
                                     child: Text(
                                       'Cadastrar',
                                       style: TextStyle(fontSize: 15),

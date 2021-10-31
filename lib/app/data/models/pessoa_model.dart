@@ -52,7 +52,6 @@ class Pessoa {
             complemento: complemento ?? this.endereco?.complemento,
             numero: numero ?? this.endereco?.numero,
             bairro: bairro ?? this.endereco?.bairro,
-            cep: cep ?? this.endereco?.cep,
             cidade: Cidade(
                 id: cidade ?? this.endereco?.cidade?.id,
                 nome: '',

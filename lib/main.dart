@@ -13,9 +13,7 @@ void main() {
       title: 'AuResgate',
       getPages: AppPages.routes,
       initialRoute: Routes.LOGIN,
-      theme: ThemeData(
-          primaryColor: Colors.blueAccent,
-          backgroundColor: Colors.blueAccent.shade200),
+      theme: mainTheme,
     ),
   ));
 }

@@ -1,12 +1,19 @@
+import 'package:auresgate/app/data/models/cidade_model.dart';
 import 'package:auresgate/app/data/models/endereco_model.dart';
+import 'package:auresgate/app/data/models/estado_model.dart';
 import 'package:auresgate/app/data/models/pessoa_model.dart';
+import 'package:auresgate/app/data/repository/city_repository.dart';
 import 'package:auresgate/app/data/repository/person_repository.dart';
+import 'package:auresgate/app/data/repository/state_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   final PersonsRepository _personsRepository;
-  RegisterController(this._personsRepository);
+  final StatesRepository _stateRepository;
+  final CityRepository _cityRepository;
+  RegisterController(
+      this._personsRepository, this._stateRepository, this._cityRepository);
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmController = TextEditingController();
@@ -22,6 +29,32 @@ class RegisterController extends GetxController {
   bool get showPassword => _showPassword.value;
   set showPassword(bool value) => _showPassword.value = value;
 
+  final _isSelectedState = false.obs;
+  bool get isSelectedState => _isSelectedState.value;
+  set isSelectedState(bool value) => _isSelectedState.value = value;
+
+  final _states = <Estado>[].obs;
+  List<Estado> get states => _states.toList();
+
+  final _selectedStates = Estado.empty().obs;
+  Estado get selectedStates => _selectedStates.value;
+
+  final _isSelectedCity = false.obs;
+  bool get isSelectedCity => _isSelectedCity.value;
+  set isSelectedCity(bool value) => _isSelectedCity.value = value;
+
+  final _citys = <Cidade>[].obs;
+  List<Cidade> get citys => _citys.toList();
+
+  final _selectedCity = Cidade.empty().obs;
+  Cidade get selectedCity => _selectedCity.value;
+
+  @override
+  void onInit() {
+    super.onInit();
+    listStates();
+  }
+
   void onChangeUser(
       {int? idade,
       String? sexo,
@@ -30,7 +63,6 @@ class RegisterController extends GetxController {
       String? telefone,
       String? senha,
       String? bairro,
-      String? cep,
       int? numero,
       String? complemento,
       int? cidade}) {
@@ -42,7 +74,6 @@ class RegisterController extends GetxController {
         telefone: telefone,
         senha: senha,
         bairro: bairro,
-        cep: cep,
         numero: numero,
         complemento: complemento,
         cidade: cidade);
@@ -52,4 +83,41 @@ class RegisterController extends GetxController {
     _pessoa.value = _pessoaEditing.value;
     _personsRepository.createUserPerson(pessoa);
   }
+
+  //SELECIONAR ESTADO
+  void selectedState(String? id) {
+    _isSelectedState.value = false;
+    for (Estado state in states) {
+      if (state.id == int.parse(id!)) {
+        _selectedStates.value = state;
+      }
+    }
+    listCity(_selectedStates.value.id.toString());
+    _isSelectedCity.value = false;
+    _isSelectedState.value = true;
+  }
+
+  void listStates() async {
+    var response = await _stateRepository.listStates();
+    _states.value = response;
+  }
+
+  //
+
+  //SELECIONAR CIDADE
+  void selectedCitys(String? id) {
+    _isSelectedCity.value = false;
+    for (Cidade city in citys) {
+      if (city.id == int.parse(id!)) {
+        _selectedCity.value = city;
+      }
+    }
+    _isSelectedCity.value = true;
+  }
+
+  void listCity(String id) async {
+    var response = await _cityRepository.listCity(id);
+    _citys.value = response;
+  }
+  //
 }
