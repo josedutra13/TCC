@@ -4,4 +4,5 @@ abstract class Routes {
   static const MAIN = '/main';
   static const REQUEST_RESCUE = '/request';
   static const RECOVER_PASS = '/recover';
+  static const ALTER_PASS = '/alter';
 }
