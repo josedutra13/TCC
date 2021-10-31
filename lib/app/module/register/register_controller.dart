@@ -5,6 +5,7 @@ import 'package:auresgate/app/data/models/pessoa_model.dart';
 import 'package:auresgate/app/data/repository/city_repository.dart';
 import 'package:auresgate/app/data/repository/person_repository.dart';
 import 'package:auresgate/app/data/repository/state_repository.dart';
+import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,14 @@ class RegisterController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmController = TextEditingController();
   final formKeyAuth = GlobalKey<FormState>();
+
+  final _optUsers = 0.obs;
+  get optUsers => this._optUsers.value;
+  set optUsers(value) => this._optUsers.value = value;
+
+  final _isPessoa = false.obs;
+  bool get isPessoa => _isPessoa.value;
+  set isPessoa(bool value) => _isPessoa.value = value;
 
   final _pessoa = Pessoa.empty().obs;
   Pessoa get pessoa => _pessoa.value;
@@ -38,6 +47,13 @@ class RegisterController extends GetxController {
 
   final _selectedStates = Estado.empty().obs;
   Estado get selectedStates => _selectedStates.value;
+
+  final _selectedSexValue = 'Sexo'.obs;
+  String get selectedSexValue => _selectedSexValue.value;
+  set selectedSexValue(String value) => _selectedSexValue.value = value;
+
+  final _sex = <String>['Sexo', 'MASCULINO', 'FEMININO'].obs;
+  List<String> get sex => _sex.toList();
 
   final _isSelectedCity = false.obs;
   bool get isSelectedCity => _isSelectedCity.value;
@@ -79,9 +95,12 @@ class RegisterController extends GetxController {
         cidade: cidade);
   }
 
-  void onSave() {
+  void onSave() async {
     _pessoa.value = _pessoaEditing.value;
-    _personsRepository.createUserPerson(pessoa);
+    var response = await _personsRepository.createUserPerson(pessoa);
+    if (response == null) {
+      Get.offNamed(Routes.LOGIN);
+    }
   }
 
   //SELECIONAR ESTADO

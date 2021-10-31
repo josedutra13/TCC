@@ -3,10 +3,9 @@ import 'package:get/get.dart';
 
 class AlterPassController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
-// final MyRepository repository;
-// MyController(this.repository);
+  final TextEditingController confirmPassController = TextEditingController();
 
-  final _showPassoword = false.obs;
-  set showPassoword(bool value) => this._showPassoword.value = value;
-  bool get showPassoword => this._showPassoword.value;
+  final _showPassword = false.obs;
+  set showPassword(bool value) => this._showPassword.value = value;
+  bool get showPassword => this._showPassword.value;
 }

@@ -12,7 +12,6 @@ class AlterPassInput extends StatelessWidget {
   final bool obscureTextOption;
   final AutovalidateMode? autovalidateMode;
   final TextEditingController? controller;
-
   const AlterPassInput(
       {Key? key,
       required this.label,
@@ -46,13 +45,13 @@ class AlterPassInput extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(15.0))),
             width: 260,
-            height: 30,
+            height: 40,
             child: TextFormField(
               controller: controller,
               onChanged: onChanged,
               autovalidateMode: autovalidateMode,
               obscureText: obscureText,
-              keyboardType: TextInputType.phone,
+              keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 hintText: placeholder,
                 hintStyle: TextStyle(fontWeight: FontWeight.w300),

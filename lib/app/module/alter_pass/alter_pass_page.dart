@@ -1,7 +1,5 @@
 import 'package:auresgate/app/module/alter_pass/alter_pass_controller.dart';
 import 'package:auresgate/app/module/alter_pass/widgets/alter_pass_input.dart';
-import 'package:auresgate/app/module/recover_pass/widgets/recover_input.dart';
-import 'package:auresgate/app/module/register/widgets/register_input.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,28 +48,27 @@ class AlterPassPage extends GetView<AlterPassController> {
                           Padding(
                             padding: const EdgeInsets.only(top: 20.0),
                             child: AlterPassInput(
-                              label: 'NOVA SENHA',
-                              controller: controller.passwordController,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              obscureText: !controller.showPassoword,
-                              onShowPassword: () {
-                                controller.showPassoword =
-                                    !controller.showPassoword;
-                              },
-                              onChanged: (_) {},
-                              placeholder: '',
-                            ),
+                                label: 'NOVA SENHA',
+                                placeholder: '',
+                                controller: controller.passwordController,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                onChanged: (_) {},
+                                obscureText: !controller.showPassword,
+                                onShowPassword: () {
+                                  controller.showPassword =
+                                      !controller.showPassword;
+                                }),
                           ),
                           AlterPassInput(
                             label: 'CONFIRMAR SENHA',
-                            controller: controller.passwordController,
+                            controller: controller.confirmPassController,
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            obscureText: !controller.showPassoword,
+                            obscureText: !controller.showPassword,
                             onShowPassword: () {
-                              controller.showPassoword =
-                                  !controller.showPassoword;
+                              controller.showPassword =
+                                  !controller.showPassword;
                             },
                             onChanged: (_) {},
                             placeholder: '',

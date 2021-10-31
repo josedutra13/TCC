@@ -78,6 +78,8 @@ class Pessoa {
     data['telefone'] = this.telefone;
     data['senha'] = this.senha;
     data['endereco'] = this.endereco;
+    data['sexo'] = this.sexo;
+    data['idade'] = this.idade;
     return data;
   }
 }

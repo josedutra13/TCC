@@ -100,6 +100,14 @@ class RegisterPage extends GetView<RegisterController> {
                                       controller.onChangeUser(telefone: value)),
                               Obx(() => SelectInput(
                                     label: 'ESTADO',
+                                    placeholder: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        'Selecione uma estado',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w300),
+                                      ),
+                                    ),
                                     dropDownvalue: controller.isSelectedState
                                         ? controller.selectedStates.id
                                             .toString()
@@ -111,6 +119,13 @@ class RegisterPage extends GetView<RegisterController> {
                                   )),
                               Obx(() => SelectInput(
                                   label: 'CIDADE',
+                                  placeholder: Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Text('Selecione uma cidade',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                        )),
+                                  ),
                                   dropDownvalue: controller.isSelectedState &&
                                           controller.isSelectedCity
                                       ? controller.selectedCity.id.toString()
@@ -138,18 +153,60 @@ class RegisterPage extends GetView<RegisterController> {
                                   placeholder: 'Informação complementar',
                                   onChanged: (value) => controller.onChangeUser(
                                       complemento: value)),
-                              Row(
-                                children: [
-                                  RadioButton(
-                                    groupT: 1,
-                                    text: 'ONG',
-                                  ),
-                                  RadioButton(
-                                    groupT: 2,
-                                    text: 'PESSOA',
-                                  )
-                                ],
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Row(
+                                  children: [
+                                    IdadeInput(
+                                        label: 'Idade',
+                                        isPerson: controller.isPessoa,
+                                        isPersonSelected: controller.isPessoa,
+                                        placeholder: 'Idade',
+                                        onChanged: (value) {
+                                          controller.onChangeUser(
+                                              idade: int.parse(value));
+                                        }),
+                                    Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10.0),
+                                        child: SexInput(
+                                          items: controller.sex,
+                                          label: 'Sexo',
+                                          isPerson: controller.isPessoa,
+                                          onChanged: (value) {
+                                            controller.selectedSexValue =
+                                                value.toString();
+                                            controller.onChangeUser(
+                                                sexo: value);
+                                          },
+                                          dropDownvalue:
+                                              controller.selectedSexValue,
+                                        ))
+                                  ],
+                                ),
                               ),
+                              Obx(() => Row(
+                                    children: [
+                                      RadioButton(
+                                        groupT: controller.optUsers,
+                                        value: 1,
+                                        text: 'ONG',
+                                        onChanged: (value) {
+                                          controller.optUsers = value;
+                                          controller.isPessoa = false;
+                                        },
+                                      ),
+                                      RadioButton(
+                                        groupT: controller.optUsers,
+                                        value: 2,
+                                        text: 'PESSOA',
+                                        onChanged: (value) {
+                                          controller.optUsers = value;
+                                          controller.isPessoa = true;
+                                        },
+                                      )
+                                    ],
+                                  )),
                               Padding(
                                 padding: const EdgeInsets.only(
                                     top: 10.0, bottom: 20),
