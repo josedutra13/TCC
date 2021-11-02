@@ -1,3 +1,4 @@
+import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:auresgate/app/widgets/appBar_widgets.dart';
@@ -16,6 +17,7 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   final RequestRescueController _requestRescueController = Get.find();
+  final LoginController _loginController = Get.find();
   //define a posição inicial do mapa
   static const _initialCameraPosition =
       CameraPosition(target: LatLng(-15.777737, -47.878488), zoom: 11.5);
@@ -79,6 +81,7 @@ class _MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: NavDrawer(
+          userName: _loginController.usuarioText.text,
           logout: onLogout,
         ),
         appBar: AppPageBarWidget(
@@ -102,22 +105,25 @@ class _MapPageState extends State<MapPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   //TODO COLOCAR LEGENDA DE SOLICITAR RESGATE
-                  FloatingActionButton(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                    onPressed: () {
-                      _requestRescueController.marking
-                          ? _googleMapController.animateCamera(
-                              CameraUpdate.newCameraPosition(
-                                  _initialCameraPosition))
-                          : Get.toNamed(Routes.REQUEST_RESCUE);
-                    },
-                    child: _requestRescueController.marking
-                        ? const Icon(Icons.center_focus_strong)
-                        : const Icon(
-                            Icons.add,
-                            size: 35,
-                          ),
+                  Visibility(
+                    visible: _loginController.userDto.isPerson!,
+                    child: FloatingActionButton(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      onPressed: () {
+                        _requestRescueController.marking
+                            ? _googleMapController.animateCamera(
+                                CameraUpdate.newCameraPosition(
+                                    _initialCameraPosition))
+                            : Get.toNamed(Routes.REQUEST_RESCUE);
+                      },
+                      child: _requestRescueController.marking
+                          ? const Icon(Icons.center_focus_strong)
+                          : const Icon(
+                              Icons.add,
+                              size: 35,
+                            ),
+                    ),
                   ),
                   SizedBox(
                     height: 20,

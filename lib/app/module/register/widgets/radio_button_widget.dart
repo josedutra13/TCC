@@ -24,14 +24,15 @@ class RadioButton extends StatelessWidget {
     return Row(children: [
       Radio(
         activeColor: color ?? Colors.white,
+        
         value: value,
         groupValue: groupT,
         onChanged: onChanged,
       ),
       if (text != null)
         Text(text!,
-            style: GoogleFonts.bebasNeue(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500))
+            style: GoogleFonts.roboto(
+                color: Colors.white, fontSize: 14, fontWeight: FontWeight.w900))
     ]);
   }
 }

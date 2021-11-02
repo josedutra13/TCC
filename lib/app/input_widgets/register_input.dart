@@ -30,10 +30,10 @@ class RegisterInput extends StatelessWidget {
           children: [
             Text(
               label,
-              style: GoogleFonts.bebasNeue(
+              style: GoogleFonts.roboto(
                   color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w900),
             ),
             Container(
               decoration: BoxDecoration(
@@ -45,7 +45,8 @@ class RegisterInput extends StatelessWidget {
                 controller: controller,
                 decoration: InputDecoration(
                   hintText: placeholder,
-                  hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                  hintStyle: TextStyle(
+                      color: Colors.grey, fontWeight: FontWeight.w400),
                   fillColor: Colors.white70,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0)),
@@ -87,9 +88,9 @@ class IdadeInput extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: GoogleFonts.bebasNeue(
+                    style: GoogleFonts.roboto(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.w500),
                   ),
                   Container(
@@ -104,7 +105,8 @@ class IdadeInput extends StatelessWidget {
                       controller: controller,
                       decoration: InputDecoration(
                         hintText: placeholder,
-                        hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                        hintStyle: TextStyle(
+                            fontWeight: FontWeight.w600, color: Colors.grey),
                         fillColor: Colors.white70,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15.0)),
@@ -177,8 +179,7 @@ class SexInput extends StatelessWidget {
                         value: dropDownvalue,
                         elevation: 16,
                         style: const TextStyle(
-                          color: Colors.black,
-                        ),
+                            color: Colors.grey, fontWeight: FontWeight.w600),
                         onChanged: onChanged,
                         items: items!
                             .map<DropdownMenuItem<String>>((String value) {
@@ -230,10 +231,10 @@ class SelectInput extends StatelessWidget {
           children: [
             Text(
               label,
-              style: GoogleFonts.bebasNeue(
+              style: GoogleFonts.roboto(
                   color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w900),
             ),
             Container(
                 decoration: BoxDecoration(
@@ -292,8 +293,8 @@ class PasswordInput extends StatelessWidget {
         children: [
           Text(
             label,
-            style: GoogleFonts.bebasNeue(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+            style: GoogleFonts.roboto(
+                color: Colors.white, fontSize: 14, fontWeight: FontWeight.w900),
           ),
           Container(
             decoration: BoxDecoration(
@@ -308,7 +309,8 @@ class PasswordInput extends StatelessWidget {
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 hintText: placeholder,
-                hintStyle: TextStyle(fontWeight: FontWeight.w300),
+                hintStyle:
+                    TextStyle(color: Colors.grey, fontWeight: FontWeight.w400),
                 suffixIcon: obscureTextOption
                     ? IconButton(
                         padding: EdgeInsets.zero,

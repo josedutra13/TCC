@@ -155,7 +155,7 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                         ),
                         onPressed: () {
                           controller.marking = true;
-                          Get.toNamed(Routes.MAIN);
+                          Get.offNamed(Routes.MAIN);
                         },
                       ),
                     ),

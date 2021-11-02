@@ -1,3 +1,4 @@
+import 'package:auresgate/app/data/models/userDTO_model.dart';
 import 'package:auresgate/app/data/repository/login_repository.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,9 @@ class LoginController extends GetxController {
   final LoginRepository _loginRepository;
 
   final _onCheck = false.obs;
+
+  final _userDto = UserDTO.empty().obs;
+  UserDTO get userDto => _userDto.value;
 
   LoginController(this._loginRepository);
   bool get onCheck => _onCheck.value;
@@ -24,7 +28,8 @@ class LoginController extends GetxController {
 
     if (response != null) {
       if (response.id != null) {
-        Get.offAllNamed(Routes.MAIN, arguments: response);
+        _userDto.value = response;
+        Get.toNamed(Routes.MAIN);
       } else {
         showDialog(
             context: context,

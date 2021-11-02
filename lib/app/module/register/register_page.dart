@@ -105,7 +105,9 @@ class RegisterPage extends GetView<RegisterController> {
                                       child: Text(
                                         'Selecione uma estado',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w300),
+                                            color: Colors.grey,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                     dropDownvalue: controller.isSelectedState
@@ -121,10 +123,13 @@ class RegisterPage extends GetView<RegisterController> {
                                   label: 'CIDADE',
                                   placeholder: Padding(
                                     padding: const EdgeInsets.only(left: 8.0),
-                                    child: Text('Selecione uma cidade',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,
-                                        )),
+                                    child: Text(
+                                      'Selecione uma cidade',
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600),
+                                    ),
                                   ),
                                   dropDownvalue: controller.isSelectedState &&
                                           controller.isSelectedCity
@@ -167,8 +172,8 @@ class RegisterPage extends GetView<RegisterController> {
                                               idade: int.parse(value));
                                         }),
                                     Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
+                                        padding: const EdgeInsets.only(
+                                            left: 10.0, bottom: 5.0),
                                         child: SexInput(
                                           items: controller.sex,
                                           label: 'Sexo',

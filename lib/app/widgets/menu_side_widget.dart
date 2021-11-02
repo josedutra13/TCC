@@ -1,15 +1,11 @@
-import 'package:auresgate/app/module/login/login_controller.dart';
-import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class NavDrawer extends StatelessWidget {
-  final LoginController _loginController = Get.find();
-  final String? userName;
+  final String userName;
   final VoidCallback? onHistory;
   final VoidCallback? logout;
 
-  NavDrawer({Key? key, this.userName, this.onHistory, this.logout});
+  NavDrawer({Key? key, required this.userName, this.onHistory, this.logout});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +38,7 @@ class NavDrawer extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20.0),
             child: ListTile(
               leading: Icon(Icons.person),
-              title: Text(_loginController.usuarioText.text),
+              title: Text(userName),
               onTap: () => {},
             ),
           ),
