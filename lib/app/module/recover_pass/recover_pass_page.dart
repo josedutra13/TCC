@@ -46,6 +46,7 @@ class RecoverPassPage extends GetView<RecoverPassController> {
                         children: [
                           RecoverInput(
                             label: 'EMAIL',
+                            controller: controller.emailText,
                             onChanged: (_) {},
                             placeholder: '',
                           ),
@@ -56,7 +57,7 @@ class RecoverPassPage extends GetView<RecoverPassController> {
                               height: 25,
                               child: ElevatedButton(
                                   onPressed: () {
-                                    Get.offNamed(Routes.ALTER_PASS);
+                                    controller.emailConfirmation(context);
                                   },
                                   style: ElevatedButton.styleFrom(
                                       shadowColor: Colors.cyan[300],

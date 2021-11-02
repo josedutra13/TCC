@@ -9,6 +9,8 @@ import 'package:auresgate/app/module/register/register_binding.dart';
 import 'package:auresgate/app/module/register/register_page.dart';
 import 'package:auresgate/app/module/request_rescue/request_rescue_binding.dart';
 import 'package:auresgate/app/module/request_rescue/request_rescue_page.dart';
+import 'package:auresgate/app/module/rescue/rescue_binding.dart';
+import 'package:auresgate/app/module/rescue/rescue_page.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +28,7 @@ class AppPages {
         binding: RequestRescueBinding()),
     GetPage(
         name: Routes.REQUEST_RESCUE,
-        page: () => RequestRescue(),
+        page: () => RequestRescuePage(),
         binding: RequestRescueBinding()),
     GetPage(
         name: Routes.RECOVER_PASS,
@@ -36,5 +38,7 @@ class AppPages {
         name: Routes.ALTER_PASS,
         page: () => AlterPassPage(),
         binding: AlterPassBinding()),
+    GetPage(
+        name: Routes.RESCUE, page: () => RescuePage(), binding: RescueBinding())
   ];
 }

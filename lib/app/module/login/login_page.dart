@@ -51,6 +51,7 @@ class LoginPage extends GetView<LoginController> {
                               BorderRadius.all(Radius.circular(15.0))),
                       height: 50,
                       child: TextFormField(
+                        controller: controller.usuarioText,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.person_outline,
@@ -77,6 +78,7 @@ class LoginPage extends GetView<LoginController> {
                               BorderRadius.all(Radius.circular(15.0))),
                       height: 50,
                       child: TextFormField(
+                        controller: controller.senhaText,
                         obscureText: true,
                         decoration: InputDecoration(
                           prefixIcon:
@@ -97,7 +99,8 @@ class LoginPage extends GetView<LoginController> {
                               color: Colors.white, fontWeight: FontWeight.w600),
                         ),
                         tristate: true,
-                        contentPadding: EdgeInsets.only(right: 20),
+                        contentPadding: EdgeInsets.only(right: 25),
+                        checkColor: Colors.white,
                         value: controller.onCheck,
                         onChanged: (value) {
                           controller.onCheck = !controller.onCheck;
@@ -110,7 +113,7 @@ class LoginPage extends GetView<LoginController> {
                         height: 60,
                         child: ElevatedButton(
                             onPressed: () {
-                              Get.offNamed(Routes.MAIN);
+                              controller.loginUser(context);
                             },
                             style: ElevatedButton.styleFrom(
                                 shadowColor: Colors.grey,
@@ -120,7 +123,8 @@ class LoginPage extends GetView<LoginController> {
                                     side: BorderSide(color: Colors.green))),
                             child: Text(
                               'ENTRAR',
-                              style: TextStyle(fontSize: 30),
+                              style:
+                                  TextStyle(fontSize: 30, color: Colors.black),
                             )),
                       ),
                     ),

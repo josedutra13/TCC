@@ -6,6 +6,7 @@ class RadioButton extends StatelessWidget {
   final String? text;
   final int groupT;
   final void Function(int?)? onChanged;
+  final Color? color;
 
   var radio;
   RadioButton(
@@ -14,14 +15,15 @@ class RadioButton extends StatelessWidget {
       required this.value,
       this.text,
       required this.groupT,
-      this.onChanged})
+      this.onChanged,
+      this.color})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(children: [
       Radio(
-        activeColor: Colors.white,
+        activeColor: color ?? Colors.white,
         value: value,
         groupValue: groupT,
         onChanged: onChanged,

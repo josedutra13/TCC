@@ -1,5 +1,6 @@
 import 'package:auresgate/app/module/alter_pass/alter_pass_controller.dart';
 import 'package:auresgate/app/module/alter_pass/widgets/alter_pass_input.dart';
+import 'package:auresgate/app/module/recover_pass/recover_pass_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class AlterPassPage extends GetView<AlterPassController> {
                             child: AlterPassInput(
                                 label: 'NOVA SENHA',
                                 placeholder: '',
-                                controller: controller.passwordController,
+                                controller: controller.passwordText,
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
                                 onChanged: (_) {},
@@ -62,7 +63,7 @@ class AlterPassPage extends GetView<AlterPassController> {
                           ),
                           AlterPassInput(
                             label: 'CONFIRMAR SENHA',
-                            controller: controller.confirmPassController,
+                            controller: controller.confirmPassText,
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             obscureText: !controller.showPassword,
@@ -79,7 +80,9 @@ class AlterPassPage extends GetView<AlterPassController> {
                               width: 220,
                               height: 25,
                               child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    controller.changePassword(context);
+                                  },
                                   style: ElevatedButton.styleFrom(
                                       shadowColor: Colors.cyan[300],
                                       primary: Colors.cyan[300],

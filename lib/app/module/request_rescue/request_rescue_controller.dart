@@ -7,4 +7,9 @@ class RequestRescueController extends GetxController {
   final _marking = false.obs;
   set marking(value) => _marking.value = value;
   get marking => this._marking.value;
+
+  final _optUsers = 0.obs;
+  get optUsers => this._optUsers.value;
+  set optUsers(value) => this._optUsers.value = value;
+
 }

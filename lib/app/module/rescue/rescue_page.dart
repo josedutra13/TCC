@@ -1,12 +1,15 @@
-import 'package:auresgate/app/module/register/widgets/radio_button_widget.dart';
 import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
+import 'package:auresgate/app/module/rescue/rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RequestRescuePage extends GetView<RequestRescueController> {
-  const RequestRescuePage({Key? key}) : super(key: key);
+class RescuePage extends GetView<RescueController> {
+  const RescuePage({Key? key}) : super(key: key);
+
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +17,15 @@ class RequestRescuePage extends GetView<RequestRescueController> {
       backgroundColor: Colors.cyan[300],
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.only(top: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 30.0, bottom: 25),
-                    child: Text('SOLICITAR RESGATE',
+                    child: Text('RESGATE',
                         style: GoogleFonts.bebasNeue(
                             color: Colors.white, fontSize: 40)),
                   ),
@@ -34,7 +36,7 @@ class RequestRescuePage extends GetView<RequestRescueController> {
               children: [
                 //CONTAINER DE DESCRIÇÃO
                 Padding(
-                    padding: const EdgeInsets.only(top: 90.0),
+                    padding: const EdgeInsets.only(top: 100.0),
                     child: Center(
                         child: Container(
                       width: MediaQuery.of(context).size.width * 0.9,
@@ -85,7 +87,7 @@ class RequestRescuePage extends GetView<RequestRescueController> {
 
                 // IMAGEM DE PERFIL DO ANIMAL
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.only(),
                   child: Center(
                     //TODO REFACTORY PARA COLOCAR BORDA BRANCA
                     child: ClipOval(
@@ -100,42 +102,7 @@ class RequestRescuePage extends GetView<RequestRescueController> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 10),
-              child: Text(
-                'Estado do animal:',
-                style: GoogleFonts.roboto(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w800),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12.0, bottom: 10),
-              child: Obx(() => Row(
-                    children: [
-                      RadioButton(
-                        groupT: controller.optUsers,
-                        value: 1,
-                        color: Colors.red,
-                        text: 'URGENTE',
-                        onChanged: (value) {
-                          controller.optUsers = value;
-                        },
-                      ),
-                      RadioButton(
-                        groupT: controller.optUsers,
-                        value: 2,
-                        color: Colors.green,
-                        text: 'SAUDÁVEL',
-                        onChanged: (value) {
-                          controller.optUsers = value;
-                        },
-                      )
-                    ],
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(top: 30.0),
               child: Column(
                 children: [
                   Center(
@@ -150,41 +117,17 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                                 side: BorderSide(
                                     color: Colors.green.shade400, width: 2))),
                         child: Text(
-                          'MARCAR LOCALIZAÇÃO',
+                          'RESGATAR ANIMAL',
                           style: TextStyle(fontSize: 20),
                         ),
                         onPressed: () {
-                          controller.marking = true;
+                          // controller.marking = true;
                           Get.toNamed(Routes.MAIN);
                         },
                       ),
                     ),
                   ),
                   // CANCELAR
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                    child: Container(
-                      width: 350,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.red.shade300,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                side: BorderSide(
-                                    color: Colors.red.shade300, width: 2))),
-                        child: Text(
-                          'VOLTAR',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          Get.back();
-                        },
-                      ),
-                    ),
-                  ),
                 ],
               ),
             )

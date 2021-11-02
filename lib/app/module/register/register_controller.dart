@@ -1,8 +1,10 @@
 import 'package:auresgate/app/data/models/cidade_model.dart';
 import 'package:auresgate/app/data/models/endereco_model.dart';
 import 'package:auresgate/app/data/models/estado_model.dart';
+import 'package:auresgate/app/data/models/ong_model.dart';
 import 'package:auresgate/app/data/models/pessoa_model.dart';
 import 'package:auresgate/app/data/repository/city_repository.dart';
+import 'package:auresgate/app/data/repository/ong_repository.dart';
 import 'package:auresgate/app/data/repository/person_repository.dart';
 import 'package:auresgate/app/data/repository/state_repository.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
@@ -13,8 +15,9 @@ class RegisterController extends GetxController {
   final PersonsRepository _personsRepository;
   final StatesRepository _stateRepository;
   final CityRepository _cityRepository;
-  RegisterController(
-      this._personsRepository, this._stateRepository, this._cityRepository);
+  final OngRepository _ongRepository;
+  RegisterController(this._personsRepository, this._stateRepository,
+      this._cityRepository, this._ongRepository);
 
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmController = TextEditingController();
@@ -33,6 +36,12 @@ class RegisterController extends GetxController {
 
   final _pessoaEditing = Pessoa.empty().obs;
   Pessoa get pessoaEditing => _pessoaEditing.value;
+
+  final _ong = Ong.empty().obs;
+  Ong get ong => _ong.value;
+
+  final _ongEditing = Ong.empty().obs;
+  Ong get ongEditing => _ongEditing.value;
 
   final _showPassword = false.obs;
   bool get showPassword => _showPassword.value;
@@ -93,11 +102,28 @@ class RegisterController extends GetxController {
         numero: numero,
         complemento: complemento,
         cidade: cidade);
+
+    _ongEditing.value = _ongEditing.value.copyWith(
+        nome: nome,
+        email: email,
+        telefone: telefone,
+        senha: senha,
+        bairro: bairro,
+        numero: numero,
+        complemento: complemento,
+        cidade: cidade);
   }
 
   void onSave() async {
     _pessoa.value = _pessoaEditing.value;
-    var response = await _personsRepository.createUserPerson(pessoa);
+    _ong.value = _ongEditing.value;
+    var response;
+    if (isPessoa) {
+      response = await _personsRepository.createUserPerson(pessoa);
+    } else {
+      response = await _ongRepository.createOng(ong);
+    }
+
     if (response == null) {
       Get.offNamed(Routes.LOGIN);
     }
