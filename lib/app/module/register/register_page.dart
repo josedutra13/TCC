@@ -1,7 +1,5 @@
 import 'package:auresgate/app/data/models/cidade_model.dart';
-import 'package:auresgate/app/data/models/endereco_model.dart';
 import 'package:auresgate/app/data/models/estado_model.dart';
-import 'package:auresgate/app/module/login/login_page.dart';
 import 'package:auresgate/app/module/register/register_controller.dart';
 import 'package:auresgate/app/module/register/widgets/radio_button_widget.dart';
 import 'package:auresgate/app/input_widgets/register_input.dart';
@@ -64,10 +62,16 @@ class RegisterPage extends GetView<RegisterController> {
                           child: Column(
                             children: [
                               RegisterInput(
+                                label: 'NOME',
+                                placeholder: 'Informe seu nome',
+                                onChanged: (value) =>
+                                    controller.onChangeUser(nome: value),
+                              ),
+                              RegisterInput(
                                 label: 'USUÁRIO',
                                 placeholder: 'Informe seu usuário',
                                 onChanged: (value) =>
-                                    controller.onChangeUser(nome: value),
+                                    controller.onChangeUser(usuario: value),
                               ),
                               RegisterInput(
                                   label: 'E-MAIL',
@@ -158,8 +162,15 @@ class RegisterPage extends GetView<RegisterController> {
                                   placeholder: 'Informação complementar',
                                   onChanged: (value) => controller.onChangeUser(
                                       complemento: value)),
+                              CNPJInput(
+                                  label: 'CNPJ',
+                                  isOng: controller.isOng,
+                                  placeholder: 'Informe o CNPJ',
+                                  onChanged: (value) {
+                                    controller.onChangeUser(cnpj: value);
+                                  }),
                               Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
+                                padding: const EdgeInsets.only(top: 2.0),
                                 child: Row(
                                   children: [
                                     IdadeInput(
@@ -173,7 +184,7 @@ class RegisterPage extends GetView<RegisterController> {
                                         }),
                                     Padding(
                                         padding: const EdgeInsets.only(
-                                            left: 10.0, bottom: 5.0),
+                                            left: 10.0, bottom: 3.0, top: 5),
                                         child: SexInput(
                                           items: controller.sex,
                                           label: 'Sexo',
@@ -199,6 +210,7 @@ class RegisterPage extends GetView<RegisterController> {
                                         onChanged: (value) {
                                           controller.optUsers = value;
                                           controller.isPessoa = false;
+                                          controller.isOng = true;
                                         },
                                       ),
                                       RadioButton(
@@ -208,6 +220,7 @@ class RegisterPage extends GetView<RegisterController> {
                                         onChanged: (value) {
                                           controller.optUsers = value;
                                           controller.isPessoa = true;
+                                          controller.isOng = false;
                                         },
                                       )
                                     ],

@@ -37,6 +37,10 @@ class RegisterController extends GetxController {
   final _pessoaEditing = Pessoa.empty().obs;
   Pessoa get pessoaEditing => _pessoaEditing.value;
 
+  final _isOng = false.obs;
+  bool get isOng => _isOng.value;
+  set isOng(bool value) => _isOng.value = value;
+
   final _ong = Ong.empty().obs;
   Ong get ong => _ong.value;
 
@@ -63,7 +67,7 @@ class RegisterController extends GetxController {
 
   final _sex = <String>['Sexo', 'MASCULINO', 'FEMININO'].obs;
   List<String> get sex => _sex.toList();
-
+  
   final _isSelectedCity = false.obs;
   bool get isSelectedCity => _isSelectedCity.value;
   set isSelectedCity(bool value) => _isSelectedCity.value = value;
@@ -84,7 +88,9 @@ class RegisterController extends GetxController {
       {int? idade,
       String? sexo,
       String? nome,
+      String? usuario,
       String? email,
+      String? cnpj,
       String? telefone,
       String? senha,
       String? bairro,
@@ -95,6 +101,7 @@ class RegisterController extends GetxController {
         idade: idade,
         sexo: sexo,
         nome: nome,
+        usuario: usuario,
         email: email,
         telefone: telefone,
         senha: senha,
@@ -106,6 +113,7 @@ class RegisterController extends GetxController {
     _ongEditing.value = _ongEditing.value.copyWith(
         nome: nome,
         email: email,
+        cnpj: cnpj,
         telefone: telefone,
         senha: senha,
         bairro: bairro,

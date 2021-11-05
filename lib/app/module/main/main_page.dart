@@ -25,6 +25,7 @@ class _MapPageState extends State<MapPage> {
   late GoogleMapController _googleMapController;
   Marker? _request;
   BitmapDescriptor? myIcon;
+  List<LatLng> tappedPoints = [];
 
   // @override
   // void initState() {
@@ -79,6 +80,15 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
+    // var markers = tappedPoints.map((latlng) {
+    //   return Marker(
+    //       onTap: () {},
+    //       markerId: const MarkerId('request'),
+    //       //TODO Definir a cor da prioridade do resgate
+    //       infoWindow: const InfoWindow(title: 'RESGATE'),
+    //       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    //       position: latlng);
+    // }).toList();
     return Scaffold(
         drawer: NavDrawer(
           userName: _loginController.usuarioText.text,
@@ -94,7 +104,8 @@ class _MapPageState extends State<MapPage> {
           initialCameraPosition: _initialCameraPosition,
           onMapCreated: (controller) => _googleMapController = controller,
           markers: {if (_request != null) _request!},
-          onLongPress: _addMarker,
+          // onLongPress: _addMarker,
+          onTap: _addMarker,
         ),
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(left: 30),
@@ -177,7 +188,7 @@ class _MapPageState extends State<MapPage> {
         ));
   }
 
-  //Metodo que setta o marcador no mapa
+  // Metodo que setta o marcador no mapa
   void _addMarker(LatLng pos) {
     if (_request == null) {
       setState(() {
@@ -192,4 +203,11 @@ class _MapPageState extends State<MapPage> {
       });
     }
   }
+
+  // void _handleTap(LatLng latlng) {
+  //   setState(() {
+  //     print(latlng);
+  //     tappedPoints.add(latlng);
+  //   });
+  // }
 }

@@ -7,7 +7,6 @@ class RegisterInput extends StatelessWidget {
   final void Function(String)? onChanged;
   final String? Function(String?, FocusNode?)? validator;
   final TextEditingController? controller;
-  final bool? isPersonSelected;
   final bool? isPerson;
   const RegisterInput(
       {Key? key,
@@ -16,7 +15,6 @@ class RegisterInput extends StatelessWidget {
       required this.onChanged,
       this.validator,
       this.controller,
-      this.isPersonSelected = false,
       this.isPerson = false})
       : super(key: key);
 
@@ -58,6 +56,66 @@ class RegisterInput extends StatelessWidget {
   }
 }
 
+class CNPJInput extends StatelessWidget {
+  final String label;
+  final String placeholder;
+  final void Function(String)? onChanged;
+  final String? Function(String?, FocusNode?)? validator;
+  final TextEditingController? controller;
+  final bool isOng;
+  const CNPJInput({
+    Key? key,
+    required this.label,
+    required this.placeholder,
+    required this.onChanged,
+    this.validator,
+    this.controller,
+    this.isOng = true,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return isOng
+        ? Padding(
+            padding: const EdgeInsets.only(top: 12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: GoogleFonts.roboto(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w900),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  height: 45,
+                  child: TextFormField(
+                    onChanged: onChanged,
+                    controller: controller,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      hintText: placeholder,
+                      hintStyle: TextStyle(
+                          color: Colors.grey, fontWeight: FontWeight.w400),
+                      fillColor: Colors.white70,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                    ),
+                  ),
+                ),
+              ],
+            ))
+        : SizedBox(
+            height: 5,
+          );
+  }
+}
+
 class IdadeInput extends StatelessWidget {
   final String label;
   final String placeholder;
@@ -90,8 +148,8 @@ class IdadeInput extends StatelessWidget {
                     label,
                     style: GoogleFonts.roboto(
                         color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -154,10 +212,10 @@ class SexInput extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: GoogleFonts.bebasNeue(
+                    style: GoogleFonts.roboto(
                         color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
                   ),
                   Container(
                       decoration: BoxDecoration(

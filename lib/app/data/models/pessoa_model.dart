@@ -9,6 +9,7 @@ class Pessoa {
   String? sexo;
   int? id;
   String? nome;
+  String? usuario;
   String? email;
   String? telefone;
   String? senha;
@@ -19,6 +20,7 @@ class Pessoa {
   Pessoa(
       {this.id,
       required this.nome,
+      required this.usuario,
       required this.email,
       required this.telefone,
       required this.senha,
@@ -32,6 +34,7 @@ class Pessoa {
       String? sexo,
       int? id,
       String? nome,
+      String? usuario,
       String? email,
       String? telefone,
       String? senha,
@@ -45,6 +48,7 @@ class Pessoa {
         idade: idade ?? this.idade,
         sexo: sexo ?? this.sexo,
         nome: nome ?? this.nome,
+        usuario: usuario ?? this.usuario,
         email: email ?? this.email,
         telefone: telefone ?? this.telefone,
         senha: senha ?? this.senha,
@@ -61,6 +65,7 @@ class Pessoa {
   fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
     this.nome = json['nome'];
+    this.usuario = json['usuario'];
     this.email = json['email'];
     this.telefone = json['telefone'];
     this.senha = json['senha'];
@@ -74,6 +79,7 @@ class Pessoa {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['nome'] = this.nome;
+    data['usuario'] = this.usuario;
     data['email'] = this.email;
     data['telefone'] = this.telefone;
     data['senha'] = this.senha;

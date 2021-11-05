@@ -17,6 +17,10 @@ class LoginController extends GetxController {
   bool get onCheck => _onCheck.value;
   set onCheck(bool value) => _onCheck.value = value;
 
+  final _invalidLogin = false.obs;
+  bool get invalidLogin => _invalidLogin.value;
+  set invalidLogin(bool value) => _invalidLogin.value = value;
+
   // final String errorMessage = '';
 
   TextEditingController usuarioText = TextEditingController();
@@ -31,29 +35,30 @@ class LoginController extends GetxController {
         _userDto.value = response;
         Get.toNamed(Routes.MAIN);
       } else {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 100.0),
-                child: AlertDialog(
-                  content: Container(
-                      height: 20,
-                      child: Row(
-                        children: [
-                          Text('Usuario ou senha invalido'),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Icon(
-                              Icons.info,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ],
-                      )),
-                ),
-              );
-            });
+        _invalidLogin.value = true;
+        // showDialog(
+        //     context: context,
+        //     builder: (BuildContext context) {
+        //       return Padding(
+        //         padding: const EdgeInsets.only(top: 100.0),
+        //         child: AlertDialog(
+        //           content: Container(
+        //               height: 20,
+        //               child: Row(
+        //                 children: [
+        //                   Text('Usuario ou senha invalido'),
+        //                   Padding(
+        //                     padding: const EdgeInsets.only(left: 8.0),
+        //                     child: Icon(
+        //                       Icons.info,
+        //                       color: Colors.red,
+        //                     ),
+        //                   ),
+        //                 ],
+        //               )),
+        //         ),
+        //       );
+        //     });
       }
     }
   }
