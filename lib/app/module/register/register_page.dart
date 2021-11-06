@@ -166,9 +166,8 @@ class RegisterPage extends GetView<RegisterController> {
                                   label: 'CNPJ',
                                   isOng: controller.isOng,
                                   placeholder: 'Informe o CNPJ',
-                                  onChanged: (value) {
-                                    controller.onChangeUser(cnpj: value);
-                                  }),
+                                  onChanged: (value) =>
+                                      controller.onChangeUser(cnpj: value)),
                               Padding(
                                 padding: const EdgeInsets.only(top: 2.0),
                                 child: Row(
@@ -178,10 +177,10 @@ class RegisterPage extends GetView<RegisterController> {
                                         isPerson: controller.isPessoa,
                                         isPersonSelected: controller.isPessoa,
                                         placeholder: 'Idade',
-                                        onChanged: (value) {
+                                        onChanged: (value) =>
                                           controller.onChangeUser(
-                                              idade: int.parse(value));
-                                        }),
+                                              idade: int.parse(value))
+                                        ),
                                     Padding(
                                         padding: const EdgeInsets.only(
                                             left: 10.0, bottom: 3.0, top: 5),

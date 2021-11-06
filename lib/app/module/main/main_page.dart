@@ -28,6 +28,20 @@ class _MapPageState extends State<MapPage> {
   List<LatLng> tappedPoints = [];
 
   @override
+  void initState() {
+    super.initState();
+    _requestRescueController.loadRescueAnimals();
+    // BitmapDescriptor.fromAssetImage(
+    //         ImageConfiguration(size: Size(48, 48)), 'assets/logo.png')
+    //     .then((value) {
+    //   if (value != null) {
+    //     myIcon = value;
+    //   }
+    // });
+    // super.initState();
+  }
+
+  @override
   void dispose() {
     _googleMapController.dispose();
     super.dispose();
@@ -68,7 +82,7 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    // bool tem = false;
+    // tappedPoints.add();
     var markers = tappedPoints.map((latlng) {
       return Marker(
           onTap: () {},
@@ -109,7 +123,9 @@ class _MapPageState extends State<MapPage> {
                       backgroundColor: Colors.blue,
                       foregroundColor: Colors.white,
                       onPressed: () {
-                        Get.toNamed(Routes.REQUEST_RESCUE);
+                        print(
+                            'TESTE ${_requestRescueController.loadRescueAnimals}');
+                        Get.offNamed(Routes.REQUEST_RESCUE);
                       },
                       child: const Icon(
                         Icons.add,

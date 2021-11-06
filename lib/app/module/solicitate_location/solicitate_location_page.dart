@@ -23,21 +23,11 @@ class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
       CameraPosition(target: LatLng(-15.777737, -47.878488), zoom: 11.5);
 
   late GoogleMapController _googleMapController;
-  Marker? _request;
+  // Marker? _request;
   BitmapDescriptor? myIcon;
   List<LatLng> tappedPoints = [];
 
-  // @override
-  // void initState() {
-  //   BitmapDescriptor.fromAssetImage(
-  //           ImageConfiguration(size: Size(48, 48)), 'assets/logo.png')
-  //       .then((value) {
-  //     if (value != null) {
-  //       myIcon = value;
-  //     }
-  //   });
-  //   super.initState();
-  // }
+
 
   @override
   void dispose() {
@@ -140,11 +130,18 @@ class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
                   height: 32,
                   child: ElevatedButton(
                       onPressed: () {
-                        _requestRescueController.onChangeSolicitation(
-                            latitude: tappedPoints[0].latitude,
-                            longitude: tappedPoints[0].longitude);
+                        _requestRescueController
+                          ..onChangeSolicitation(
+                              latitude: tappedPoints[0].latitude,
+                              longitude: tappedPoints[0].longitude)
+                          ..onConfirmRescue();
+
                         print(
-                            '[LOG] :: ${_requestRescueController.animalEditing}');
+                            '[LOG] :: ${_requestRescueController.animalEditing.descricao}');
+                        print(
+                            '[LOG] :: ABEu ${_requestRescueController.animalEditing.estado}');
+                        print(
+                            '[LOG] :: ${_requestRescueController.animalEditing.localizacao!.latitude}');
                       },
                       style: ElevatedButton.styleFrom(
                           shadowColor: Colors.green[200],
@@ -166,7 +163,7 @@ class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
                   height: 32,
                   child: ElevatedButton(
                       onPressed: () {
-                        Get.toNamed(Routes.MAIN);
+                        Get.offNamed(Routes.MAIN);
                       },
                       style: ElevatedButton.styleFrom(
                           shadowColor: Colors.red[300],

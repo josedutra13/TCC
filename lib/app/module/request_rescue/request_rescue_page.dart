@@ -185,7 +185,7 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                           style: TextStyle(fontSize: 20),
                         ),
                         onPressed: () {
-                          Get.back();
+                          Get.offNamed(Routes.MAIN);
                         },
                       ),
                     ),

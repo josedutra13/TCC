@@ -2,9 +2,9 @@ import 'package:auresgate/app/data/models/localizacao_model.dart';
 
 class Animal {
   int? id;
-  late String estado;
-  late String descricao;
-  late Localizacao localizacao;
+  String? estado;
+  String? descricao;
+  Localizacao? localizacao;
 
   Animal(
       {this.id,
@@ -21,15 +21,15 @@ class Animal {
         estado: estado ?? this.estado,
         descricao: descricao ?? this.descricao,
         localizacao: Localizacao(
-            latitude: latitude ?? localizacao.latitude,
-            longitude: longitude ?? localizacao.longitude));
+            latitude: latitude ?? localizacao?.latitude,
+            longitude: longitude ?? localizacao?.longitude));
   }
 
   Animal.fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
     this.estado = json['estado'];
     this.descricao = json['descricao'];
-    this.localizacao = json['localizacao'];
+    this.localizacao = Localizacao.fromJson(json['localizacao']);
   }
 
   Animal.empty();

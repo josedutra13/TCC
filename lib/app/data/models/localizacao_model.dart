@@ -2,8 +2,8 @@ import 'package:auresgate/app/data/models/estado_model.dart';
 
 class Localizacao {
   int? id;
-  late double latitude;
-  late double longitude;
+  double? latitude;
+  double? longitude;
 
   Localizacao({this.id, required this.latitude, required this.longitude});
 
@@ -19,7 +19,7 @@ class Localizacao {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['longitude'] = this.longitude;
+    data['latitude'] = this.latitude;
     data['longitude'] = this.longitude;
     return data;
   }
