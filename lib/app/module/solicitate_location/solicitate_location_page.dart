@@ -8,14 +8,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapPage extends StatefulWidget {
-  const MapPage({Key? key}) : super(key: key);
+class SolicitateLocationPage extends StatefulWidget {
+  const SolicitateLocationPage({Key? key}) : super(key: key);
 
   @override
-  _MapPageState createState() => _MapPageState();
+  _SolicitateLocationPageState createState() => _SolicitateLocationPageState();
 }
 
-class _MapPageState extends State<MapPage> {
+class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
   final RequestRescueController _requestRescueController = Get.find();
   final LoginController _loginController = Get.find();
   //define a posição inicial do mapa
@@ -26,6 +26,18 @@ class _MapPageState extends State<MapPage> {
   Marker? _request;
   BitmapDescriptor? myIcon;
   List<LatLng> tappedPoints = [];
+
+  // @override
+  // void initState() {
+  //   BitmapDescriptor.fromAssetImage(
+  //           ImageConfiguration(size: Size(48, 48)), 'assets/logo.png')
+  //       .then((value) {
+  //     if (value != null) {
+  //       myIcon = value;
+  //     }
+  //   });
+  //   super.initState();
+  // }
 
   @override
   void dispose() {
@@ -68,8 +80,7 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    // bool tem = false;
-    var markers = tappedPoints.map((latlng) {
+    var marker = tappedPoints.map((latlng) {
       return Marker(
           onTap: () {},
           markerId: const MarkerId('request'),
@@ -92,7 +103,8 @@ class _MapPageState extends State<MapPage> {
           zoomControlsEnabled: true,
           initialCameraPosition: _initialCameraPosition,
           onMapCreated: (controller) => _googleMapController = controller,
-          markers: markers,
+          markers: marker,
+          onTap: _handleTap,
         ),
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(left: 30),
@@ -109,33 +121,92 @@ class _MapPageState extends State<MapPage> {
                       backgroundColor: Colors.blue,
                       foregroundColor: Colors.white,
                       onPressed: () {
-                        Get.toNamed(Routes.REQUEST_RESCUE);
+                        _googleMapController.animateCamera(
+                            CameraUpdate.newCameraPosition(
+                                _initialCameraPosition));
                       },
-                      child: const Icon(
-                        Icons.add,
-                        size: 35,
-                      ),
+                      child: const Icon(Icons.center_focus_strong),
                     ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  FloatingActionButton(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                      onPressed: () {
-                        _googleMapController.animateCamera(
-                            CameraUpdate.newCameraPosition(
-                                _initialCameraPosition));
-                      },
-                      child: const Icon(
-                        Icons.center_focus_strong,
-                        size: 30,
-                      ))
                 ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, bottom: 32),
+                child: Container(
+                  width: 110,
+                  height: 32,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        _requestRescueController.onChangeSolicitation(
+                            latitude: tappedPoints[0].latitude,
+                            longitude: tappedPoints[0].longitude);
+                        print(
+                            '[LOG] :: ${_requestRescueController.animalEditing}');
+                      },
+                      style: ElevatedButton.styleFrom(
+                          shadowColor: Colors.green[200],
+                          primary: Colors.green[400],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          )),
+                      child: Text(
+                        'Confirmar',
+                        style: GoogleFonts.bebasNeue(
+                            color: Colors.white, fontSize: 20),
+                      )),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, bottom: 32),
+                child: Container(
+                  width: 110,
+                  height: 32,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Get.toNamed(Routes.MAIN);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          shadowColor: Colors.red[300],
+                          primary: Colors.red[400],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          )),
+                      child: Text(
+                        'Cancelar',
+                        style: GoogleFonts.bebasNeue(
+                            color: Colors.white, fontSize: 20),
+                      )),
+                ),
               ),
             ],
           ),
         ));
+  }
+
+  // Metodo que setta o marcador no mapa
+  // void _addMarker(LatLng pos) {
+  //   if (_request == null) {
+  //     setState(() {
+  //       _request = Marker(
+  //           onTap: () {},
+  //           markerId: const MarkerId('request'),
+  //           //TODO Definir a cor da prioridade do resgate
+  //           infoWindow: const InfoWindow(title: 'RESGATE'),
+  //           icon:
+  //               BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+  //           position: pos);
+  //     });
+  //   }
+  // }
+
+  void _handleTap(LatLng latlng) {
+    setState(() {
+      tappedPoints = [];
+      tappedPoints.add(latlng);
+      print(tappedPoints);
+    });
   }
 }

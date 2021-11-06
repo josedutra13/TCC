@@ -67,6 +67,10 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(20))),
                                   child: TextField(
+                                    onChanged: (descricao) {
+                                      controller.onChangeSolicitation(
+                                          descricao: descricao);
+                                    },
                                     minLines: null,
                                     maxLines: null,
                                     expands: true,
@@ -120,6 +124,7 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                         text: 'URGENTE',
                         onChanged: (value) {
                           controller.optUsers = value;
+                          controller.onChangeSolicitation(estado: 'URGENTE');
                         },
                       ),
                       RadioButton(
@@ -129,6 +134,7 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                         text: 'SAUDÁVEL',
                         onChanged: (value) {
                           controller.optUsers = value;
+                          controller.onChangeSolicitation(estado: 'SAUDÁVEL');
                         },
                       )
                     ],
@@ -154,8 +160,7 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                           style: TextStyle(fontSize: 20),
                         ),
                         onPressed: () {
-                          controller.marking = true;
-                          Get.offNamed(Routes.MAIN);
+                          Get.toNamed(Routes.SOLICITATE_LOCATION);
                         },
                       ),
                     ),
