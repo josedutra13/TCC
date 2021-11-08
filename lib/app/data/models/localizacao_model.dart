@@ -9,8 +9,8 @@ class Localizacao {
 
   Localizacao.fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
-    this.latitude = json['latitude'];
-    this.longitude = json['longitude'];
+    this.latitude = double.parse(json['latitude']);
+    this.longitude = double.parse(json['longitude']);
   }
 
   Localizacao.empty();

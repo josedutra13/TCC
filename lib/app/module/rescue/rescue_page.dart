@@ -6,10 +6,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RescuePage extends GetView<RescueController> {
-  const RescuePage({Key? key}) : super(key: key);
-
-
-  
+  final RequestRescueController _requestRescueController = Get.find();
+  RescuePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,9 @@ class RescuePage extends GetView<RescueController> {
                     padding: const EdgeInsets.only(top: 30.0, bottom: 25),
                     child: Text('RESGATE',
                         style: GoogleFonts.bebasNeue(
-                            color: Colors.white, fontSize: 40)),
+                            color: Colors.white,
+                            fontSize: 40,
+                            letterSpacing: 5)),
                   ),
                 ],
               ),
@@ -57,29 +57,26 @@ class RescuePage extends GetView<RescueController> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 20.0),
-                            child: Center(
-                              child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.75,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.3,
-                                  decoration: BoxDecoration(
-                                      color: Colors.lightBlue.shade300,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
-                                  child: TextField(
-                                    minLines: null,
-                                    maxLines: null,
-                                    expands: true,
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20))),
-                                    style: TextStyle(color: Colors.white),
-                                  )),
-                            ),
-                          ),
+                              padding: const EdgeInsets.only(top: 20.0),
+                              child: Center(
+                                child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.75,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.3,
+                                    decoration: BoxDecoration(
+                                        color: Colors.lightBlue.shade300,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20))),
+                                    child: Text('')
+
+                                    // Text(
+                                    //   _requestRescueController
+                                    //       .chamadoDTO.animal.descricao!,
+                                    //   style: TextStyle(color: Colors.white),
+                                    // ))),
+                                    ),
+                              )),
                         ],
                       ),
                     ))),
@@ -111,19 +108,44 @@ class RescuePage extends GetView<RescueController> {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Colors.green.shade400,
+                            primary: Colors.greenAccent.shade400,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.0),
                                 side: BorderSide(
-                                    color: Colors.green.shade400, width: 2))),
+                                    color: Colors.greenAccent.shade400,
+                                    width: 2))),
                         child: Text(
-                          'RESGATAR ANIMAL',
-                          style: TextStyle(fontSize: 20),
+                          'AuResgate',
+                          style: TextStyle(fontSize: 30),
                         ),
                         onPressed: () {
                           // controller.marking = true;
                           Get.toNamed(Routes.MAIN);
                         },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Center(
+                      child: Container(
+                        width: 350,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.red.shade300,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  side: BorderSide(
+                                      color: Colors.red.shade300, width: 2))),
+                          child: Text(
+                            'VOLTAR',
+                            style: TextStyle(fontSize: 30),
+                          ),
+                          onPressed: () {
+                            Get.offNamed(Routes.MAIN);
+                          },
+                        ),
                       ),
                     ),
                   ),

@@ -1,29 +1,30 @@
 import 'package:auresgate/app/data/models/cidade_model.dart';
 import 'package:auresgate/app/data/models/endereco_model.dart';
 import 'package:auresgate/app/data/models/estado_model.dart';
+import 'package:auresgate/app/data/models/user_model.dart';
 
-class Ong {
+class Ong extends User {
   int? id;
-  String? nome;
-  String? usuario;
-  String? email;
   String? cnpj;
-  String? telefone;
-  String? senha;
-  Endereco? endereco;
 
-  Ong.empty();
+  Ong.empty() : super.empty();
 
   Ong({
     this.id,
-    required this.nome,
-    required this.usuario,
-    required this.email,
+    final String? nome,
+    final String? nomeUsuario,
+    final String? email,
     required this.cnpj,
-    required this.telefone,
-    required this.senha,
-    required this.endereco,
-  });
+    final String? telefone,
+    final String? senha,
+    final Endereco? endereco,
+  }) : super(
+            email: email,
+            senha: senha,
+            endereco: endereco,
+            nome: nome,
+            nomeUsuario: nomeUsuario,
+            telefone: telefone);
 
   Ong copyWith(
       {int? id,
@@ -39,7 +40,7 @@ class Ong {
     return Ong(
         id: id,
         nome: nome ?? this.nome,
-        usuario: usuario ?? this.usuario,
+        nomeUsuario: nomeUsuario ?? this.nomeUsuario,
         email: email ?? this.email,
         cnpj: cnpj ?? this.cnpj,
         telefone: telefone ?? this.telefone,
@@ -57,7 +58,7 @@ class Ong {
   fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
     this.nome = json['nome'];
-    this.usuario = json['usuario'];
+    this.nomeUsuario = json['nomeUsuario'];
     this.email = json['email'];
     this.cnpj = json['cnpj'];
     this.telefone = json['telefone'];
@@ -70,7 +71,7 @@ class Ong {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['nome'] = this.nome;
-    data['usuario'] = this.usuario;
+    data['nomeUsuario'] = this.nomeUsuario;
     data['email'] = this.email;
     data['cnpj'] = this.cnpj;
     data['telefone'] = this.telefone;

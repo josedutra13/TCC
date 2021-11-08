@@ -5,13 +5,13 @@ import 'package:auresgate/app/data/models/userDTO_model.dart';
 
 class ChamadoDTO {
   late Animal animal;
-  late UserDTO userDTO;
+  late UserDTO loginDTO;
 
-  ChamadoDTO({required this.animal, required userDTO});
+  ChamadoDTO({required this.animal, required loginDTO});
 
   ChamadoDTO.fromJson(Map<String, dynamic> json) {
     this.animal = json['animal'];
-    this.userDTO = json['userDTO'];
+    this.loginDTO = json['loginDTO'];
   }
 
   ChamadoDTO.empty();
@@ -20,7 +20,7 @@ class ChamadoDTO {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['animal'] = this.animal;
-    data['userDTO'] = this.userDTO;
+    data['loginDTO'] = this.loginDTO;
     return data;
   }
 }

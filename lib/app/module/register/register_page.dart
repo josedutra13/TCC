@@ -71,7 +71,7 @@ class RegisterPage extends GetView<RegisterController> {
                                 label: 'USUÁRIO',
                                 placeholder: 'Informe seu usuário',
                                 onChanged: (value) =>
-                                    controller.onChangeUser(usuario: value),
+                                    controller.onChangeUser(nomeUsuario: value),
                               ),
                               RegisterInput(
                                   label: 'E-MAIL',

@@ -7,4 +7,6 @@ abstract class Routes {
   static const ALTER_PASS = '/alter';
   static const RESCUE = '/rescue';
   static const SOLICITATE_LOCATION = '/solicitate_location';
+  static const FINISH_RESCUE = '/finish_rescue';
+  static const EDIT_RESCUE = '/edit_rescue';
 }

@@ -23,14 +23,13 @@ class _MapPageState extends State<MapPage> {
       CameraPosition(target: LatLng(-15.777737, -47.878488), zoom: 11.5);
 
   late GoogleMapController _googleMapController;
-  Marker? _request;
   BitmapDescriptor? myIcon;
   List<LatLng> tappedPoints = [];
 
   @override
   void initState() {
     super.initState();
-    _requestRescueController.loadRescueAnimals();
+    _requestRescueController.loadRescueChamado();
     // BitmapDescriptor.fromAssetImage(
     //         ImageConfiguration(size: Size(48, 48)), 'assets/logo.png')
     //     .then((value) {
@@ -124,8 +123,8 @@ class _MapPageState extends State<MapPage> {
                       foregroundColor: Colors.white,
                       onPressed: () {
                         print(
-                            'TESTE ${_requestRescueController.loadRescueAnimals}');
-                        Get.offNamed(Routes.REQUEST_RESCUE);
+                            'TESTE ${_requestRescueController.loadRescueChamado}');
+                        Get.offNamed(Routes.FINISH_RESCUE);
                       },
                       child: const Icon(
                         Icons.add,

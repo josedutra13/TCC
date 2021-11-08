@@ -1,5 +1,8 @@
 import 'package:auresgate/app/module/alter_pass/alter_pass_binding.dart';
 import 'package:auresgate/app/module/alter_pass/alter_pass_page.dart';
+import 'package:auresgate/app/module/edit_rescue/edit_rescue_binding.dart';
+import 'package:auresgate/app/module/finish_rescue/finish_rescue_binding.dart';
+import 'package:auresgate/app/module/finish_rescue/finish_rescue_page.dart';
 import 'package:auresgate/app/module/login/login_binding.dart';
 import 'package:auresgate/app/module/login/login_page.dart';
 import 'package:auresgate/app/module/main/main_page.dart';
@@ -47,6 +50,14 @@ class AppPages {
     GetPage(
         name: Routes.SOLICITATE_LOCATION,
         page: () => SolicitateLocationPage(),
-        binding: SolicitateLocationBindings())
+        binding: SolicitateLocationBindings()),
+    GetPage(
+        name: Routes.FINISH_RESCUE,
+        page: () => FinishRescuePage(),
+        binding: FinishRescueBinding()),
+    GetPage(
+        name: Routes.EDIT_RESCUE,
+        page: () => FinishRescuePage(),
+        binding: EditRescueBinding())
   ];
 }
