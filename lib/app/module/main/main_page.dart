@@ -124,7 +124,7 @@ class _MapPageState extends State<MapPage> {
                       onPressed: () {
                         print(
                             'TESTE ${_requestRescueController.loadRescueChamado}');
-                        Get.offNamed(Routes.FINISH_RESCUE);
+                        Get.offNamed(Routes.EDIT_RESCUE);
                       },
                       child: const Icon(
                         Icons.add,

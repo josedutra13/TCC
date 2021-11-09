@@ -24,7 +24,6 @@ class RadioButton extends StatelessWidget {
     return Row(children: [
       Radio(
         activeColor: color ?? Colors.white,
-        
         value: value,
         groupValue: groupT,
         onChanged: onChanged,
