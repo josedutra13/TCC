@@ -26,7 +26,7 @@ class User {
     this.email = json['email'];
     this.telefone = json['telefone'];
     this.senha = json['senha'];
-    this.endereco = json['endereco'];
+    this.endereco = Endereco.fromJson(json['endereco']);
   }
 
   @override

@@ -61,8 +61,8 @@ class RequestRescueController extends GetxController {
 
   void loadRescueChamado() async {
     var response = await _chamadoRepository.listChamado();
-    print('AQUIII $response');
     _listChamadosRescue.value = response;
+    print('AQUIII ${response[0].usuario_abriu_chamado!.nome}');
     // _listLocation.value = response.map((e) {
     //   return e.localizacao;
     // }).toList();

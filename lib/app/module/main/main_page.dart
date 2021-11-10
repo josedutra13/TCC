@@ -81,10 +81,11 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    // tappedPoints.add();
     var markers = tappedPoints.map((latlng) {
       return Marker(
-          onTap: () {},
+          onTap: () {
+            Get.offNamed(Routes.RESCUE);
+          },
           markerId: const MarkerId('request'),
           //TODO Definir a cor da prioridade do resgate
           infoWindow: const InfoWindow(title: 'RESGATE'),
@@ -124,7 +125,7 @@ class _MapPageState extends State<MapPage> {
                       onPressed: () {
                         print(
                             'TESTE ${_requestRescueController.loadRescueChamado}');
-                        Get.offNamed(Routes.EDIT_RESCUE);
+                        Get.offNamed(Routes.REQUEST_RESCUE);
                       },
                       child: const Icon(
                         Icons.add,

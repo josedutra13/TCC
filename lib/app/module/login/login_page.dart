@@ -101,19 +101,16 @@ class LoginPage extends GetView<LoginController> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 3, top: 5.0),
-                          child: Text(
-                            controller.invalidLogin
-                                ? 'Usuario ou senha invalido'
-                                : '',
-                            style: GoogleFonts.roboto(
-                                color: controller.invalidLogin
-                                    ? Colors.red
-                                    : Colors.transparent,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15),
-                          ),
+                        Text(
+                          controller.invalidLogin
+                              ? 'Usuario ou senha invalido'
+                              : '',
+                          style: GoogleFonts.roboto(
+                              color: controller.invalidLogin
+                                  ? Colors.red
+                                  : Colors.transparent,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16),
                         ),
                         Obx(() => CheckboxListTile(
                             title: Text(

@@ -19,7 +19,7 @@ class Endereco {
     this.complemento = json['complemento'];
     this.numero = json['numero'];
     this.bairro = json['bairro'];
-    this.cidade = json['cidade'];
+    this.cidade = Cidade.fromJson(json['cidade']);
   }
 
   @override

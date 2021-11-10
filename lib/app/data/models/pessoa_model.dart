@@ -62,7 +62,7 @@ class Pessoa extends User {
                 estado: Estado(nome: '', sigla: ''))));
   }
 
-  fromJson(Map<String, dynamic> json) {
+   fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
     this.nome = json['nome'];
     this.nomeUsuario = json['nomeUsuario'];
@@ -72,7 +72,7 @@ class Pessoa extends User {
     this.endereco = json['endereco'];
     this.idade = json['idade'];
     this.sexo = json['sexo'];
-  } 
+  }
 
   @override
   Map<String, dynamic> toJson() {

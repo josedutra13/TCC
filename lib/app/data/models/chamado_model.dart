@@ -9,7 +9,7 @@ class Chamado {
   DateTime? data_hora_fechamento;
   String? status;
   Animal? animal;
-  Pessoa? usuario_abriu_chamado;
+  User? usuario_abriu_chamado;
   User? usuario_atendeu_chamado;
 
   Chamado(
@@ -28,7 +28,7 @@ class Chamado {
         DateTime.parse(json['data_hora_fechamento'] ?? '1999-09-29');
     this.status = json['status'];
     this.animal = Animal.fromJson(json['animal']);
-    this.usuario_abriu_chamado = json['usuario_abriu_chamado'];
+    this.usuario_abriu_chamado = User.fromJson(json['usuario_abriu_chamado']);
     this.usuario_atendeu_chamado =
         json['usuario_atendeu_chamado'] ?? User.empty();
   }
