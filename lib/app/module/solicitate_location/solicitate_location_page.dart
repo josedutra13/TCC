@@ -23,7 +23,6 @@ class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
       CameraPosition(target: LatLng(-15.777737, -47.878488), zoom: 11.5);
 
   late GoogleMapController _googleMapController;
-  // Marker? _request;
   BitmapDescriptor? myIcon;
   List<LatLng> tappedPoints = [];
 
@@ -135,13 +134,6 @@ class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
                               latitude: tappedPoints[0].latitude,
                               longitude: tappedPoints[0].longitude)
                           ..onConfirmRescue();
-
-                        print(
-                            '[LOG] :: ${_requestRescueController.animalEditing.descricao}');
-                        print(
-                            '[LOG] :: ABEu ${_requestRescueController.animalEditing.estado}');
-                        print(
-                            '[LOG] :: ${_requestRescueController.animalEditing.localizacao!.latitude}');
                       },
                       style: ElevatedButton.styleFrom(
                           shadowColor: Colors.green[200],
@@ -182,22 +174,6 @@ class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
           ),
         ));
   }
-
-  // Metodo que setta o marcador no mapa
-  // void _addMarker(LatLng pos) {
-  //   if (_request == null) {
-  //     setState(() {
-  //       _request = Marker(
-  //           onTap: () {},
-  //           markerId: const MarkerId('request'),
-  //           //TODO Definir a cor da prioridade do resgate
-  //           infoWindow: const InfoWindow(title: 'RESGATE'),
-  //           icon:
-  //               BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-  //           position: pos);
-  //     });
-  //   }
-  // }
 
   void _handleTap(LatLng latlng) {
     setState(() {

@@ -6,6 +6,7 @@ import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class RequestRescueController extends GetxController {
   final ChamadoRepository _chamadoRepository;
@@ -24,8 +25,8 @@ class RequestRescueController extends GetxController {
   final _listChamadosRescue = <Chamado>[].obs;
   List<Chamado> get listChamadosRescue => _listChamadosRescue.toList();
 
-  final _listLocation = <Localizacao?>[].obs;
-  List<Localizacao?> get listLocation => _listLocation.toList();
+  final _listLocation = <LatLng?>[].obs;
+  List<LatLng?> get listLocation => _listLocation.toList();
 
   final _marking = false.obs;
   set marking(value) => _marking.value = value;
@@ -34,6 +35,12 @@ class RequestRescueController extends GetxController {
   final _optUsers = 0.obs;
   get optUsers => this._optUsers.value;
   set optUsers(value) => this._optUsers.value = value;
+
+  @override
+  void onInit() {
+    super.onInit();
+    loadRescueChamado();
+  }
 
   void onChangeSolicitation(
       {String? estado,
@@ -62,7 +69,8 @@ class RequestRescueController extends GetxController {
   void loadRescueChamado() async {
     var response = await _chamadoRepository.listChamado();
     _listChamadosRescue.value = response;
-    print('AQUIII ${response[0].usuario_abriu_chamado!.nome}');
+    // _listLocation =
+
     // _listLocation.value = response.map((e) {
     //   return e.localizacao;
     // }).toList();

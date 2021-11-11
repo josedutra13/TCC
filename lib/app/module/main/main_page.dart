@@ -24,21 +24,30 @@ class _MapPageState extends State<MapPage> {
 
   late GoogleMapController _googleMapController;
   BitmapDescriptor? myIcon;
+  Set<Marker> setMarker = new Set();
   List<LatLng> tappedPoints = [];
 
-  @override
-  void initState() {
-    super.initState();
-    _requestRescueController.loadRescueChamado();
-    // BitmapDescriptor.fromAssetImage(
-    //         ImageConfiguration(size: Size(48, 48)), 'assets/logo.png')
-    //     .then((value) {
-    //   if (value != null) {
-    //     myIcon = value;
-    //   }
-    // });
-    // super.initState();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   print('CARREGA AQUI MENO ${_requestRescueController.listChamadosRescue}');
+  //   // var teste = _requestRescueController.loadRescueChamado().then((value) {
+  //   //   value
+  //   //     ..map((e) {
+  //   //       tappedPoints.add(LatLng(e.animal!.localizacao!.latitude!,
+  //   //           e.animal!.localizacao!.longitude!));
+  //   //     });
+  //   // });
+
+  //   // BitmapDescriptor.fromAssetImage(
+  //   //         ImageConfiguration(size: Size(48, 48)), 'assets/logo.png')
+  //   //     .then((value) {
+  //   //   if (value != null) {
+  //   //     myIcon = value;
+  //   //   }
+  //   // });
+  //   // super.initState();
+  // }
 
   @override
   void dispose() {
@@ -55,7 +64,8 @@ class _MapPageState extends State<MapPage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('INFORMAÇÕES'),
+            title: Text(
+                '${_requestRescueController.listChamadosRescue[0].animal!.estado}'),
             content: Container(
               height: 50,
               child: Column(
@@ -81,17 +91,6 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    var markers = tappedPoints.map((latlng) {
-      return Marker(
-          onTap: () {
-            Get.offNamed(Routes.RESCUE);
-          },
-          markerId: const MarkerId('request'),
-          //TODO Definir a cor da prioridade do resgate
-          infoWindow: const InfoWindow(title: 'RESGATE'),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-          position: latlng);
-    }).toSet();
     return Scaffold(
         drawer: NavDrawer(
           userName: _loginController.usuarioText.text,
@@ -105,8 +104,27 @@ class _MapPageState extends State<MapPage> {
           myLocationButtonEnabled: false,
           zoomControlsEnabled: true,
           initialCameraPosition: _initialCameraPosition,
-          onMapCreated: (controller) => _googleMapController = controller,
-          markers: markers,
+          onMapCreated: (controller) {
+            _googleMapController = controller;
+            _requestRescueController.listChamadosRescue.map((e) {
+              tappedPoints.add(LatLng(e.animal!.localizacao!.latitude!,
+                  e.animal!.localizacao!.longitude!));
+            }).toList();
+            tappedPoints.map((latlng) {
+              setMarker.add(Marker(
+                  onTap: () {
+                    Get.offNamed(Routes.RESCUE);
+                  },
+                  markerId: const MarkerId('request'),
+                  //TODO Definir a cor da prioridade do resgate
+                  infoWindow: const InfoWindow(title: 'RESGATE'),
+                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueRed),
+                  position: latlng));
+            }).toSet();
+            print('AQUIII NO FRONT$tappedPoints');
+          },
+          markers: setMarker,
         ),
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(left: 30),
