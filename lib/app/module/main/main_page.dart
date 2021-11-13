@@ -1,136 +1,57 @@
 import 'package:auresgate/app/module/login/login_controller.dart';
-import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
+import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:auresgate/app/widgets/appBar_widgets.dart';
 import 'package:auresgate/app/widgets/menu_side_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapPage extends StatefulWidget {
-  const MapPage({Key? key}) : super(key: key);
-
-  @override
-  _MapPageState createState() => _MapPageState();
-}
-
-class _MapPageState extends State<MapPage> {
-  final RequestRescueController _requestRescueController = Get.find();
+class MainPage extends GetView<MainController> {
   final LoginController _loginController = Get.find();
-  //define a posição inicial do mapa
-  static const _initialCameraPosition =
-      CameraPosition(target: LatLng(-15.777737, -47.878488), zoom: 11.5);
 
-  late GoogleMapController _googleMapController;
-  BitmapDescriptor? myIcon;
-  Set<Marker> setMarker = new Set();
-  List<LatLng> tappedPoints = [];
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   print('CARREGA AQUI MENO ${_requestRescueController.listChamadosRescue}');
-  //   // var teste = _requestRescueController.loadRescueChamado().then((value) {
-  //   //   value
-  //   //     ..map((e) {
-  //   //       tappedPoints.add(LatLng(e.animal!.localizacao!.latitude!,
-  //   //           e.animal!.localizacao!.longitude!));
-  //   //     });
-  //   // });
-
-  //   // BitmapDescriptor.fromAssetImage(
-  //   //         ImageConfiguration(size: Size(48, 48)), 'assets/logo.png')
-  //   //     .then((value) {
-  //   //   if (value != null) {
-  //   //     myIcon = value;
-  //   //   }
-  //   // });
-  //   // super.initState();
-  // }
-
-  @override
-  void dispose() {
-    _googleMapController.dispose();
-    super.dispose();
-  }
-
+  MainPage({Key? key}) : super(key: key);
   void onLogout() {
     Get.offAllNamed(Routes.LOGIN);
   }
 
-  void help() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-                '${_requestRescueController.listChamadosRescue[0].animal!.estado}'),
-            content: Container(
-              height: 50,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Text('Resgates Urgentes'),
-                      Icon(Icons.circle, color: Colors.red)
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text('Resgates com pouca urgência'),
-                      Icon(Icons.circle, color: Colors.green)
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
+  void reloadMarkers() {
+    controller.loadRescueChamado();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: NavDrawer(
-          userName: _loginController.usuarioText.text,
-          logout: onLogout,
-        ),
-        appBar: AppPageBarWidget(
-            onAction: help,
-            title: 'AuResgate',
-            titleStyle: TextStyle(fontSize: 20)),
-        body: GoogleMap(
-          myLocationButtonEnabled: false,
-          zoomControlsEnabled: true,
-          initialCameraPosition: _initialCameraPosition,
-          onMapCreated: (controller) {
-            _googleMapController = controller;
-            _requestRescueController.listChamadosRescue.map((e) {
-              tappedPoints.add(LatLng(e.animal!.localizacao!.latitude!,
-                  e.animal!.localizacao!.longitude!));
-            }).toList();
-            tappedPoints.map((latlng) {
-              setMarker.add(Marker(
-                  onTap: () {
-                    Get.offNamed(Routes.RESCUE);
-                  },
-                  markerId: const MarkerId('request'),
-                  //TODO Definir a cor da prioridade do resgate
-                  infoWindow: const InfoWindow(title: 'RESGATE'),
-                  icon: BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueRed),
-                  position: latlng));
-            }).toSet();
-            print('AQUIII NO FRONT$tappedPoints');
-          },
-          markers: setMarker,
-        ),
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(left: 30),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
+      drawer: NavDrawer(
+        userName: _loginController.usuarioText.text,
+        logout: onLogout,
+      ),
+      appBar: AppPageBarWidget(
+          onAction: reloadMarkers,
+          isMenu: true,
+          title: 'AuResgate',
+          titleStyle: TextStyle(fontSize: 20)),
+      body: Stack(children: [
+        Obx(() => Visibility(
+              visible: controller.listChamadosRescue.length >= 0,
+              child: GoogleMap(
+                markers: controller.isEmptyMarker
+                    ? Set.of(controller.markers)
+                    : Set(),
+                initialCameraPosition:
+                    CameraPosition(target: controller.center.value, zoom: 14.0),
+                onMapCreated: controller.onMapCreated,
+                zoomGesturesEnabled: true,
+                onCameraMove: controller.onCameraMove,
+                myLocationEnabled: true,
+                compassEnabled: false,
+                myLocationButtonEnabled: true,
+                mapToolbarEnabled: false,
+              ),
+            )),
+        Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -141,8 +62,8 @@ class _MapPageState extends State<MapPage> {
                       backgroundColor: Colors.blue,
                       foregroundColor: Colors.white,
                       onPressed: () {
-                        print(
-                            'TESTE ${_requestRescueController.loadRescueChamado}');
+                        // print(
+                        //     'TESTE ${_requestRescueController.loadRescueChamado}');
                         Get.offNamed(Routes.REQUEST_RESCUE);
                       },
                       child: const Icon(
@@ -154,22 +75,29 @@ class _MapPageState extends State<MapPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  FloatingActionButton(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                      onPressed: () {
-                        _googleMapController.animateCamera(
-                            CameraUpdate.newCameraPosition(
-                                _initialCameraPosition));
-                      },
-                      child: const Icon(
-                        Icons.center_focus_strong,
-                        size: 30,
-                      ))
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 23,
+                    ),
+                    child: FloatingActionButton(
+                        backgroundColor: Colors.blue,
+                        foregroundColor: Colors.white,
+                        onPressed: () {
+                          // _googleMapController.animateCamera(
+                          //     CameraUpdate.newCameraPosition(
+                          //         _initialCameraPosition));
+                        },
+                        child: const Icon(
+                          Icons.center_focus_strong,
+                          size: 30,
+                        )),
+                  )
                 ],
               ),
-            ],
-          ),
-        ));
+            ]))
+      ]),
+    );
+
+    //
   }
 }

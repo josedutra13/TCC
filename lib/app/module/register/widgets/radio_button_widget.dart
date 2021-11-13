@@ -7,6 +7,7 @@ class RadioButton extends StatelessWidget {
   final int groupT;
   final void Function(int?)? onChanged;
   final Color? color;
+  final bool isDisabled;
 
   var radio;
   RadioButton(
@@ -16,7 +17,8 @@ class RadioButton extends StatelessWidget {
       this.text,
       required this.groupT,
       this.onChanged,
-      this.color})
+      this.color,
+      this.isDisabled = false})
       : super(key: key);
 
   @override
@@ -26,7 +28,7 @@ class RadioButton extends StatelessWidget {
         activeColor: color ?? Colors.white,
         value: value,
         groupValue: groupT,
-        onChanged: onChanged,
+        onChanged: isDisabled ? null : onChanged,
       ),
       if (text != null)
         Text(text!,

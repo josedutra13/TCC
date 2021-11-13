@@ -29,6 +29,7 @@ class Ong extends User {
   Ong copyWith(
       {int? id,
       String? nome,
+      String? nomeUsuario,
       String? email,
       String? cnpj,
       String? telefone,

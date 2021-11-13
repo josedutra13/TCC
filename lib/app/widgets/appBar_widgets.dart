@@ -11,6 +11,7 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String? actionButtonLabel;
   final Widget? leading;
   final ButtonTypes? buttonType;
+  final bool isMenu;
 
   const AppPageBarWidget({
     Key? key,
@@ -23,6 +24,7 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
     this.titleStyle,
     this.color,
     this.elevation,
+    this.isMenu = false,
   }) : super(key: key);
 
   void actionHandle() {
@@ -53,7 +55,7 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
         if (onAction != null)
           IconButton(
             icon: Icon(
-              Icons.help,
+              isMenu ? Icons.replay : Icons.help,
               color: Colors.white,
             ),
             onPressed: onAction,

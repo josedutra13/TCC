@@ -14,7 +14,7 @@ class LoginRepository extends ApiBase {
 
     return null;
   }
-
+    
   Future<UserDTO?> emailConfirm(String email) async {
     Map<String, dynamic> params = {'email': email};
     var response = await client.get('/email', queryParameters: params);

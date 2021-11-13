@@ -20,13 +20,11 @@ class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
   final LoginController _loginController = Get.find();
   //define a posição inicial do mapa
   static const _initialCameraPosition =
-      CameraPosition(target: LatLng(-15.777737, -47.878488), zoom: 11.5);
+      CameraPosition(target: LatLng(-15.777737, -47.878488), zoom: 14);
 
   late GoogleMapController _googleMapController;
   BitmapDescriptor? myIcon;
   List<LatLng> tappedPoints = [];
-
-
 
   @override
   void dispose() {
@@ -72,7 +70,7 @@ class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
     var marker = tappedPoints.map((latlng) {
       return Marker(
           onTap: () {},
-          markerId: const MarkerId('request'),
+          markerId: MarkerId('request'),
           //TODO Definir a cor da prioridade do resgate
           infoWindow: const InfoWindow(title: 'RESGATE'),
           icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),

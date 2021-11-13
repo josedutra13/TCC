@@ -112,6 +112,7 @@ class RegisterController extends GetxController {
 
     _ongEditing.value = _ongEditing.value.copyWith(
         nome: nome,
+        nomeUsuario: nomeUsuario,
         email: email,
         cnpj: cnpj,
         telefone: telefone,
