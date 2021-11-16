@@ -1,6 +1,4 @@
 import 'package:auresgate/app/data/models/animal_model.dart';
-import 'package:auresgate/app/data/models/estado_model.dart';
-import 'package:auresgate/app/data/models/localizacao_model.dart';
 import 'package:auresgate/app/data/models/userDTO_model.dart';
 
 class ChamadoDTO {

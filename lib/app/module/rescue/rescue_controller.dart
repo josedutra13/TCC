@@ -1,4 +1,6 @@
+import 'package:auresgate/app/data/models/chamadoResgateDTO_model.dart';
 import 'package:auresgate/app/data/models/chamado_model.dart';
+import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:get/get.dart';
@@ -8,18 +10,23 @@ class RescueController extends GetxController {
   String id = '';
   MainController mainController = Get.find();
   LoginController loginController = Get.find();
+  ChamadoRepository _chamadoRepository = ChamadoRepository();
 
   final _rescue = Chamado.empty().obs;
   Chamado get rescue => _rescue.value;
   set rescue(Chamado value) => _rescue.value = value;
 
+  final _chamadoDTO = ChamadoResgateDTO.empty().obs;
+  ChamadoResgateDTO get chamadoDTO => _chamadoDTO.value;
+  set chamadoDTO(ChamadoResgateDTO value) => _chamadoDTO.value = value;
+
   final _optUsers = 0.obs;
   get optUsers => this._optUsers.value;
   set optUsers(value) => this._optUsers.value = value;
 
-  final _statusNumber = 0.obs;
-  get statusNumber => this._statusNumber.value;
-  set statusNumber(value) => this._statusNumber.value = value;
+  final _startRescue = false.obs;
+  bool get startRescue => _startRescue.value;
+  set startRescue(bool value) => _startRescue.value = value;
 
   @override
   void onInit() {
@@ -35,8 +42,6 @@ class RescueController extends GetxController {
       print('ID => LOAD $id');
     }
   }
-
-
 
   void checkButton() {
     if (_rescue.value.animal!.estado == 'URGENTE') {
@@ -54,5 +59,13 @@ class RescueController extends GetxController {
     });
 
     print('ANIMAL  ${rescue.animal!.descricao}');
+  }
+
+  void startRescueFunc() async {
+    _startRescue.value = true;
+    chamadoDTO.copyWith(
+        nome: loginController.userDto.nome,
+        isPerson: loginController.userDto.isPerson);
+    await _chamadoRepository.associateChamado(chamadoDTO);
   }
 }

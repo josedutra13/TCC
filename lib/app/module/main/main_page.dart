@@ -73,25 +73,25 @@ class MainPage extends GetView<MainController> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 27,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 23,
-                    ),
-                    child: FloatingActionButton(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                        onPressed: () {
-                          // _googleMapController.animateCamera(
-                          //     CameraUpdate.newCameraPosition(
-                          //         _initialCameraPosition));
-                        },
-                        child: const Icon(
-                          Icons.center_focus_strong,
-                          size: 30,
-                        )),
-                  )
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //     bottom: 23,
+                  //   ),
+                  //   child: FloatingActionButton(
+                  //       backgroundColor: Colors.blue,
+                  //       foregroundColor: Colors.white,
+                  //       onPressed: () {
+                  //         // _googleMapController.animateCamera(
+                  //         //     CameraUpdate.newCameraPosition(
+                  //         //         _initialCameraPosition));
+                  //       },
+                  //       child: const Icon(
+                  //         Icons.center_focus_strong,
+                  //         size: 30,
+                  //       )),
+                  // )
                 ],
               ),
             ]))

@@ -144,8 +144,8 @@ class RescuePage extends GetView<RescueController> {
                               style: TextStyle(fontSize: 30),
                             ),
                             onPressed: () {
-                              // controller.marking = true;
-                              Get.toNamed(Routes.MAIN);
+                                controller.startRescueFunc();
+                                Get.offNamed(Routes.MAIN);                              
                             },
                           ),
                         ),

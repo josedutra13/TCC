@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditRescuePage extends GetView<EditRescueController> {
-  RequestRescueController _requestRescueController = Get.find();
+  // RequestRescueController _requestRescueController = Get.find();
   EditRescuePage({Key? key}) : super(key: key);
 
   @override
@@ -65,22 +65,32 @@ class EditRescuePage extends GetView<EditRescueController> {
                               padding: const EdgeInsets.only(top: 20.0),
                               child: Center(
                                 child: Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.75,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.3,
-                                    decoration: BoxDecoration(
-                                        color: Colors.lightBlue.shade300,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                    child: Text('')
-
-                                    // Text(
-                                    //   _requestRescueController
-                                    //       .chamadoDTO.animal.descricao!,
-                                    //   style: TextStyle(color: Colors.white),
-                                    // ))),
-                                    ),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.75,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.3,
+                                  decoration: BoxDecoration(
+                                      color: Colors.lightBlue.shade300,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8.0, top: 5),
+                                    child: Obx(() => TextFormField(
+                                          initialValue:
+                                              '${controller.rescueController.rescue.animal!.descricao}',
+                                          expands: true,
+                                          minLines: null,
+                                          maxLines: null,
+                                          enabled: controller.isEditing,
+                                          onChanged: (value) {
+                                            controller.onEditAnimal(
+                                                descricao: value);
+                                          },
+                                          style: TextStyle(color: Colors.white),
+                                        )),
+                                  ),
+                                ),
                               )),
                         ],
                       ),
@@ -119,7 +129,10 @@ class EditRescuePage extends GetView<EditRescueController> {
                       ButtonEdit(
                           height: 50,
                           width: 50,
-                          onPressed: () {},
+                          onPressed: () {
+                            controller.isEditing = true;
+                            Get.toNamed(Routes.SOLICITATE_LOCATION);
+                          },
                           icon: Image.asset(
                             'assets/icons/mapas-e-bandeiras.png',
                             scale: 4,
@@ -131,7 +144,9 @@ class EditRescuePage extends GetView<EditRescueController> {
                       ButtonEdit(
                           height: 50,
                           width: 50,
-                          onPressed: () {},
+                          onPressed: () {
+                            controller.isEditing = true;
+                          },
                           icon: Image.asset(
                             'assets/icons/ferramenta-lapis.png',
                             scale: 4,
@@ -143,7 +158,9 @@ class EditRescuePage extends GetView<EditRescueController> {
                       ButtonEdit(
                           height: 50,
                           width: 50,
-                          onPressed: () {},
+                          onPressed: () {
+                            controller.deleteRequest(context);
+                          },
                           icon: Image.asset(
                             'assets/icons/lixeira-de-reciclagem.png',
                             scale: 4,
@@ -159,25 +176,24 @@ class EditRescuePage extends GetView<EditRescueController> {
               child: Obx(() => Row(
                     children: [
                       RadioButton(
-                        groupT: _requestRescueController.optUsers,
+                        groupT: controller.optUsers,
                         value: 1,
                         color: Colors.red,
                         text: 'URGENTE',
                         onChanged: (value) {
-                          _requestRescueController.optUsers = value;
-                          _requestRescueController.onChangeSolicitation(
-                              estado: 'URGENTE');
+                          controller.optUsers = value;
+                          controller.onEditAnimal(estado: 'URGENTE');
                         },
                       ),
                       RadioButton(
-                        groupT: _requestRescueController.optUsers,
+                        groupT: controller.optUsers,
+                        // isDisabled: controller.isEditing,
                         value: 2,
                         color: Colors.green,
                         text: 'SAUDÁVEL',
                         onChanged: (value) {
-                          _requestRescueController.optUsers = value;
-                          _requestRescueController.onChangeSolicitation(
-                              estado: 'SAUDÁVEL');
+                          controller.optUsers = value;
+                          controller.onEditAnimal(estado: 'SAUDÁVEL');
                         },
                       )
                     ],
@@ -204,7 +220,7 @@ class EditRescuePage extends GetView<EditRescueController> {
                           style: TextStyle(fontSize: 30),
                         ),
                         onPressed: () {
-                          // controller.marking = true;
+                          controller.updateRequest();
                           Get.toNamed(Routes.MAIN);
                         },
                       ),

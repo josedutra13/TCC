@@ -4,6 +4,7 @@ import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
+import 'package:auresgate/app/module/rescue/rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -26,18 +27,34 @@ class MainController extends GetxController {
   bool get isEmptyMarker => _isEmptyMarker.value;
   set isEmptyMarker(bool value) => _isEmptyMarker.value = value;
 
+  final _teste = false.obs;
+  bool get teste => _teste.value;
+  set teste(bool value) => _teste.value = value;
+
   MainController(this._chamadoRepository);
 
   @override
   void onInit() {
     getUserLocation();
     loadData();
+    funcTeste();
     super.onInit();
   }
 
   void loadData() async {
     loadRescueChamado();
+
     print('loadData');
+  }
+
+  void funcTeste() {
+    for (int i = 0; i < listChamadosRescue.length; i++) {
+      if (listChamadosRescue[i].status == 'EM ANDAMENTO') {
+        _teste.value = true;
+      } else {
+        _teste.value = false;
+      }
+    }
   }
 
   void onMapCreated(GoogleMapController controller) {
@@ -74,7 +91,7 @@ class MainController extends GetxController {
   }
 
   void loadMarkers() {
-    print('load');
+    print('teste $teste');
     if (listChamadosRescue.length > 0) {
       listChamadosRescue.forEach((e) {
         markers.add(
@@ -91,7 +108,11 @@ class MainController extends GetxController {
                   print('Chamado clicado ID ${e.id}');
                 },
               ),
-              icon: BitmapDescriptor.defaultMarker,
+              icon: teste
+                  ? BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueOrange)
+                  : BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueRed),
               onTap: () {
                 if (checkUser()) {
                   Get.offNamed(Routes.EDIT_RESCUE,

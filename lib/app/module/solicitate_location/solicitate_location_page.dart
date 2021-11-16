@@ -1,3 +1,4 @@
+import 'package:auresgate/app/module/edit_rescue/edit_rescue_controller.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
@@ -18,6 +19,8 @@ class SolicitateLocationPage extends StatefulWidget {
 class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
   final RequestRescueController _requestRescueController = Get.find();
   final LoginController _loginController = Get.find();
+  final EditRescueController _editRescueController = Get.find();
+
   //define a posição inicial do mapa
   static const _initialCameraPosition =
       CameraPosition(target: LatLng(-15.777737, -47.878488), zoom: 14);
@@ -127,11 +130,18 @@ class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
                   height: 32,
                   child: ElevatedButton(
                       onPressed: () {
-                        _requestRescueController
-                          ..onChangeSolicitation(
+                        if (_editRescueController.isEditing) {
+                          _editRescueController.onEditAnimal(
                               latitude: tappedPoints[0].latitude,
-                              longitude: tappedPoints[0].longitude)
-                          ..onConfirmRescue();
+                              longitude: tappedPoints[0].longitude);
+                          Get.offNamed(Routes.EDIT_RESCUE);
+                        } else {
+                          _requestRescueController
+                            ..onChangeSolicitation(
+                                latitude: tappedPoints[0].latitude,
+                                longitude: tappedPoints[0].longitude)
+                            ..onConfirmRescue();
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                           shadowColor: Colors.green[200],
@@ -153,7 +163,11 @@ class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
                   height: 32,
                   child: ElevatedButton(
                       onPressed: () {
-                        Get.offNamed(Routes.MAIN);
+                        if (_editRescueController.isEditing) {
+                          Get.offNamed(Routes.EDIT_RESCUE);
+                        } else {
+                          Get.offNamed(Routes.MAIN);
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                           shadowColor: Colors.red[300],

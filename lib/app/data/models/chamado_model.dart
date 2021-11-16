@@ -1,6 +1,5 @@
 import 'package:auresgate/app/data/models/animal_model.dart';
-import 'package:auresgate/app/data/models/localizacao_model.dart';
-import 'package:auresgate/app/data/models/pessoa_model.dart';
+import 'package:auresgate/app/data/models/endereco_model.dart';
 import 'package:auresgate/app/data/models/user_model.dart';
 
 class Chamado {
@@ -31,6 +30,30 @@ class Chamado {
     this.usuario_abriu_chamado = User.fromJson(json['usuario_abriu_chamado']);
     this.usuario_atendeu_chamado =
         json['usuario_atendeu_chamado'] ?? User.empty();
+  }
+
+  Chamado copyWith({
+    DateTime? data_hora_fechamento,
+    String? status,
+    int? id,
+    String? nomeUsuario,
+    String? nome,
+    String? email,
+    String? senha,
+    String? telefone,
+    Endereco? endereco,
+  }) {
+    return Chamado(
+        id: id,
+        data_hora_fechamento: data_hora_fechamento ?? this.data_hora_fechamento,
+        status: status ?? this.status,
+        usuario_atendeu_chamado: User(
+            nomeUsuario: nomeUsuario,
+            nome: nome,
+            email: email,
+            senha: senha,
+            telefone: telefone,
+            endereco: endereco));
   }
 
   Chamado.empty();
