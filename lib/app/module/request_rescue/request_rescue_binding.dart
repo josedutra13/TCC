@@ -1,6 +1,7 @@
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/data/repository/login_repository.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';
+import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +11,8 @@ class RequestRescueBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<LoginController>(() => LoginController(_loginRepository));
-    Get.lazyPut<RequestRescueController>(() => RequestRescueController(_chamadoRepository));
+    Get.lazyPut<RequestRescueController>(
+        () => RequestRescueController(_chamadoRepository));
+    Get.lazyPut<MainController>(() => MainController(_chamadoRepository));
   }
 }

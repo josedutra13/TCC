@@ -29,10 +29,7 @@ class AppPages {
         name: Routes.REGISTER,
         page: () => RegisterPage(),
         binding: RegisterBindings()),
-    GetPage(
-        name: Routes.MAIN,
-        page: () => MainPage(),
-        binding: MainBindings()),
+    GetPage(name: Routes.MAIN, page: () => MainPage(), binding: MainBindings()),
     GetPage(
         name: Routes.REQUEST_RESCUE,
         page: () => RequestRescuePage(),

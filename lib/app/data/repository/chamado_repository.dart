@@ -3,12 +3,13 @@ import 'package:auresgate/app/data/models/chamadoDTO_model.dart';
 import 'package:auresgate/app/data/models/chamadoResgateDTO_model.dart';
 import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/providers/api.dart';
+import 'package:get/get.dart';
 
 class ChamadoRepository extends ApiBase {
   ChamadoRepository() : super('/chamados');
 
-  Future<Chamado?> createChamado(ChamadoDTO chamado) async {
-    var response = await client.post('', data: chamado.toJson());
+  Future<Chamado?> createChamado(FormData formData) async {
+    var response = await client.post('', data: formData);
 
     if (response.statusCode == 200 && response.data != null) {
       return Chamado.fromJson(response.data);
@@ -19,10 +20,12 @@ class ChamadoRepository extends ApiBase {
 
   Future<void> updateChamado(Animal animal, int id) async {
     await client.put('/$id', data: animal.toJson());
-   }
-    Future<void> associateChamado(ChamadoResgateDTO chamadoResgateDTO) async {
+  }
+
+  Future<void> associateChamado(ChamadoResgateDTO chamadoResgateDTO) async {
     await client.put('', data: chamadoResgateDTO.toJson());
   }
+
   Future<List<Chamado>> listChamado() async {
     var response = await client.get('');
 
@@ -33,8 +36,6 @@ class ChamadoRepository extends ApiBase {
     }
     return [];
   }
-
-  
 
   Future<bool> deleteChamado(int id) async {
     var response = await client.delete('/$id');

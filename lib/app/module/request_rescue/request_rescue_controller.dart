@@ -2,6 +2,7 @@ import 'package:auresgate/app/data/models/animal_model.dart';
 import 'package:auresgate/app/data/models/chamadoDTO_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';
+import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -9,6 +10,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class RequestRescueController extends GetxController {
   final ChamadoRepository _chamadoRepository;
   final LoginController _loginController = Get.find();
+  final MainController _mainController = Get.find();
 
   RequestRescueController(this._chamadoRepository);
 
@@ -45,9 +47,15 @@ class RequestRescueController extends GetxController {
   }
 
   void onConfirmRescue() async {
+    print('TESTE IMAGE ${_mainController.image.path}');
     _chamadoDTO.value.animal = _animalEditing.value;
     _chamadoDTO.value.loginDTO = _loginController.userDto;
-    var response = await _chamadoRepository.createChamado(chamadoDTO);
+    var formData = FormData({
+      'chamadoDTO': chamadoDTO,
+      'file': new MultipartFile(_mainController.image, filename: 'IMAGE')
+    });
+
+    var response = await _chamadoRepository.createChamado(formData);
     if (response == null) {
       Get.offNamed(Routes.MAIN);
     }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
@@ -6,9 +7,11 @@ import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
 import 'package:auresgate/app/module/rescue/rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MainController extends GetxController {
   final ChamadoRepository _chamadoRepository;
@@ -30,6 +33,10 @@ class MainController extends GetxController {
   final _teste = false.obs;
   bool get teste => _teste.value;
   set teste(bool value) => _teste.value = value;
+
+  final _image = File('').obs;
+  File get image => _image.value;
+  set image(File value) => _image.value = value;
 
   MainController(this._chamadoRepository);
 
@@ -135,5 +142,18 @@ class MainController extends GetxController {
       _isEmptyMarker.value = false;
     }
     loadMarkers();
+  }
+
+// CAMERA FUNCTIONS //
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+
+      final imageTemporary = File(image.path);
+      _image.value = imageTemporary;
+    } on PlatformException catch (e) {
+      print('Failed to pick image $e');
+    }
   }
 }

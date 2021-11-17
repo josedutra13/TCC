@@ -9,4 +9,5 @@ abstract class Routes {
   static const SOLICITATE_LOCATION = '/solicitate_location';
   static const FINISH_RESCUE = '/finish_rescue';
   static const EDIT_RESCUE = '/edit_rescue';
+  static const CAMERA = '/camera';
 }

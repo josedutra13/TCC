@@ -1,3 +1,5 @@
+import 'package:auresgate/app/module/edit_rescue/widgets/button_edit_widget.dart';
+import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:auresgate/app/module/register/widgets/radio_button_widget.dart';
 import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
@@ -6,7 +8,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RequestRescuePage extends GetView<RequestRescueController> {
-  const RequestRescuePage({Key? key}) : super(key: key);
+  MainController _mainController = Get.find();
+
+  RequestRescuePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -93,10 +97,11 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                   child: Center(
                     //TODO REFACTORY PARA COLOCAR BORDA BRANCA
                     child: ClipOval(
-                      child: Image.asset(
-                        'assets/images/cururu.png',
+                      child: Image.file(
+                        _mainController.image,
                         width: 150,
                         height: 150,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),

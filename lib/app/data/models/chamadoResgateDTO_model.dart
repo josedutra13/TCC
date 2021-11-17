@@ -14,7 +14,9 @@ class ChamadoResgateDTO {
 
   ChamadoResgateDTO.empty();
 
-  ChamadoResgateDTO copyWith({String? nome, bool? isPerson}) {
+  ChamadoResgateDTO copyWith({
+    
+    String? nome, bool? isPerson}) {
     return ChamadoResgateDTO(
         loginDTO: UserDTO(
             id: id ?? loginDTO.id,
