@@ -4,7 +4,9 @@ import 'package:auresgate/app/module/register/register_controller.dart';
 import 'package:auresgate/app/module/register/widgets/radio_button_widget.dart';
 import 'package:auresgate/app/input_widgets/register_input.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -99,6 +101,7 @@ class RegisterPage extends GetView<RegisterController> {
                               ),
                               RegisterInput(
                                   label: 'TELEFONE',
+                                  isPhone: true,
                                   placeholder: 'Informe seu telefone',
                                   onChanged: (value) =>
                                       controller.onChangeUser(telefone: value)),
@@ -178,9 +181,8 @@ class RegisterPage extends GetView<RegisterController> {
                                         isPersonSelected: controller.isPessoa,
                                         placeholder: 'Idade',
                                         onChanged: (value) =>
-                                          controller.onChangeUser(
-                                              idade: int.parse(value))
-                                        ),
+                                            controller.onChangeUser(
+                                                idade: int.parse(value))),
                                     Padding(
                                         padding: const EdgeInsets.only(
                                             left: 10.0, bottom: 3.0, top: 5),

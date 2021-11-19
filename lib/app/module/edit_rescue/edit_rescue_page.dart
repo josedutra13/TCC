@@ -107,6 +107,7 @@ class EditRescuePage extends GetView<EditRescueController> {
                         'assets/images/cururu.png',
                         width: 150,
                         height: 150,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -120,7 +121,6 @@ class EditRescuePage extends GetView<EditRescueController> {
                         scale: 4,
                         fit: BoxFit.scaleDown,
                       )),
-                      
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 347.0, right: 30),

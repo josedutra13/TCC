@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
+
+// import 'package:dio/dio.dart' as dio;
 import 'package:auresgate/app/data/models/animal_model.dart';
 import 'package:auresgate/app/data/models/chamadoDTO_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
@@ -6,6 +10,7 @@ import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:http_parser/http_parser.dart';
 
 class RequestRescueController extends GetxController {
   final ChamadoRepository _chamadoRepository;
@@ -47,15 +52,17 @@ class RequestRescueController extends GetxController {
   }
 
   void onConfirmRescue() async {
-    print('TESTE IMAGE ${_mainController.image.path}');
+    print('TESTE IMAGE ${_mainController.image}');
+
+    File imageFile = new File(_mainController.image.path);
+    List<int> imageBytes = imageFile.readAsBytesSync();
+    String base64Image = base64.encode(imageBytes);
+
     _chamadoDTO.value.animal = _animalEditing.value;
     _chamadoDTO.value.loginDTO = _loginController.userDto;
-    var formData = FormData({
-      'chamadoDTO': chamadoDTO,
-      'file': new MultipartFile(_mainController.image, filename: 'IMAGE')
-    });
+    _chamadoDTO.value.img = base64Image;
 
-    var response = await _chamadoRepository.createChamado(formData);
+    var response = await _chamadoRepository.createChamado(chamadoDTO);
     if (response == null) {
       Get.offNamed(Routes.MAIN);
     }

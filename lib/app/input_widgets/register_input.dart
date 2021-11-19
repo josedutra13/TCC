@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RegisterInput extends StatelessWidget {
@@ -8,6 +10,7 @@ class RegisterInput extends StatelessWidget {
   final String? Function(String?, FocusNode?)? validator;
   final TextEditingController? controller;
   final bool? isPerson;
+  final bool? isPhone;
   const RegisterInput(
       {Key? key,
       required this.label,
@@ -15,7 +18,8 @@ class RegisterInput extends StatelessWidget {
       required this.onChanged,
       this.validator,
       this.controller,
-      this.isPerson = false})
+      this.isPerson = false,
+      this.isPhone = false})
       : super(key: key);
 
   @override
@@ -41,6 +45,12 @@ class RegisterInput extends StatelessWidget {
               child: TextFormField(
                 onChanged: onChanged,
                 controller: controller,
+                inputFormatters: isPhone!
+                    ? [
+                        FilteringTextInputFormatter.digitsOnly,
+                        TelefoneInputFormatter(),
+                      ]
+                    : [],
                 decoration: InputDecoration(
                   hintText: placeholder,
                   hintStyle: TextStyle(
@@ -98,6 +108,10 @@ class CNPJInput extends StatelessWidget {
                     onChanged: onChanged,
                     controller: controller,
                     keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      CnpjInputFormatter(),
+                    ],
                     decoration: InputDecoration(
                       hintText: placeholder,
                       hintStyle: TextStyle(
