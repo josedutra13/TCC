@@ -93,9 +93,10 @@ class RescuePage extends GetView<RescueController> {
                         //TODO REFACTORY PARA COLOCAR BORDA BRANCA
                         child: ClipOval(
                           child: Image.asset(
-                            'assets/images/cururu.png',
+                            '${controller.rescue.animal!.descricao}',
                             width: 150,
                             height: 150,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
@@ -144,8 +145,8 @@ class RescuePage extends GetView<RescueController> {
                               style: TextStyle(fontSize: 30),
                             ),
                             onPressed: () {
-                                controller.startRescueFunc();
-                                Get.offNamed(Routes.MAIN);                              
+                              controller.startRescueFunc();
+                              Get.offNamed(Routes.MAIN);
                             },
                           ),
                         ),

@@ -7,6 +7,7 @@ class Chamado {
   DateTime? data_hora_abertura;
   DateTime? data_hora_fechamento;
   String? status;
+  String? img;
   Animal? animal;
   User? usuario_abriu_chamado;
   User? usuario_atendeu_chamado;
@@ -18,7 +19,8 @@ class Chamado {
       this.status,
       this.animal,
       this.usuario_abriu_chamado,
-      this.usuario_atendeu_chamado});
+      this.usuario_atendeu_chamado,
+      this.img});
 
   Chamado.fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
@@ -30,6 +32,7 @@ class Chamado {
     this.usuario_abriu_chamado = User.fromJson(json['usuario_abriu_chamado']);
     this.usuario_atendeu_chamado =
         json['usuario_atendeu_chamado'] ?? User.empty();
+    this.img = json['img'];
   }
 
   Chamado copyWith({
@@ -41,12 +44,14 @@ class Chamado {
     String? email,
     String? senha,
     String? telefone,
+    String? img,
     Endereco? endereco,
   }) {
     return Chamado(
         id: id,
         data_hora_fechamento: data_hora_fechamento ?? this.data_hora_fechamento,
         status: status ?? this.status,
+        img: img ?? this.img,
         usuario_atendeu_chamado: User(
             nomeUsuario: nomeUsuario,
             nome: nome,
@@ -68,6 +73,7 @@ class Chamado {
     data['animal'] = this.animal;
     data['usuario_abriu_chamado'] = this.usuario_abriu_chamado;
     data['usuario_atendeu_chamado'] = this.usuario_atendeu_chamado;
+    data['img'] = this.img;
 
     return data;
   }

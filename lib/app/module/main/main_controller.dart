@@ -42,7 +42,7 @@ class MainController extends GetxController {
 
   @override
   void onInit() {
-    getUserLocation();
+    // getUserLocation();
     loadData();
     funcTeste();
     super.onInit();
