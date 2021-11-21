@@ -1,17 +1,25 @@
-import 'package:auresgate/app/data/repository/chamado_repository.dart';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:auresgate/app/module/edit_rescue/edit_rescue_controller.dart';
 import 'package:auresgate/app/module/edit_rescue/widgets/button_edit_widget.dart';
 import 'package:auresgate/app/module/register/widgets/radio_button_widget.dart';
-import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
-import 'package:auresgate/app/module/rescue/rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditRescuePage extends GetView<EditRescueController> {
-  // RequestRescueController _requestRescueController = Get.find();
   EditRescuePage({Key? key}) : super(key: key);
+  File imageRescue() {
+    print('ASAA:  ${controller.rescueController.rescue.animal!.imagem}');
+    final decodedBytes =
+        base64Decode(controller.rescueController.rescue.animal!.imagem!);
+    var file = File(
+        "/data/user/0/com.example.auresgate/cache/image_picker7873509514644868996.jpg");
+    file.writeAsBytesSync(decodedBytes);
+    return file;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +111,8 @@ class EditRescuePage extends GetView<EditRescueController> {
                   child: Center(
                     //TODO REFACTORY PARA COLOCAR BORDA BRANCA
                     child: ClipOval(
-                      child: Image.asset(
-                        'assets/images/cururu.png',
+                      child: Image.file(
+                        imageRescue(),
                         width: 150,
                         height: 150,
                         fit: BoxFit.cover,

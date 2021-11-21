@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auresgate/app/data/models/animal_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/rescue/rescue_controller.dart';
@@ -51,12 +53,14 @@ class EditRescueController extends GetxController {
       {String? estado,
       String? descricao,
       double? latitude,
-      double? longitude}) {
+      double? longitude,
+      String? imagem}) {
     _animalEditing.value = _animalEditing.value.copyWith(
         estado: estado,
         descricao: descricao,
         latitude: latitude,
-        longitude: longitude);
+        longitude: longitude,
+        imagem: imagem);
   }
 
   void updateRequest() async {

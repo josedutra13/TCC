@@ -3,15 +3,14 @@ import 'package:auresgate/app/data/models/chamadoDTO_model.dart';
 import 'package:auresgate/app/data/models/chamadoResgateDTO_model.dart';
 import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/providers/api.dart';
-import 'package:dio/dio.dart';
 
 class ChamadoRepository extends ApiBase {
   ChamadoRepository() : super('/chamados');
 
   Future<Chamado?> createChamado(ChamadoDTO chamadoDTO) async {
     print('TESTEI AQUI ${chamadoDTO.img}');
-    var response = await client.post('', data: chamadoDTO.toJson());
 
+    var response = await client.post('', data: chamadoDTO.toJson());
     if (response.statusCode == 200 && response.data != null) {
       return Chamado.fromJson(response.data);
     }

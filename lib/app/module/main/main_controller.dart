@@ -73,7 +73,6 @@ class MainController extends GetxController {
     for (var i = 0; i < listChamadosRescue.length; i++) {
       idUserCreate = listChamadosRescue[0].usuario_abriu_chamado!.id;
     }
-    print('ID  AQUI $idUserCreate');
     if (_loginController.userDto.id == idUserCreate) {
       return true;
     } else {
@@ -98,7 +97,6 @@ class MainController extends GetxController {
   }
 
   void loadMarkers() {
-    print('teste $teste');
     if (listChamadosRescue.length > 0) {
       listChamadosRescue.forEach((e) {
         markers.add(
@@ -112,7 +110,7 @@ class MainController extends GetxController {
                 title: e.animal!.estado,
                 snippet: e.animal!.estado,
                 onTap: () {
-                  print('Chamado clicado ID ${e.id}');
+                  
                 },
               ),
               icon: teste
@@ -128,7 +126,6 @@ class MainController extends GetxController {
                   Get.offNamed(Routes.RESCUE,
                       parameters: {'id': e.id.toString()});
                 }
-                print('CLICADO PAE ${e.id}');
               }),
         );
       });

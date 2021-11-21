@@ -25,7 +25,7 @@ class MainPage extends GetView<MainController> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavDrawer(
-        userName: _loginController.usuarioText.text,
+        userName: _loginController.userDto.nome.toString(),
         logout: onLogout,
       ),
       appBar: AppPageBarWidget(

@@ -57,15 +57,13 @@ class RescueController extends GetxController {
         _rescue.value = element;
       }
     });
-
-    print('ANIMAL  ${rescue.animal!.descricao}');
   }
 
   void startRescueFunc() async {
     _startRescue.value = true;
-    chamadoDTO.copyWith(
-        nome: loginController.userDto.nome,
-        isPerson: loginController.userDto.isPerson);
+    print('ID RESGATE = $id');
+    _chamadoDTO.value.idChamado = int.parse(id);
+    _chamadoDTO.value.loginDTO = loginController.userDto;
     await _chamadoRepository.associateChamado(chamadoDTO);
   }
 }

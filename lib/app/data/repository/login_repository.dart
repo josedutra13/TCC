@@ -5,7 +5,7 @@ class LoginRepository extends ApiBase {
   LoginRepository() : super('/login');
 
   Future<UserDTO?> login(String username, String senha) async {
-    Map<String, dynamic> params = {'username': username, 'senha': senha};
+    Map<String, dynamic> params = {'nomeUsuario': username, 'senha': senha};
     var response = await client.get('', queryParameters: params);
 
     if (response.statusCode == 200 && response.data != null) {
@@ -14,7 +14,7 @@ class LoginRepository extends ApiBase {
 
     return null;
   }
-    
+
   Future<UserDTO?> emailConfirm(String email) async {
     Map<String, dynamic> params = {'email': email};
     var response = await client.get('/email', queryParameters: params);

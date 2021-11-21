@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:auresgate/app/module/register/widgets/radio_button_widget.dart';
 import 'package:auresgate/app/module/rescue/rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
@@ -7,6 +10,18 @@ import 'package:google_fonts/google_fonts.dart';
 
 class RescuePage extends GetView<RescueController> {
   RescuePage({Key? key}) : super(key: key);
+
+  File imageRescue() {
+    print('DESC : ${controller.rescue.animal!.descricao}');
+    print(' ID: ${controller.rescue.animal!.id}');
+    print('IMG:  ${controller.rescue.animal!.imagem}');
+    final decodedBytes =
+        base64Decode(controller.rescue.animal!.imagem.toString());
+    var file = File(
+        "/data/user/0/com.example.auresgate/cache/image_picker7873509514644868996.jpg");
+    file.writeAsBytesSync(decodedBytes);
+    return file;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,8 +107,8 @@ class RescuePage extends GetView<RescueController> {
                       child: Center(
                         //TODO REFACTORY PARA COLOCAR BORDA BRANCA
                         child: ClipOval(
-                          child: Image.asset(
-                            '${controller.rescue.animal!.descricao}',
+                          child: Image.file(
+                            imageRescue(),
                             width: 150,
                             height: 150,
                             fit: BoxFit.cover,

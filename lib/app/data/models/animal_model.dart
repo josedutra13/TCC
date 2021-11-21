@@ -5,24 +5,25 @@ class Animal {
   String? estado;
   String? descricao;
   Localizacao? localizacao;
-  String? img;
+  String? imagem;
 
   Animal(
       {this.id,
       required this.estado,
       required this.descricao,
       required this.localizacao,
-      required this.img});
+      required this.imagem});
 
   Animal copyWith(
       {String? estado,
       String? descricao,
       double? latitude,
-      double? longitude}) {
+      double? longitude,
+      String? imagem}) {
     return Animal(
         estado: estado ?? this.estado,
         descricao: descricao ?? this.descricao,
-        img: img ?? this.img,
+        imagem: imagem ?? this.imagem,
         localizacao: Localizacao(
             latitude: latitude ?? localizacao?.latitude,
             longitude: longitude ?? localizacao?.longitude));
@@ -32,7 +33,7 @@ class Animal {
     this.id = json['id'];
     this.estado = json['estado'];
     this.descricao = json['descricao'];
-    this.img = json['img'];
+    this.imagem = json['imagem'];
     this.localizacao = Localizacao.fromJson(json['localizacao']);
   }
 
@@ -44,7 +45,7 @@ class Animal {
     data['id'] = this.id;
     data['estado'] = this.estado;
     data['descricao'] = this.descricao;
-    data['img'] = this.img;
+    data['imagem'] = this.imagem;
     data['localizacao'] = this.localizacao;
 
     return data;

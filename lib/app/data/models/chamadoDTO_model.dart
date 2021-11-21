@@ -9,7 +9,7 @@ class ChamadoDTO {
   late UserDTO loginDTO;
   late String img;
 
-  ChamadoDTO({required this.animal, required loginDTO, required img});
+  ChamadoDTO({required this.animal, required loginDTO, required imagem});
 
   ChamadoDTO.fromJson(Map<String, dynamic> json) {
     this.animal = json['animal'];
