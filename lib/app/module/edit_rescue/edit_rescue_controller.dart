@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:auresgate/app/data/models/animal_model.dart';
@@ -5,8 +6,10 @@ import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/rescue/rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditRescueController extends GetxController {
   RescueController rescueController = Get.find();
@@ -23,6 +26,10 @@ class EditRescueController extends GetxController {
 
   final _animalEditing = Animal.empty().obs;
   Animal get animalEditing => _animalEditing.value;
+
+  final _image = File('').obs;
+  File get image => _image.value;
+  set image(File value) => _image.value = value;
 
   TextEditingController descriptionEdit = TextEditingController();
 
@@ -63,9 +70,23 @@ class EditRescueController extends GetxController {
         imagem: imagem);
   }
 
+  Future pickImage() async {
+    try {
+      final imageF = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (imageF == null) return;
+
+      final imageTemporary = File(imageF.path);
+      List<int> imageBytes = imageTemporary.readAsBytesSync();
+      String base64Image = base64.encode(imageBytes);
+      rescueController.rescue.animal!.copyWith(imagem: base64Image);
+    } on PlatformException catch (e) {
+      print('Failed to pick image $e');
+    }
+  }
+
   void updateRequest() async {
-    print('TESTE AQUI ${animalEditing.descricao}');
-    await _chamadoRepository.updateChamado(animalEditing, int.parse(id));
+    var rescue = rescueController.rescue.animal!;
+    await _chamadoRepository.updateChamado(rescue, int.parse(id));
   }
 
   void deleteRequest(BuildContext context) async {

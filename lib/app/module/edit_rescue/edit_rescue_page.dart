@@ -11,14 +11,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditRescuePage extends GetView<EditRescueController> {
   EditRescuePage({Key? key}) : super(key: key);
-  File imageRescue() {
-    print('ASAA:  ${controller.rescueController.rescue.animal!.imagem}');
-    final decodedBytes =
-        base64Decode(controller.rescueController.rescue.animal!.imagem!);
-    var file = File(
-        "/data/user/0/com.example.auresgate/cache/image_picker7873509514644868996.jpg");
-    file.writeAsBytesSync(decodedBytes);
-    return file;
+  Image imageRescue() {
+    final decodedBytes = Base64Decoder()
+        .convert(controller.rescueController.rescue.animal!.imagem.toString());
+    var image =
+        Image.memory(decodedBytes, fit: BoxFit.cover, width: 150, height: 150);
+
+    return image;
   }
 
   @override
@@ -110,20 +109,17 @@ class EditRescuePage extends GetView<EditRescueController> {
                   padding: const EdgeInsets.only(),
                   child: Center(
                     //TODO REFACTORY PARA COLOCAR BORDA BRANCA
-                    child: ClipOval(
-                      child: Image.file(
-                        imageRescue(),
-                        width: 150,
-                        height: 150,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                    child: Obx(() => ClipOval(
+                          child: imageRescue(),
+                        )),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 230.0),
                   child: ButtonEdit(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.pickImage();
+                      },
                       icon: Image.asset(
                         'assets/icons/camera_black.png',
                         scale: 4,
@@ -154,7 +150,7 @@ class EditRescuePage extends GetView<EditRescueController> {
                           height: 50,
                           width: 50,
                           onPressed: () {
-                            controller.isEditing = true;
+                            controller.isEditing = !controller.isEditing;
                           },
                           icon: Image.asset(
                             'assets/icons/ferramenta-lapis.png',
@@ -230,7 +226,7 @@ class EditRescuePage extends GetView<EditRescueController> {
                         ),
                         onPressed: () {
                           controller.updateRequest();
-                          Get.toNamed(Routes.MAIN);
+                          Get.offNamed(Routes.MAIN);
                         },
                       ),
                     ),

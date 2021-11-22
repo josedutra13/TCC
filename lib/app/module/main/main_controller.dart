@@ -44,7 +44,7 @@ class MainController extends GetxController {
   void onInit() {
     // getUserLocation();
     loadData();
-    funcTeste();
+
     super.onInit();
   }
 
@@ -52,16 +52,6 @@ class MainController extends GetxController {
     loadRescueChamado();
 
     print('loadData');
-  }
-
-  void funcTeste() {
-    for (int i = 0; i < listChamadosRescue.length; i++) {
-      if (listChamadosRescue[i].status == 'EM ANDAMENTO') {
-        _teste.value = true;
-      } else {
-        _teste.value = false;
-      }
-    }
   }
 
   void onMapCreated(GoogleMapController controller) {
@@ -107,22 +97,23 @@ class MainController extends GetxController {
                 e.animal!.localizacao!.longitude!,
               ),
               infoWindow: InfoWindow(
-                title: e.animal!.estado,
-                snippet: e.animal!.estado,
-                onTap: () {
-                  
-                },
+                onTap: () {},
               ),
-              icon: teste
+              icon: e.status == 'ANDAMENTO'
                   ? BitmapDescriptor.defaultMarkerWithHue(
                       BitmapDescriptor.hueOrange)
                   : BitmapDescriptor.defaultMarkerWithHue(
                       BitmapDescriptor.hueRed),
               onTap: () {
-                if (checkUser()) {
+                if (e.usuario_abriu_chamado!.id ==
+                    _loginController.userDto.id) {
                   Get.offNamed(Routes.EDIT_RESCUE,
                       parameters: {'id': e.id.toString()});
+                } else if (e.status == 'ANDAMENTO') {
+                  Get.offNamed(Routes.FINISH_RESCUE,
+                      parameters: {'id': e.id.toString()});
                 } else {
+                  print('STATUS AQUI : ${e.status}');
                   Get.offNamed(Routes.RESCUE,
                       parameters: {'id': e.id.toString()});
                 }
@@ -138,16 +129,17 @@ class MainController extends GetxController {
     if (listChamadosRescue.length == 0) {
       _isEmptyMarker.value = false;
     }
+    print('AQUI  $teste');
     loadMarkers();
   }
 
 // CAMERA FUNCTIONS //
   Future pickImage(ImageSource source) async {
     try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return;
+      final imageF = await ImagePicker().pickImage(source: source);
+      if (imageF == null) return;
 
-      final imageTemporary = File(image.path);
+      final imageTemporary = File(imageF.path);
       _image.value = imageTemporary;
     } on PlatformException catch (e) {
       print('Failed to pick image $e');

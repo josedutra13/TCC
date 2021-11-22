@@ -39,10 +39,6 @@ class RequestRescueController extends GetxController {
   get optUsers => this._optUsers.value;
   set optUsers(value) => this._optUsers.value = value;
 
-  final _path = ''.obs;
-  String get path => _path.value;
-  set path(String value) => this._path.value = value;
-
   void onChangeSolicitation(
       {String? estado,
       String? descricao,
@@ -57,8 +53,8 @@ class RequestRescueController extends GetxController {
 
   void onConfirmRescue() async {
     print('CAI AQUI ${_mainController.image.path}');
-    _path.value = _mainController.image.path;
-    File imageFile = new File(path);
+    var path = _mainController.image.path;
+    File imageFile = File(path);
     List<int> imageBytes = imageFile.readAsBytesSync();
     String base64Image = base64.encode(imageBytes);
 

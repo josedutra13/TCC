@@ -109,6 +109,7 @@ class MainPage extends GetView<MainController> {
                                           controller
                                               .pickImage(ImageSource.gallery)
                                               .then((value) {
+                                            // controller.image = value;
                                             Get.offNamed(Routes.REQUEST_RESCUE);
                                           });
                                         },

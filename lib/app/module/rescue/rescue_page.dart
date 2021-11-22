@@ -11,16 +11,13 @@ import 'package:google_fonts/google_fonts.dart';
 class RescuePage extends GetView<RescueController> {
   RescuePage({Key? key}) : super(key: key);
 
-  File imageRescue() {
-    print('DESC : ${controller.rescue.animal!.descricao}');
-    print(' ID: ${controller.rescue.animal!.id}');
-    print('IMG:  ${controller.rescue.animal!.imagem}');
+  Image imageRescue() {
     final decodedBytes =
-        base64Decode(controller.rescue.animal!.imagem.toString());
-    var file = File(
-        "/data/user/0/com.example.auresgate/cache/image_picker7873509514644868996.jpg");
-    file.writeAsBytesSync(decodedBytes);
-    return file;
+        Base64Decoder().convert(controller.rescue.animal!.imagem.toString());
+    var image =
+        Image.memory(decodedBytes, fit: BoxFit.cover, width: 150, height: 150);
+
+    return image;
   }
 
   @override
@@ -106,14 +103,7 @@ class RescuePage extends GetView<RescueController> {
                       padding: const EdgeInsets.only(),
                       child: Center(
                         //TODO REFACTORY PARA COLOCAR BORDA BRANCA
-                        child: ClipOval(
-                          child: Image.file(
-                            imageRescue(),
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                        child: ClipOval(child: imageRescue()),
                       ),
                     ),
                   ],
