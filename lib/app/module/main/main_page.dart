@@ -26,6 +26,7 @@ class MainPage extends GetView<MainController> {
     return Scaffold(
       drawer: NavDrawer(
         userName: _loginController.userDto.nome.toString(),
+        onHistory: () => Get.offNamed(Routes.STORY),
         logout: onLogout,
       ),
       appBar: AppPageBarWidget(

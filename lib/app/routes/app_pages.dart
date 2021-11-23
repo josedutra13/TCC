@@ -18,6 +18,8 @@ import 'package:auresgate/app/module/rescue/rescue_binding.dart';
 import 'package:auresgate/app/module/rescue/rescue_page.dart';
 import 'package:auresgate/app/module/solicitate_location/solicitate_location_page.dart';
 import 'package:auresgate/app/module/solicitate_location/solicitate_location_binding.dart';
+import 'package:auresgate/app/module/story/story_binding.dart';
+import 'package:auresgate/app/module/story/story_page.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 
@@ -57,6 +59,8 @@ class AppPages {
     GetPage(
         name: Routes.EDIT_RESCUE,
         page: () => EditRescuePage(),
-        binding: EditRescueBinding())
+        binding: EditRescueBinding()),
+    GetPage(
+        name: Routes.STORY, page: () => StoryPage(), binding: StoryBinding())
   ];
 }

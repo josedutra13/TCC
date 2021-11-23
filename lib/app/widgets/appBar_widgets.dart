@@ -39,7 +39,7 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       elevation: elevation,
-      backgroundColor: color ?? Colors.blue,
+      backgroundColor: color ?? Colors.cyan[300],
       iconTheme: const IconThemeData(color: Colors.white),
       automaticallyImplyLeading: true,
       leading: onMenu != null
