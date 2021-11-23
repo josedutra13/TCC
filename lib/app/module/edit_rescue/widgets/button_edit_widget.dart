@@ -6,6 +6,7 @@ class ButtonEdit extends StatelessWidget {
   final double? height;
   final double? width;
   final bool isBottomPopup;
+  final EdgeInsets? padding;
 
   const ButtonEdit(
       {Key? key,
@@ -13,13 +14,14 @@ class ButtonEdit extends StatelessWidget {
       required this.onPressed,
       this.height,
       this.width,
-      this.isBottomPopup = false})
+      this.isBottomPopup = false,
+      this.padding})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 100.0),
+      padding: padding ?? EdgeInsets.only(top: 80.0),
       child: Container(
         decoration: BoxDecoration(
             border: Border.all(

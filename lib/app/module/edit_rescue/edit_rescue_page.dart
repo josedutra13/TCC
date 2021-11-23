@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:auresgate/app/module/edit_rescue/edit_rescue_controller.dart';
 import 'package:auresgate/app/module/edit_rescue/widgets/button_edit_widget.dart';
@@ -51,7 +50,7 @@ class EditRescuePage extends GetView<EditRescueController> {
                     child: Center(
                         child: Container(
                       width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.53,
+                      height: MediaQuery.of(context).size.height * 0.57,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -115,8 +114,9 @@ class EditRescuePage extends GetView<EditRescueController> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 230.0),
+                  padding: const EdgeInsets.only(left: 250.0),
                   child: ButtonEdit(
+                      padding: EdgeInsets.only(top: 80),
                       onPressed: () {
                         controller.pickImage();
                       },

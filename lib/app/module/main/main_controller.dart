@@ -4,8 +4,6 @@ import 'dart:io';
 import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';
-import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
-import 'package:auresgate/app/module/rescue/rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';

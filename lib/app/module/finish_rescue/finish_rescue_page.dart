@@ -34,7 +34,7 @@ class FinishRescuePage extends GetView<FinishRescueController> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 100.0),
+              padding: const EdgeInsets.only(top: 70.0),
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 3),
@@ -66,7 +66,7 @@ class FinishRescuePage extends GetView<FinishRescueController> {
                   letterSpacing: 2),
             ),
             SizedBox(
-              height: 80,
+              height: 40,
             ),
             Column(
               children: [

@@ -12,28 +12,29 @@ class Chamado {
   User? usuario_abriu_chamado;
   User? usuario_atendeu_chamado;
 
-  Chamado(
-      {this.id,
-      this.data_hora_abertura,
-      this.data_hora_fechamento,
-      this.status,
-      this.animal,
-      this.usuario_abriu_chamado,
-      this.usuario_atendeu_chamado,
-      this.imagem});
+  Chamado({
+    this.id,
+    this.data_hora_abertura,
+    this.data_hora_fechamento,
+    this.imagem,
+    this.status,
+    this.animal,
+    this.usuario_abriu_chamado,
+    this.usuario_atendeu_chamado,
+  });
 
   Chamado.fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
     this.data_hora_abertura = DateTime.parse(json['data_hora_abertura']);
     this.data_hora_fechamento =
         DateTime.parse(json['data_hora_fechamento'] ?? '1999-09-29');
+    this.imagem = json['imagem'];
     this.status = json['status'];
     this.animal = Animal.fromJson(json['animal']);
     this.usuario_abriu_chamado = User.fromJson(json['usuario_abriu_chamado']);
     this.usuario_atendeu_chamado = json['usuario_atendeu_chamado'] == null
         ? User.empty()
         : User.fromJson(json['usuario_atendeu_chamado']);
-    this.imagem = json['imagem'];
   }
 
   Chamado copyWith({
@@ -70,11 +71,11 @@ class Chamado {
     data['id'] = this.id;
     data['data_hora_abertura'] = this.data_hora_abertura;
     data['data_hora_fechamento'] = this.data_hora_fechamento;
+    data['imagem'] = this.imagem;
     data['status'] = this.status;
     data['animal'] = this.animal;
     data['usuario_abriu_chamado'] = this.usuario_abriu_chamado;
     data['usuario_atendeu_chamado'] = this.usuario_atendeu_chamado;
-    data['imagem'] = this.imagem;
 
     return data;
   }

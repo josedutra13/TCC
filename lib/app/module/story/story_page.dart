@@ -1,7 +1,9 @@
+import 'package:auresgate/app/module/story/story_controller.dart';
 import 'package:auresgate/app/widgets/appBar_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class StoryPage extends StatelessWidget {
+class StoryPage extends GetView<StoryController> {
   const StoryPage({Key? key}) : super(key: key);
   void help(BuildContext context) {
     showDialog(
@@ -32,20 +34,25 @@ class StoryPage extends StatelessWidget {
         });
   }
 
+  onBack() {
+    Get.back();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.cyan[300],
       appBar: AppPageBarWidget(
-          onAction: null,
+          onAction: () {
+            help(context);
+          },
+          // onBack: onBack,
           isMenu: false,
           title: 'HISTÓRICO DE OCORRÊNCIAS',
           titleStyle: TextStyle(fontSize: 15)),
-      body: ListView(
-        children: [
-          
-        ],
-      ),
+      body: Obx(() => ListView(
+            children: [...controller.listStory(context: context)],
+          )),
     );
   }
 }

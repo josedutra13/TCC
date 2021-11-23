@@ -89,9 +89,9 @@ class EditRescueController extends GetxController {
     await _chamadoRepository.updateChamado(rescue, int.parse(id));
   }
 
-  void deleteRequest(BuildContext context) async {
+  void deleteRequest(BuildContext? context) async {
     showDialog(
-        context: context,
+        context: context!,
         builder: (BuildContext context) {
           return AlertDialog(
             content: Container(
