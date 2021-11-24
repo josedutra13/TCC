@@ -50,7 +50,7 @@ class EditRescuePage extends GetView<EditRescueController> {
                     child: Center(
                         child: Container(
                       width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.57,
+                      height: MediaQuery.of(context).size.height * 0.54,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -127,7 +127,7 @@ class EditRescuePage extends GetView<EditRescueController> {
                       )),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 347.0, right: 30),
+                  padding: const EdgeInsets.only(top: 400.0, right: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

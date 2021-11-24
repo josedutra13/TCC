@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:auresgate/app/data/models/animal_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
+import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:auresgate/app/module/rescue/rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 
 class EditRescueController extends GetxController {
   RescueController rescueController = Get.find();
+  MainController mainController = Get.find();
   ChamadoRepository _chamadoRepository = ChamadoRepository();
   String id = '';
 
@@ -78,6 +80,10 @@ class EditRescueController extends GetxController {
       final imageTemporary = File(imageF.path);
       List<int> imageBytes = imageTemporary.readAsBytesSync();
       String base64Image = base64.encode(imageBytes);
+      print(
+          'AQUI MANO ${rescueController.rescue.animal!.localizacao!.latitude}');
+      print('AQUI DESC ${rescueController.rescue.animal!.descricao}');
+      print('AQUI IMG ${rescueController.rescue.animal!.imagem}');
       rescueController.rescue.animal!.copyWith(imagem: base64Image);
     } on PlatformException catch (e) {
       print('Failed to pick image $e');

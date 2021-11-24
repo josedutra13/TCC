@@ -67,53 +67,76 @@ class MainPage extends GetView<MainController> {
                       onPressed: () {
                         showModalBottomSheet(
                             context: context,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(30),
+                              ),
+                            ),
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
                             builder: (BuildContext context) {
                               return Container(
                                 height: 250,
                                 color: Colors.grey.shade600,
                                 child: Padding(
                                   padding: const EdgeInsets.only(bottom: 50.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                  child: Column(
                                     children: [
-                                      ButtonEdit(
-                                        isBottomPopup: true,
-                                        width: 100,
-                                        height: 100,
-                                        icon: Image.asset(
-                                          'assets/icons/camera_black.png',
-                                          scale: 8,
-                                          fit: BoxFit.scaleDown,
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 8.0),
+                                        child: Container(
+                                          height: 3,
+                                          width: 200,
                                           color: Colors.white,
                                         ),
-                                        onPressed: () {
-                                          controller
-                                              .pickImage(ImageSource.camera)
-                                              .then((value) {
-                                            Get.offNamed(Routes.REQUEST_RESCUE);
-                                          });
-                                        },
                                       ),
-                                      SizedBox(
-                                        width: 50,
-                                      ),
-                                      ButtonEdit(
-                                        width: 100,
-                                        height: 100,
-                                        isBottomPopup: true,
-                                        icon: Image.asset(
-                                          'assets/icons/gallery.png',
-                                          scale: 8,
-                                          fit: BoxFit.scaleDown,
-                                        ),
-                                        onPressed: () {
-                                          controller
-                                              .pickImage(ImageSource.gallery)
-                                              .then((value) {
-                                            // controller.image = value;
-                                            Get.offNamed(Routes.REQUEST_RESCUE);
-                                          });
-                                        },
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ButtonEdit(
+                                            isBottomPopup: true,
+                                            width: 100,
+                                            height: 100,
+                                            icon: Image.asset(
+                                              'assets/icons/camera_black.png',
+                                              scale: 8,
+                                              fit: BoxFit.scaleDown,
+                                              color: Colors.white,
+                                            ),
+                                            onPressed: () {
+                                              controller
+                                                  .pickImage(ImageSource.camera)
+                                                  .then((value) {
+                                                Get.offNamed(
+                                                    Routes.REQUEST_RESCUE);
+                                              });
+                                            },
+                                          ),
+                                          SizedBox(
+                                            width: 50,
+                                          ),
+                                          ButtonEdit(
+                                            width: 100,
+                                            height: 100,
+                                            isBottomPopup: true,
+                                            icon: Image.asset(
+                                              'assets/icons/gallery.png',
+                                              scale: 8,
+                                              fit: BoxFit.scaleDown,
+                                            ),
+                                            onPressed: () {
+                                              controller
+                                                  .pickImage(
+                                                      ImageSource.gallery)
+                                                  .then((value) {
+                                                // controller.image = value;
+                                                Get.offNamed(
+                                                    Routes.REQUEST_RESCUE);
+                                              });
+                                            },
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),

@@ -17,14 +17,6 @@ class LoginPage extends GetView<LoginController> {
             child: SingleChildScrollView(
               child: Stack(
                 children: [
-                  // Container(
-                  //   decoration: const BoxDecoration(
-                  //     image: DecorationImage(
-                  //       image: AssetImage('assets/images/fundo.png'),
-                  //       fit: BoxFit.cover,
-                  //    ) ),
-                  //   ),
-                  // ),
                   Column(
                     children: [
                       Padding(
@@ -112,23 +104,8 @@ class LoginPage extends GetView<LoginController> {
                               fontWeight: FontWeight.w600,
                               fontSize: 16),
                         ),
-                        Obx(() => CheckboxListTile(
-                            title: Text(
-                              'Manter-me logado',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            tristate: true,
-                            contentPadding: EdgeInsets.only(right: 25),
-                            checkColor: Colors.white,
-                            value: controller.onCheck,
-                            onChanged: (value) {
-                              controller.onCheck = !controller.onCheck;
-                            },
-                            controlAffinity: ListTileControlAffinity.leading)),
                         Padding(
-                          padding: const EdgeInsets.only(left: 40, top: 10),
+                          padding: const EdgeInsets.only(left: 40, top: 20),
                           child: Container(
                             width: 250,
                             height: 60,

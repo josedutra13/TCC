@@ -70,7 +70,7 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                                       color: Colors.lightBlue.shade300,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(20))),
-                                  child: TextField(
+                                  child: TextFormField(
                                     onChanged: (descricao) {
                                       controller.onChangeSolicitation(
                                           descricao: descricao);

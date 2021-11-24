@@ -28,9 +28,9 @@ class MainController extends GetxController {
   bool get isEmptyMarker => _isEmptyMarker.value;
   set isEmptyMarker(bool value) => _isEmptyMarker.value = value;
 
-  final _teste = false.obs;
-  bool get teste => _teste.value;
-  set teste(bool value) => _teste.value = value;
+  final _isPickTaked = false.obs;
+  bool get isPickTaked => _isPickTaked.value;
+  set isPickTaked(bool value) => _isPickTaked.value = value;
 
   final _image = File('').obs;
   File get image => _image.value;
@@ -87,36 +87,40 @@ class MainController extends GetxController {
   void loadMarkers() {
     if (listChamadosRescue.length > 0) {
       listChamadosRescue.forEach((e) {
-        markers.add(
-          Marker(
-              markerId: MarkerId(e.id.toString()),
-              position: LatLng(
-                e.animal!.localizacao!.latitude!,
-                e.animal!.localizacao!.longitude!,
-              ),
-              infoWindow: InfoWindow(
-                onTap: () {},
-              ),
-              icon: e.status == 'ANDAMENTO'
-                  ? BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueOrange)
-                  : BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueRed),
-              onTap: () {
-                if (e.usuario_abriu_chamado!.id ==
-                    _loginController.userDto.id) {
-                  Get.offNamed(Routes.EDIT_RESCUE,
-                      parameters: {'id': e.id.toString()});
-                } else if (e.status == 'ANDAMENTO') {
-                  Get.offNamed(Routes.FINISH_RESCUE,
-                      parameters: {'id': e.id.toString()});
-                } else {
-                  print('STATUS AQUI : ${e.status}');
-                  Get.offNamed(Routes.RESCUE,
-                      parameters: {'id': e.id.toString()});
-                }
-              }),
-        );
+        if (e.status == 'FINALIZADO') {
+          markers = {};
+        } else {
+          markers.add(
+            Marker(
+                markerId: MarkerId(e.id.toString()),
+                position: LatLng(
+                  e.animal!.localizacao!.latitude!,
+                  e.animal!.localizacao!.longitude!,
+                ),
+                infoWindow: InfoWindow(
+                  onTap: () {},
+                ),
+                icon: e.status == 'ANDAMENTO'
+                    ? BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueOrange)
+                    : BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueRed),
+                onTap: () {
+                  if (e.usuario_abriu_chamado!.id ==
+                      _loginController.userDto.id) {
+                    Get.offNamed(Routes.EDIT_RESCUE,
+                        parameters: {'id': e.id.toString()});
+                  } else if (e.status == 'ANDAMENTO') {
+                    Get.offNamed(Routes.FINISH_RESCUE,
+                        parameters: {'id': e.id.toString()});
+                  } else {
+                    print('STATUS AQUI : ${e.status}');
+                    Get.offNamed(Routes.RESCUE,
+                        parameters: {'id': e.id.toString()});
+                  }
+                }),
+          );
+        }
       });
     }
   }
@@ -127,18 +131,19 @@ class MainController extends GetxController {
     if (listChamadosRescue.length == 0) {
       _isEmptyMarker.value = false;
     }
-    print('AQUI  $teste');
     loadMarkers();
   }
 
 // CAMERA FUNCTIONS //
   Future pickImage(ImageSource source) async {
     try {
+      _isPickTaked.value = false;
       final imageF = await ImagePicker().pickImage(source: source);
       if (imageF == null) return;
 
       final imageTemporary = File(imageF.path);
       _image.value = imageTemporary;
+      _isPickTaked.value = true;
     } on PlatformException catch (e) {
       print('Failed to pick image $e');
     }

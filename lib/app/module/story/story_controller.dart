@@ -53,7 +53,7 @@ class StoryController extends GetxController {
 
   void deleteRequest(BuildContext context, int id) async {
     showDialog(
-        context: context!,
+        context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             content: Container(

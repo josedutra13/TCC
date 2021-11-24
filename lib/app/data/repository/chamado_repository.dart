@@ -26,6 +26,10 @@ class ChamadoRepository extends ApiBase {
     await client.put('', data: chamadoResgateDTO.toJson());
   }
 
+  Future<void> finalizarChamado(Chamado chamado) async {
+    await client.put('/finalizar/${chamado.id}', data: chamado.toJson());
+  }
+
   Future<List<Chamado>> listChamado() async {
     var response = await client.get('');
 
