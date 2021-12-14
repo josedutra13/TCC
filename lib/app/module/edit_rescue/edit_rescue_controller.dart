@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:auresgate/app/data/models/animal_model.dart';
+import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:auresgate/app/module/rescue/rescue_controller.dart';
@@ -13,7 +14,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditRescueController extends GetxController {
-  RescueController rescueController = Get.find();
   MainController mainController = Get.find();
   ChamadoRepository _chamadoRepository = ChamadoRepository();
   String id = '';
@@ -26,12 +26,20 @@ class EditRescueController extends GetxController {
   bool get isEditing => _isEditing.value;
   set isEditing(bool value) => _isEditing.value = value;
 
+  final _isPicked = true.obs;
+  bool get isPicked => _isPicked.value;
+  set isPicked(bool value) => _isPicked.value = value;
+
   final _animalEditing = Animal.empty().obs;
   Animal get animalEditing => _animalEditing.value;
 
   final _image = File('').obs;
   File get image => _image.value;
   set image(File value) => _image.value = value;
+
+  final _rescue = Chamado.empty().obs;
+  Chamado get rescue => _rescue.value;
+  set rescue(Chamado value) => _rescue.value = value;
 
   TextEditingController descriptionEdit = TextEditingController();
 
@@ -44,18 +52,26 @@ class EditRescueController extends GetxController {
     if (param['id'] != null) {
       id = param['id']!;
 
-      rescueController.loadInfoRescue();
+      loadInfoRescue();
       checkButton();
       print('ID => LOAD EDIT $id');
     }
   }
 
   void checkButton() {
-    if (rescueController.rescue.animal!.estado == 'URGENTE') {
+    if (rescue.animal!.estado == 'URGENTE') {
       _optUsers.value = 1;
     } else {
       _optUsers.value = 2;
     }
+  }
+
+  void loadInfoRescue() {
+    mainController.listChamadosRescue.forEach((element) {
+      if (id == element.id.toString()) {
+        _rescue.value = element;
+      }
+    });
   }
 
   void onEditAnimal(
@@ -80,19 +96,19 @@ class EditRescueController extends GetxController {
       final imageTemporary = File(imageF.path);
       List<int> imageBytes = imageTemporary.readAsBytesSync();
       String base64Image = base64.encode(imageBytes);
-      print(
-          'AQUI MANO ${rescueController.rescue.animal!.localizacao!.latitude}');
-      print('AQUI DESC ${rescueController.rescue.animal!.descricao}');
-      print('AQUI IMG ${rescueController.rescue.animal!.imagem}');
-      rescueController.rescue.animal!.copyWith(imagem: base64Image);
+
+      _image.value = imageTemporary;
+      _animalEditing.value.imagem = base64Image;
+      print('IMAGEM ANIMAL AQUI : ${animalEditing.imagem}');
+      _isPicked.value = false;
     } on PlatformException catch (e) {
       print('Failed to pick image $e');
     }
   }
 
   void updateRequest() async {
-    var rescue = rescueController.rescue.animal!;
-    await _chamadoRepository.updateChamado(rescue, int.parse(id));
+    _rescue.value.animal = _animalEditing.value;
+    await _chamadoRepository.updateChamado(rescue.animal!, int.parse(id));
   }
 
   void deleteRequest(BuildContext? context) async {

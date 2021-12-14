@@ -14,6 +14,6 @@ class EditRescueBinding implements Bindings {
     Get.lazyPut<MainController>(() => MainController(_chamadoRepository));
     Get.lazyPut<RequestRescueController>(
         () => RequestRescueController(_chamadoRepository));
-    Get.lazyPut<RescueController>(() => RescueController());
+    // Get.lazyPut<RescueController>(() => RescueController());
   }
 }

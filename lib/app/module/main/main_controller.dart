@@ -24,7 +24,7 @@ class MainController extends GetxController {
 
   final listChamadosRescue = <Chamado>[].obs;
 
-  final _isEmptyMarker = true.obs;
+  final _isEmptyMarker = false.obs;
   bool get isEmptyMarker => _isEmptyMarker.value;
   set isEmptyMarker(bool value) => _isEmptyMarker.value = value;
 
@@ -87,8 +87,8 @@ class MainController extends GetxController {
   void loadMarkers() {
     if (listChamadosRescue.length > 0) {
       listChamadosRescue.forEach((e) {
-        if (e.status == 'FINALIZADO') {
-          markers = {};
+        if (e.status == 'FECHADO') {
+          markers.remove(e);
         } else {
           markers.add(
             Marker(
@@ -108,14 +108,14 @@ class MainController extends GetxController {
                 onTap: () {
                   if (e.usuario_abriu_chamado!.id ==
                       _loginController.userDto.id) {
-                    Get.offNamed(Routes.EDIT_RESCUE,
+                    Get.toNamed(Routes.EDIT_RESCUE,
                         parameters: {'id': e.id.toString()});
                   } else if (e.status == 'ANDAMENTO') {
                     Get.offNamed(Routes.FINISH_RESCUE,
                         parameters: {'id': e.id.toString()});
                   } else {
                     print('STATUS AQUI : ${e.status}');
-                    Get.offNamed(Routes.RESCUE,
+                    Get.toNamed(Routes.RESCUE,
                         parameters: {'id': e.id.toString()});
                   }
                 }),
@@ -126,10 +126,10 @@ class MainController extends GetxController {
   }
 
   void loadRescueChamado() async {
-    _isEmptyMarker.value = true;
+    _isEmptyMarker.value = false;
     listChamadosRescue.assignAll(await _chamadoRepository.listChamado());
     if (listChamadosRescue.length == 0) {
-      _isEmptyMarker.value = false;
+      _isEmptyMarker.value = true;
     }
     loadMarkers();
   }
@@ -137,15 +137,14 @@ class MainController extends GetxController {
 // CAMERA FUNCTIONS //
   Future pickImage(ImageSource source) async {
     try {
-      _isPickTaked.value = false;
       final imageF = await ImagePicker().pickImage(source: source);
       if (imageF == null) return;
 
       final imageTemporary = File(imageF.path);
       _image.value = imageTemporary;
-      _isPickTaked.value = true;
     } on PlatformException catch (e) {
       print('Failed to pick image $e');
     }
+    _isPickTaked.value = true;
   }
 }

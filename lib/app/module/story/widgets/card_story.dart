@@ -63,7 +63,7 @@ class CardStory extends StatelessWidget {
                             fontSize: 20, letterSpacing: 1)),
                     Icon(
                       Icons.circle,
-                      color: status == 'URGENTE' ? Colors.red : Colors.green,
+                      color: status == 'FECHADO' ? Colors.red : Colors.green,
                       size: 20,
                     ),
                   ],

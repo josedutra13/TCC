@@ -7,7 +7,7 @@ class Chamado {
   DateTime? data_hora_abertura;
   DateTime? data_hora_fechamento;
   String? status;
-  String? imagem;
+  String? img;
   Animal? animal;
   User? usuario_abriu_chamado;
   User? usuario_atendeu_chamado;
@@ -16,7 +16,7 @@ class Chamado {
     this.id,
     this.data_hora_abertura,
     this.data_hora_fechamento,
-    this.imagem,
+    this.img,
     this.status,
     this.animal,
     this.usuario_abriu_chamado,
@@ -28,7 +28,7 @@ class Chamado {
     this.data_hora_abertura = DateTime.parse(json['data_hora_abertura']);
     this.data_hora_fechamento =
         DateTime.parse(json['data_hora_fechamento'] ?? '1999-09-29');
-    this.imagem = json['imagem'];
+    this.img = json['img'];
     this.status = json['status'];
     this.animal = Animal.fromJson(json['animal']);
     this.usuario_abriu_chamado = User.fromJson(json['usuario_abriu_chamado']);
@@ -46,14 +46,14 @@ class Chamado {
     String? email,
     String? senha,
     String? telefone,
-    String? imagem,
+    String? img,
     Endereco? endereco,
   }) {
     return Chamado(
         id: id,
         data_hora_fechamento: data_hora_fechamento ?? this.data_hora_fechamento,
         status: status ?? this.status,
-        imagem: imagem ?? this.imagem,
+        img: img ?? this.img,
         usuario_atendeu_chamado: User(
             nomeUsuario: nomeUsuario,
             nome: nome,
@@ -71,7 +71,7 @@ class Chamado {
     data['id'] = this.id;
     data['data_hora_abertura'] = this.data_hora_abertura;
     data['data_hora_fechamento'] = this.data_hora_fechamento;
-    data['imagem'] = this.imagem;
+    data['img'] = this.img;
     data['status'] = this.status;
     data['animal'] = this.animal;
     data['usuario_abriu_chamado'] = this.usuario_abriu_chamado;

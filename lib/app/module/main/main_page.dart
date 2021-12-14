@@ -39,8 +39,8 @@ class MainPage extends GetView<MainController> {
               visible: controller.listChamadosRescue.length >= 0,
               child: GoogleMap(
                 markers: controller.isEmptyMarker
-                    ? Set.of(controller.markers)
-                    : Set(),
+                    ? Set()
+                    : Set.of(controller.markers),
                 initialCameraPosition:
                     CameraPosition(target: controller.center.value, zoom: 14.0),
                 onMapCreated: controller.onMapCreated,
@@ -59,98 +59,109 @@ class MainPage extends GetView<MainController> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   //TODO COLOCAR LEGENDA DE SOLICITAR RESGATE
-                  Visibility(
-                    visible: _loginController.userDto.isPerson!,
-                    child: FloatingActionButton(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                      onPressed: () {
-                        showModalBottomSheet(
-                            context: context,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(30),
-                              ),
-                            ),
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            builder: (BuildContext context) {
-                              return Container(
-                                height: 250,
-                                color: Colors.grey.shade600,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 50.0),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 8.0),
-                                        child: Container(
-                                          height: 3,
-                                          width: 200,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                  Obx(() => Visibility(
+                        visible: _loginController.userDto.isPerson!,
+                        child: FloatingActionButton(
+                          backgroundColor: Colors.blue,
+                          foregroundColor: Colors.white,
+                          onPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(30),
+                                  ),
+                                ),
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height: 250,
+                                    color: Colors.grey.shade600,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 50.0),
+                                      child: Column(
                                         children: [
-                                          ButtonEdit(
-                                            isBottomPopup: true,
-                                            width: 100,
-                                            height: 100,
-                                            icon: Image.asset(
-                                              'assets/icons/camera_black.png',
-                                              scale: 8,
-                                              fit: BoxFit.scaleDown,
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child: Container(
+                                              height: 3,
+                                              width: 200,
                                               color: Colors.white,
                                             ),
-                                            onPressed: () {
-                                              controller
-                                                  .pickImage(ImageSource.camera)
-                                                  .then((value) {
-                                                Get.offNamed(
-                                                    Routes.REQUEST_RESCUE);
-                                              });
-                                            },
                                           ),
-                                          SizedBox(
-                                            width: 50,
-                                          ),
-                                          ButtonEdit(
-                                            width: 100,
-                                            height: 100,
-                                            isBottomPopup: true,
-                                            icon: Image.asset(
-                                              'assets/icons/gallery.png',
-                                              scale: 8,
-                                              fit: BoxFit.scaleDown,
-                                            ),
-                                            onPressed: () {
-                                              controller
-                                                  .pickImage(
-                                                      ImageSource.gallery)
-                                                  .then((value) {
-                                                // controller.image = value;
-                                                Get.offNamed(
-                                                    Routes.REQUEST_RESCUE);
-                                              });
-                                            },
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              ButtonEdit(
+                                                isBottomPopup: true,
+                                                width: 100,
+                                                height: 100,
+                                                icon: Image.asset(
+                                                  'assets/icons/camera_black.png',
+                                                  scale: 8,
+                                                  fit: BoxFit.scaleDown,
+                                                  color: Colors.white,
+                                                ),
+                                                onPressed: () {
+                                                  controller
+                                                      .pickImage(
+                                                          ImageSource.camera)
+                                                      .then((value) {
+                                                    if (controller.image.path !=
+                                                        '') {
+                                                      Get.offNamed(Routes
+                                                          .REQUEST_RESCUE);
+                                                    } else {
+                                                      Get.offNamed(Routes.MAIN);
+                                                    }
+                                                  });
+                                                },
+                                              ),
+                                              SizedBox(
+                                                width: 50,
+                                              ),
+                                              ButtonEdit(
+                                                width: 100,
+                                                height: 100,
+                                                isBottomPopup: true,
+                                                icon: Image.asset(
+                                                  'assets/icons/gallery.png',
+                                                  scale: 8,
+                                                  fit: BoxFit.scaleDown,
+                                                ),
+                                                onPressed: () {
+                                                  controller
+                                                      .pickImage(
+                                                          ImageSource.gallery)
+                                                      .then((value) {
+                                                    if (controller.image.path !=
+                                                        '') {
+                                                      Get.offNamed(Routes
+                                                          .REQUEST_RESCUE);
+                                                    } else {
+                                                      Get.offNamed(Routes.MAIN);
+                                                    }
+                                                  });
+                                                },
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            });
-                        // Get.offNamed(Routes.REQUEST_RESCUE);
-                      },
-                      child: const Icon(
-                        Icons.add,
-                        size: 35,
-                      ),
-                    ),
-                  ),
+                                    ),
+                                  );
+                                });
+                            // Get.offNamed(Routes.REQUEST_RESCUE);
+                          },
+                          child: const Icon(
+                            Icons.add,
+                            size: 35,
+                          ),
+                        ),
+                      )),
                   SizedBox(
                     height: 27,
                   ),

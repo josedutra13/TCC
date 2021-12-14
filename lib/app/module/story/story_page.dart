@@ -1,4 +1,5 @@
 import 'package:auresgate/app/module/story/story_controller.dart';
+import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:auresgate/app/widgets/appBar_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,15 +35,16 @@ class StoryPage extends GetView<StoryController> {
         });
   }
 
-  onBack() {
-    Get.back();
+  void onBack() {
+    Get.offNamed(Routes.MAIN);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.cyan[300],
-      appBar: AppPageBarWidget(
+      appBar: AppPageStoryWidget(
+          onBack: onBack,
           onAction: () {
             help(context);
           },

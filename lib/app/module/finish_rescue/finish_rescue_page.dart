@@ -1,7 +1,4 @@
 import 'package:auresgate/app/module/finish_rescue/finish_rescue_controller.dart';
-import 'package:auresgate/app/module/main/main_controller.dart';
-import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
-import 'package:auresgate/app/module/rescue/rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class FinishRescuePage extends GetView<FinishRescueController> {
-  
   FinishRescuePage({Key? key}) : super(key: key);
 
   @override
@@ -36,63 +32,71 @@ class FinishRescuePage extends GetView<FinishRescueController> {
                 ],
               ),
             ),
-            Visibility(
-              visible: controller.mainController.isPickTaked,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Center(
-                  //TODO REFACTORY PARA COLOCAR BORDA BRANCA
-                  child: ClipOval(
-                    child: Image.file(
-                      controller.mainController.image,
-                      width: 150,
-                      height: 150,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Visibility(
-              visible: !controller.mainController.isEmptyMarker,
-              child: Column(
+            Obx(
+              () => Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 70.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 3),
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(100))),
-                      height: 200,
-                      width: 200,
-                      child: IconButton(
-                        onPressed: () {
-                          controller.mainController
-                              .pickImage(ImageSource.camera)
-                              .then((value) => Routes.FINISH_RESCUE);
-                        },
-                        icon: Image.asset(
-                          'assets/icons/camera.png',
-                          scale: 4,
-                          fit: BoxFit.scaleDown,
+                  Visibility(
+                    visible: controller.mainController.isPickTaked,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Center(
+                        //TODO REFACTORY PARA COLOCAR BORDA BRANCA
+                        child: ClipOval(
+                          child: Image.file(
+                            controller.mainController.image,
+                            width: 300,
+                            height: 300,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    'ADICIONAR FOTO',
-                    style: GoogleFonts.roboto(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 2),
-                  ),
-                  SizedBox(
-                    height: 40,
+                  Visibility(
+                    visible: !controller.mainController.isPickTaked,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 70.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black, width: 3),
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(100))),
+                            height: 200,
+                            width: 200,
+                            child: IconButton(
+                              onPressed: () {
+                                controller.mainController
+                                    .pickImage(ImageSource.camera)
+                                    .then((value) => Routes.FINISH_RESCUE);
+                              },
+                              icon: Image.asset(
+                                'assets/icons/camera.png',
+                                scale: 4,
+                                fit: BoxFit.scaleDown,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          'ADICIONAR FOTO',
+                          style: GoogleFonts.roboto(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 2),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -117,7 +121,7 @@ class FinishRescuePage extends GetView<FinishRescueController> {
                       ),
                       onPressed: () {
                         // controller.marking = true;
-                        Get.toNamed(Routes.MAIN);
+                        controller.onFinishRescue();
                       },
                     ),
                   ),

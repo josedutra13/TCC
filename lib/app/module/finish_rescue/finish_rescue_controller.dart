@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:auresgate/app/data/models/chamadoDTO_model.dart';
 import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/main/main_controller.dart';
@@ -11,9 +9,22 @@ import 'package:get/get.dart';
 class FinishRescueController extends GetxController {
   final MainController mainController = Get.find();
   final ChamadoRepository _chamadoRepository = ChamadoRepository();
+  String id = '';
 
   final _chamado = Chamado.empty().obs;
   Chamado get chamado => _chamado.value;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    final param = Get.parameters;
+
+    if (param['id'] != null) {
+      id = param['id']!;
+      print('ID => LOAD $id');
+    }
+  }
 
   void onFinishRescue() async {
     var path = mainController.image.path;
@@ -21,9 +32,9 @@ class FinishRescueController extends GetxController {
     List<int> imageBytes = imageFile.readAsBytesSync();
     String base64Image = base64.encode(imageBytes);
 
-    _chamado.value.imagem = base64Image;
-
-    await _chamadoRepository.finalizarChamado(chamado).whenComplete(() {
+    await _chamadoRepository
+        .finalizarChamado(base64Image, int.parse(id))
+        .whenComplete(() {
       Get.offNamed(Routes.MAIN);
     });
   }

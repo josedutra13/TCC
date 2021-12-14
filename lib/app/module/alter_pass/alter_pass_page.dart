@@ -75,7 +75,7 @@ class AlterPassPage extends GetView<AlterPassController> {
                             placeholder: '',
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 5, top: 30),
+                            padding: const EdgeInsets.only(left: 5, top: 15),
                             child: Container(
                               width: 220,
                               height: 25,
@@ -98,7 +98,7 @@ class AlterPassPage extends GetView<AlterPassController> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 5, top: 15),
+                            padding: const EdgeInsets.only(left: 5, top: 10),
                             child: Container(
                               width: 220,
                               height: 25,

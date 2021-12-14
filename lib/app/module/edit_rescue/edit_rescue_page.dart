@@ -11,8 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 class EditRescuePage extends GetView<EditRescueController> {
   EditRescuePage({Key? key}) : super(key: key);
   Image imageRescue() {
-    final decodedBytes = Base64Decoder()
-        .convert(controller.rescueController.rescue.animal!.imagem.toString());
+    final decodedBytes =
+        Base64Decoder().convert(controller.rescue.animal!.imagem.toString());
     var image =
         Image.memory(decodedBytes, fit: BoxFit.cover, width: 150, height: 150);
 
@@ -50,7 +50,7 @@ class EditRescuePage extends GetView<EditRescueController> {
                     child: Center(
                         child: Container(
                       width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.54,
+                      height: MediaQuery.of(context).size.height * 0.56,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -82,19 +82,19 @@ class EditRescuePage extends GetView<EditRescueController> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 8.0, top: 5),
-                                    child: Obx(() => TextFormField(
-                                          initialValue:
-                                              '${controller.rescueController.rescue.animal!.descricao}',
-                                          expands: true,
-                                          minLines: null,
-                                          maxLines: null,
-                                          enabled: controller.isEditing,
-                                          onChanged: (value) {
-                                            controller.onEditAnimal(
-                                                descricao: value);
-                                          },
-                                          style: TextStyle(color: Colors.white),
-                                        )),
+                                    child: TextFormField(
+                                      initialValue:
+                                          '${controller.rescue.animal!.descricao}',
+                                      expands: true,
+                                      minLines: null,
+                                      maxLines: null,
+                                      enabled: controller.isEditing,
+                                      onChanged: (value) {
+                                        controller.onEditAnimal(
+                                            descricao: value);
+                                      },
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ),
                                 ),
                               )),
@@ -109,7 +109,10 @@ class EditRescuePage extends GetView<EditRescueController> {
                   child: Center(
                     //TODO REFACTORY PARA COLOCAR BORDA BRANCA
                     child: Obx(() => ClipOval(
-                          child: imageRescue(),
+                          child: controller.isPicked
+                              ? imageRescue()
+                              : Image.file(controller.image,
+                                  fit: BoxFit.cover, width: 150, height: 150),
                         )),
                   ),
                 ),
@@ -118,7 +121,8 @@ class EditRescuePage extends GetView<EditRescueController> {
                   child: ButtonEdit(
                       padding: EdgeInsets.only(top: 80),
                       onPressed: () {
-                        controller.pickImage();
+                        controller.pickImage().whenComplete(
+                            () => Get.toNamed(Routes.EDIT_RESCUE));
                       },
                       icon: Image.asset(
                         'assets/icons/camera_black.png',
@@ -127,7 +131,7 @@ class EditRescuePage extends GetView<EditRescueController> {
                       )),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 400.0, right: 30),
+                  padding: const EdgeInsets.only(top: 350.0, right: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -150,7 +154,7 @@ class EditRescuePage extends GetView<EditRescueController> {
                           height: 50,
                           width: 50,
                           onPressed: () {
-                            controller.isEditing = !controller.isEditing;
+                            controller.isEditing = true;
                           },
                           icon: Image.asset(
                             'assets/icons/ferramenta-lapis.png',
@@ -249,7 +253,11 @@ class EditRescuePage extends GetView<EditRescueController> {
                             style: TextStyle(fontSize: 30),
                           ),
                           onPressed: () {
-                            Get.offNamed(Routes.MAIN);
+                            if (Get.previousRoute == Routes.STORY) {
+                              Get.offNamed(Routes.STORY);
+                            } else {
+                              Get.offNamed(Routes.MAIN);
+                            }
                           },
                         ),
                       ),
