@@ -7,24 +7,25 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final LoginRepository _loginRepository;
+  LoginController(this._loginRepository);
+  final _onFocusLogin = false.obs;
+  bool get onFocusLogin => _onFocusLogin.value;
+  set onFocusLogin(bool value) => _onFocusLogin.value = value;
 
-  final _onCheck = false.obs;
+  final _onFocusPass = false.obs;
+  bool get onFocusPass => _onFocusPass.value;
+  set onFocusPass(bool value) => _onFocusPass.value = value;
 
   final _userDto = UserDTO.empty().obs;
   UserDTO get userDto => _userDto.value;
-
-  LoginController(this._loginRepository);
-  bool get onCheck => _onCheck.value;
-  set onCheck(bool value) => _onCheck.value = value;
 
   final _invalidLogin = false.obs;
   bool get invalidLogin => _invalidLogin.value;
   set invalidLogin(bool value) => _invalidLogin.value = value;
 
-  // final String errorMessage = '';
-
   TextEditingController usuarioText = TextEditingController();
   TextEditingController senhaText = TextEditingController();
+  final formLogin = GlobalKey<FormState>();
 
   void loginUser(BuildContext context) async {
     var response =

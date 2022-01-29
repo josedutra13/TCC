@@ -1,5 +1,4 @@
 import 'package:auresgate/app/data/models/cidade_model.dart';
-import 'package:auresgate/app/data/models/endereco_model.dart';
 import 'package:auresgate/app/data/models/estado_model.dart';
 import 'package:auresgate/app/data/models/ong_model.dart';
 import 'package:auresgate/app/data/models/pessoa_model.dart';
@@ -42,17 +41,9 @@ class RegisterController extends GetxController {
   final TextEditingController numberController = TextEditingController();
   final formAddress = GlobalKey<FormState>();
 
-  // final _optUsers = 0.obs;
-  // get optUsers => this._optUsers.value;
-  // set optUsers(value) => this._optUsers.value = value;
-
   final _currentStep = 0.obs;
   get currentStep => this._currentStep.value;
   set currentStep(value) => this._currentStep.value = value;
-
-  final _currentSliderValue = 0.0.obs;
-  get currentSliderValue => _currentSliderValue.value;
-  set currentSliderValue(value) => _currentSliderValue.value = value;
 
   final _isPessoa = false.obs;
   bool get isPessoa => _isPessoa.value;
@@ -61,6 +52,10 @@ class RegisterController extends GetxController {
   final _showPass = false.obs;
   bool get showPass => _showPass.value;
   set showPass(bool value) => _showPass.value = value;
+
+  final _isTheLast = false.obs;
+  bool get isTheLast => _isTheLast.value;
+  set isTheLast(bool value) => _isTheLast.value = value;
 
   final _pessoa = Pessoa.empty().obs;
   Pessoa get pessoa => _pessoa.value;
@@ -92,7 +87,7 @@ class RegisterController extends GetxController {
   String get selectedSexValue => _selectedSexValue.value;
   set selectedSexValue(String value) => _selectedSexValue.value = value;
 
-  final _sex = <String>['Sexo', 'MASCULINO', 'FEMININO'].obs;
+  final _sex = <String>['MASCULINO', 'FEMININO'].obs;
   List<String> get sex => _sex.toList();
 
   final _typeAccount = <String>['Ong', 'Pessoa Fisica'].obs;
@@ -152,6 +147,21 @@ class RegisterController extends GetxController {
         complemento: complemento,
         cidade: cidade);
   }
+
+  saveStep1(context) {
+    // if (formData.currentState!.validate()) {
+    goToNextStep(context);
+    // }
+  }
+
+  saveStep2(context) {
+    // if (formDataRegister.currentState!.validate()) {
+    goToNextStep(context);
+    //   _isTheLast.value = true;
+    // }
+  }
+
+  saveStep3(context) {}
 
   void onSave() async {
     _pessoa.value = _pessoaEditing.value;
