@@ -1,6 +1,6 @@
 import 'package:auresgate/app/data/models/animal_model.dart';
-import 'package:auresgate/app/data/models/chamadoDTO_model.dart';
-import 'package:auresgate/app/data/models/chamadoResgateDTO_model.dart';
+import 'package:auresgate/app/data/models/DTO/chamadoDTO_model.dart';
+import 'package:auresgate/app/data/models/DTO/chamadoResgateDTO_model.dart';
 import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/providers/api.dart';
 

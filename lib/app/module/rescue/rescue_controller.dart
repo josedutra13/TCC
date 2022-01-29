@@ -1,4 +1,4 @@
-import 'package:auresgate/app/data/models/chamadoResgateDTO_model.dart';
+import 'package:auresgate/app/data/models/DTO/chamadoResgateDTO_model.dart';
 import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';

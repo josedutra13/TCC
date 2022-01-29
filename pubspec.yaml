@@ -38,6 +38,7 @@ dependencies:
   permission_handler: ^8.2.6
   image_picker: ^0.8.4+4
   brasil_fields: ^1.3.0
+  flux_validator_dart: ^2.0.0
 
 dev_dependencies:
   flutter_test:

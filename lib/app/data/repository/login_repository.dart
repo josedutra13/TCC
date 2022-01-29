@@ -1,4 +1,4 @@
-import 'package:auresgate/app/data/models/userDTO_model.dart';
+import 'package:auresgate/app/data/models/DTO/userDTO_model.dart';
 import 'package:auresgate/app/data/providers/api.dart';
 
 class LoginRepository extends ApiBase {

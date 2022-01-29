@@ -1,68 +1,46 @@
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../colors.dart';
 import 'package:flutter/material.dart';
 
+class ButtonWidget extends StatelessWidget {
+  final Function()? onPressed;
+  final String? buttonText;
+  final bool isBack;
 
-enum ButtonTypes {
-  DEFAULT,
-  PRIMARY,
-}
-enum ButtonShapes { SQUARE, ROUNDED }
-
-// BUTTON
-
-class Button extends StatelessWidget {
-  final String title;
-  final ButtonTypes type;
-  final ButtonShapes btnShape;
-  final EdgeInsets? padding;
-  final VoidCallback? onPressed;
-  final VoidCallback? onLongPress;
-  final IconData? icon;
-  final double? iconSize;
-  final Color? iconColor;
-
-  const Button(
-      {required this.title,
-      this.onPressed,
-      this.onLongPress,
-      this.icon,
-      this.iconSize,
-      this.padding,
-      this.type = ButtonTypes.DEFAULT,
-      this.btnShape = ButtonShapes.SQUARE,
-      this.iconColor});
-
-  // builda o estilo do botão
-  ButtonStyle style(ThemeData theme) {
-    Color textColor;
-    Color? backgroundColor;
-    BorderSide side = BorderSide.none;
-    RoundedRectangleBorder? shape;
-    double? elevation;
-
-    switch (type) {
-      case ButtonTypes.PRIMARY:
-        backgroundColor = theme.primaryColor;
-        break;
-      case ButtonTypes.DEFAULT:
-        backgroundColor = theme.accentColor;
-        break;
-    }
-
-    if (btnShape == ButtonShapes.ROUNDED) {
-      shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0));
-    }
-
-    return ElevatedButton.styleFrom(
-        primary: backgroundColor,
-        elevation: elevation,
-        // onPrimary: textColor,
-        // onSurface: NullUtils.isNull(onPressed) ? backgroundColor : null,
-        side: side,
-        shape: shape);
-  }
+  const ButtonWidget({
+    Key? key,
+    this.onPressed,
+    this.buttonText,
+    this.isBack = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }}
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.90,
+        height: MediaQuery.of(context).size.height * 0.060,
+        child: ElevatedButton(
+          style: ButtonStyle(
+              backgroundColor: isBack
+                  ? MaterialStateProperty.all<Color>(MainColors.whiteColor)
+                  : MaterialStateProperty.all<Color>(MainColors.primaryColor),
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  side: BorderSide(color: MainColors.primaryColor)))),
+          child: Text(
+            buttonText!,
+            style: GoogleFonts.titilliumWeb(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color:
+                    isBack ? MainColors.primaryColor : MainColors.whiteColor),
+          ),
+          onPressed: onPressed,
+        ),
+      ),
+    );
+  }
+}

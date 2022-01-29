@@ -1,5 +1,7 @@
 import 'package:auresgate/app/widgets/button_widgets.dart';
+import '../../colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -7,10 +9,10 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final double? elevation;
   final TextStyle? titleStyle;
   final VoidCallback? onMenu;
+  final Function()? onBack;
   final VoidCallback? onAction;
   final String? actionButtonLabel;
   final Widget? leading;
-  final ButtonTypes? buttonType;
   final bool isMenu;
 
   const AppPageBarWidget({
@@ -20,11 +22,11 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
     this.onAction,
     this.actionButtonLabel,
     this.leading,
-    this.buttonType,
     this.titleStyle,
     this.color,
     this.elevation,
     this.isMenu = false,
+    this.onBack,
   }) : super(key: key);
 
   void actionHandle() {
@@ -39,24 +41,35 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       elevation: elevation,
-      backgroundColor: color ?? Colors.cyan[300],
+      backgroundColor: MainColors.whiteColor,
       iconTheme: const IconThemeData(color: Colors.white),
       automaticallyImplyLeading: true,
       leading: onMenu != null
           ? IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.menu,
-                color: Colors.white,
+                color: MainColors.primaryColor,
               ),
               onPressed: onMenu)
-          : null,
-      title: Text(title, style: titleStyle ?? theme.textTheme.headline2),
+          : IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: MainColors.primaryColor,
+              ),
+              onPressed: onBack),
+      title: Text(title,
+          textAlign: TextAlign.justify,
+          style: titleStyle ??
+              GoogleFonts.titilliumWeb(
+                  fontSize: 25,
+                  color: MainColors.primaryColor,
+                  fontWeight: FontWeight.w600)),
       actions: <Widget>[
         if (onAction != null)
           IconButton(
             icon: Icon(
               isMenu ? Icons.replay : Icons.help,
-              color: Colors.white,
+              color: MainColors.whiteColor,
             ),
             onPressed: onAction,
           )
@@ -67,7 +80,7 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
         //     title: actionButtonLabel!,
         //     type: buttonType == null ? ButtonTypes.PRIMARY : buttonType!),
       ],
-      centerTitle: false,
+      centerTitle: true,
     );
   }
 
@@ -75,7 +88,8 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(50.0);
 }
 
-class AppPageStoryWidget extends StatelessWidget implements PreferredSizeWidget {
+class AppPageStoryWidget extends StatelessWidget
+    implements PreferredSizeWidget {
   final String title;
   final Color? color;
   final double? elevation;
@@ -84,7 +98,6 @@ class AppPageStoryWidget extends StatelessWidget implements PreferredSizeWidget 
   final VoidCallback? onAction;
   final String? actionButtonLabel;
   final Widget? leading;
-  final ButtonTypes? buttonType;
   final bool isMenu;
 
   const AppPageStoryWidget({
@@ -94,7 +107,6 @@ class AppPageStoryWidget extends StatelessWidget implements PreferredSizeWidget 
     this.onAction,
     this.actionButtonLabel,
     this.leading,
-    this.buttonType,
     this.titleStyle,
     this.color,
     this.elevation,
@@ -116,13 +128,12 @@ class AppPageStoryWidget extends StatelessWidget implements PreferredSizeWidget 
       backgroundColor: color ?? Colors.cyan[300],
       iconTheme: const IconThemeData(color: Colors.white),
       automaticallyImplyLeading: true,
-      leading:  IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-              onPressed: onBack)
-          ,
+      leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: onBack),
       title: Text(title, style: titleStyle ?? theme.textTheme.headline2),
       actions: <Widget>[
         if (onAction != null)

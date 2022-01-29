@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:auresgate/app/module/edit_rescue/edit_rescue_controller.dart';
 import 'package:auresgate/app/module/edit_rescue/widgets/button_edit_widget.dart';
-import 'package:auresgate/app/module/register/widgets/radio_button_widget.dart';
+import 'package:auresgate/app/module/register_account/widgets/radio_button_widget.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

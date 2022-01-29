@@ -1,5 +1,5 @@
 import 'package:auresgate/app/data/models/animal_model.dart';
-import 'package:auresgate/app/data/models/userDTO_model.dart';
+import 'package:auresgate/app/data/models/DTO/userDTO_model.dart';
 
 class ChamadoResgateDTO {
   late int idChamado;

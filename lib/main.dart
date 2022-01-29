@@ -10,6 +10,8 @@ void main() {
       FocusManager.instance.primaryFocus?.unfocus();
     },
     child: GetMaterialApp(
+      debugShowMaterialGrid: false,
+      debugShowCheckedModeBanner: false,
       title: 'AuResgate',
       getPages: AppPages.routes,
       initialRoute: Routes.LOGIN,

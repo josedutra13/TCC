@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:auresgate/app/module/register/widgets/radio_button_widget.dart';
+import 'package:auresgate/app/module/register_account/widgets/radio_button_widget.dart';
 import 'package:auresgate/app/module/rescue/rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -130,7 +130,7 @@ class RescuePage extends GetView<RescueController> {
                       ),
                     )),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
+                  padding: const EdgeInsets.only(top: 15.0),
                   child: Column(
                     children: [
                       Center(
@@ -157,7 +157,7 @@ class RescuePage extends GetView<RescueController> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
+                        padding: const EdgeInsets.only(top: 15.0),
                         child: Center(
                           child: Container(
                             width: 350,

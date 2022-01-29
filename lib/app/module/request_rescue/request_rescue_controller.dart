@@ -3,7 +3,7 @@ import 'dart:io';
 
 // import 'package:dio/dio.dart' as dio;
 import 'package:auresgate/app/data/models/animal_model.dart';
-import 'package:auresgate/app/data/models/chamadoDTO_model.dart';
+import 'package:auresgate/app/data/models/DTO/chamadoDTO_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/module/main/main_controller.dart';

@@ -19,17 +19,48 @@ class RegisterController extends GetxController {
   RegisterController(this._personsRepository, this._stateRepository,
       this._cityRepository, this._ongRepository);
 
+  //Step1 Dados de acesso
+  final TextEditingController accountTypeController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmController = TextEditingController();
-  final formKeyAuth = GlobalKey<FormState>();
+  final formData = GlobalKey<FormState>();
 
-  final _optUsers = 0.obs;
-  get optUsers => this._optUsers.value;
-  set optUsers(value) => this._optUsers.value = value;
+  //Step 2 Dados de cadastro
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController cnpjController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
+  final TextEditingController sexController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final formDataRegister = GlobalKey<FormState>();
+
+  //Step 3 Dados de endereço
+  final TextEditingController stateController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
+  final TextEditingController districtController = TextEditingController();
+  final TextEditingController numberController = TextEditingController();
+  final formAddress = GlobalKey<FormState>();
+
+  // final _optUsers = 0.obs;
+  // get optUsers => this._optUsers.value;
+  // set optUsers(value) => this._optUsers.value = value;
+
+  final _currentStep = 0.obs;
+  get currentStep => this._currentStep.value;
+  set currentStep(value) => this._currentStep.value = value;
+
+  final _currentSliderValue = 0.0.obs;
+  get currentSliderValue => _currentSliderValue.value;
+  set currentSliderValue(value) => _currentSliderValue.value = value;
 
   final _isPessoa = false.obs;
   bool get isPessoa => _isPessoa.value;
   set isPessoa(bool value) => _isPessoa.value = value;
+
+  final _showPass = false.obs;
+  bool get showPass => _showPass.value;
+  set showPass(bool value) => _showPass.value = value;
 
   final _pessoa = Pessoa.empty().obs;
   Pessoa get pessoa => _pessoa.value;
@@ -47,10 +78,6 @@ class RegisterController extends GetxController {
   final _ongEditing = Ong.empty().obs;
   Ong get ongEditing => _ongEditing.value;
 
-  final _showPassword = false.obs;
-  bool get showPassword => _showPassword.value;
-  set showPassword(bool value) => _showPassword.value = value;
-
   final _isSelectedState = false.obs;
   bool get isSelectedState => _isSelectedState.value;
   set isSelectedState(bool value) => _isSelectedState.value = value;
@@ -67,7 +94,10 @@ class RegisterController extends GetxController {
 
   final _sex = <String>['Sexo', 'MASCULINO', 'FEMININO'].obs;
   List<String> get sex => _sex.toList();
-  
+
+  final _typeAccount = <String>['Ong', 'Pessoa Fisica'].obs;
+  List<String> get typeAccount => _typeAccount.toList();
+
   final _isSelectedCity = false.obs;
   bool get isSelectedCity => _isSelectedCity.value;
   set isSelectedCity(bool value) => _isSelectedCity.value = value;
@@ -124,7 +154,6 @@ class RegisterController extends GetxController {
   }
 
   void onSave() async {
-    
     _pessoa.value = _pessoaEditing.value;
     _ong.value = _ongEditing.value;
     var response;
@@ -137,6 +166,10 @@ class RegisterController extends GetxController {
     if (response == null) {
       Get.offNamed(Routes.LOGIN);
     }
+  }
+
+  void goToNextStep(BuildContext context) {
+    _currentStep.value = _currentStep.value + 1;
   }
 
   //SELECIONAR ESTADO

@@ -2,7 +2,6 @@ import 'package:auresgate/app/data/models/cidade_model.dart';
 import 'package:auresgate/app/data/models/endereco_model.dart';
 import 'package:auresgate/app/data/models/estado_model.dart';
 import 'package:auresgate/app/data/models/user_model.dart';
-import 'package:flutter/foundation.dart';
 
 class Pessoa extends User {
   int? idade;
@@ -62,7 +61,7 @@ class Pessoa extends User {
                 estado: Estado(nome: '', sigla: ''))));
   }
 
-   fromJson(Map<String, dynamic> json) {
+  fromJson(Map<String, dynamic> json) {
     this.id = json['id'];
     this.nome = json['nome'];
     this.nomeUsuario = json['nomeUsuario'];

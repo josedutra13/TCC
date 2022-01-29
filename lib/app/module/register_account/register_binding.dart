@@ -2,7 +2,7 @@ import 'package:auresgate/app/data/repository/city_repository.dart';
 import 'package:auresgate/app/data/repository/ong_repository.dart';
 import 'package:auresgate/app/data/repository/person_repository.dart';
 import 'package:auresgate/app/data/repository/state_repository.dart';
-import 'package:auresgate/app/module/register/register_controller.dart';
+import 'package:auresgate/app/module/register_account/register_controller.dart';
 import 'package:get/get.dart';
 
 class RegisterBindings implements Bindings {

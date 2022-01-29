@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:auresgate/app/data/models/animal_model.dart';
-import 'package:auresgate/app/data/models/userDTO_model.dart';
+import 'package:auresgate/app/data/models/DTO/userDTO_model.dart';
 import 'package:flutter/services.dart';
 
 class ChamadoDTO {

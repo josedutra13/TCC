@@ -1,4 +1,4 @@
-import 'package:auresgate/app/data/models/userDTO_model.dart';
+import 'package:auresgate/app/data/models/DTO/userDTO_model.dart';
 import 'package:auresgate/app/data/repository/login_repository.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';

@@ -1,7 +1,7 @@
 import 'package:auresgate/app/routes/app_routes.dart';
+import '../../../colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'login_controller.dart';
 
@@ -11,179 +11,179 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return Obx(() => Scaffold(
-          backgroundColor: Colors.cyan[300],
-          body: SizedBox(
-            child: SingleChildScrollView(
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 50),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.7,
-                          height: 400,
-                          child: Image.asset('assets/images/logo.png'),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 180, left: 25, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 65, top: 150),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0))),
-                          height: 50,
-                          child: TextFormField(
-                            controller: controller.usuarioText,
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(
-                                Icons.person_outline,
-                                size: 30,
-                                color: Colors.grey,
-                              ),
-                              hintText: 'USUÁRIO',
-                              //TODO ALINHAR PLACEHOLDER
-                              hintStyle: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey),
-                              fillColor: Colors.white70,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0)),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              border: controller.invalidLogin
-                                  ? Border.all(color: Colors.red)
-                                  : Border.all(color: Colors.blue),
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0))),
-                          height: 50,
-                          child: TextFormField(
-                            controller: controller.senhaText,
-                            obscureText: true,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock,
-                                  size: 30, color: Colors.grey),
-                              hintText: 'SENHA',
-                              hintStyle: TextStyle(
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.bold),
-                              fillColor: Colors.white70,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0)),
-                            ),
-                          ),
-                        ),
-                        Text(
-                          controller.invalidLogin
-                              ? 'Usuario ou senha invalido'
-                              : '',
-                          style: GoogleFonts.roboto(
-                              color: controller.invalidLogin
-                                  ? Colors.red
-                                  : Colors.transparent,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 40, top: 20),
-                          child: Container(
-                            width: 250,
-                            height: 60,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  controller.loginUser(context);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    shadowColor: Colors.grey,
-                                    primary: Colors.green,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                        side: BorderSide(color: Colors.green))),
-                                child: Text(
-                                  'ENTRAR',
-                                  style: TextStyle(
-                                      fontSize: 30, color: Colors.black),
-                                )),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                    flex: 2,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          primary: Colors.cyan[300],
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30.0),
-                                              side: BorderSide(
-                                                  color: Colors.white,
-                                                  width: 2))),
-                                      child: Text('Esqueci a senha',
-                                          style: TextStyle(fontSize: 15)),
-                                      onPressed: () {
-                                        Get.offNamed(Routes.RECOVER_PASS);
-                                      },
-                                    )),
-                                Expanded(
-                                    flex: 2,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 20.0),
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            primary: Colors.cyan[300],
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(30.0),
-                                                side: BorderSide(
-                                                    color: Colors.white,
-                                                    width: 2))),
-                                        child: Text(
-                                          'Cadastrar',
-                                          style: TextStyle(fontSize: 15),
-                                        ),
-                                        onPressed: () {
-                                          Get.offNamed(Routes.REGISTER);
-                                        },
-                                      ),
-                                    ))
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 60, left: 60, top: 60),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: MediaQuery.of(context).size.width * 0.6,
+                child: Image.asset('assets/images/logo.png'),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(right: 30, left: 30, bottom: 5, top: 5),
+              child: Focus(
+                onFocusChange: (focus) => focus
+                    ? controller.onCheck = true
+                    : controller.onCheck = false,
+                child: TextFormField(
+                  controller: controller.usuarioText,
+                  decoration: InputDecoration(
+                      labelText: 'Usuário',
+                      labelStyle: TextStyle(
+                          color: controller.onCheck
+                              ? MainColors.primaryColor
+                              : Colors.grey),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MainColors.primaryColor)),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: MainColors.primaryColor))),
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(right: 30, left: 30, bottom: 5, top: 5),
+              child: Focus(
+                onFocusChange: (focus) => focus
+                    ? controller.onCheck = true
+                    : controller.onCheck = false,
+                child: TextFormField(
+                  controller: controller.senhaText,
+                  obscureText: true,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: InputDecoration(
+                    labelText: 'Senha',
+                    labelStyle: TextStyle(
+                        color: controller.onCheck
+                            ? MainColors.primaryColor
+                            : Colors.grey),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: MainColors.primaryColor)),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: MainColors.primaryColor)),
+                    suffixIcon: Icon(
+                      Icons.remove_red_eye_rounded,
+                      color: MainColors.blackColor,
                     ),
                   ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Get.offNamed(Routes.RECOVER_PASS);
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: 30.0, top: 8),
+                child: Text(
+                  'Esqueci minha senha',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.87,
+                  height: MediaQuery.of(context).size.width * 0.11,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        controller.loginUser(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          shadowColor: MainColors.primaryColor,
+                          primary: MainColors.primaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              side:
+                                  BorderSide(color: MainColors.primaryColor))),
+                      child: Text(
+                        'Entrar',
+                        style: TextStyle(
+                            fontSize: 22,
+                            color: MainColors.whiteColor,
+                            fontWeight: FontWeight.w500),
+                      )),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 25.0, top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text('Não tem uma conta? '),
+                  InkWell(
+                      onTap: () {
+                        Get.toNamed(Routes.REGISTER);
+                      },
+                      child: Text(
+                        'Crie agora',
+                        style: TextStyle(color: MainColors.primaryColor),
+                      ))
                 ],
               ),
             ),
-          ),
-        ));
+            Padding(
+              padding: const EdgeInsets.only(top: 30, left: 26),
+              child: Row(
+                children: [
+                  Container(
+                    color: MainColors.primaryColor,
+                    width: MediaQuery.of(context).size.width * 0.31,
+                    height: 1,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+                    child: Text('Ou entre com'),
+                  ),
+                  Container(
+                    color: MainColors.primaryColor,
+                    width: MediaQuery.of(context).size.width * 0.31,
+                    height: 1,
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.87,
+                  height: MediaQuery.of(context).size.width * 0.11,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        controller.loginUser(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          primary: MainColors.whiteColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              side:
+                                  BorderSide(color: MainColors.primaryColor))),
+                      child: Text(
+                        'Entrar com o Google',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: MainColors.primaryColor,
+                            fontWeight: FontWeight.w500),
+                      )),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
