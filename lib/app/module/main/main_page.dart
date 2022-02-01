@@ -4,7 +4,10 @@ import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:auresgate/app/widgets/appBar_widgets.dart';
 import 'package:auresgate/app/widgets/menu_side_widget.dart';
+import 'package:auresgate/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,10 +20,6 @@ class MainPage extends GetView<MainController> {
     Get.offAllNamed(Routes.LOGIN);
   }
 
-  void reloadMarkers() {
-    controller.loadRescueChamado();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +29,10 @@ class MainPage extends GetView<MainController> {
         logout: onLogout,
       ),
       appBar: AppPageBarWidget(
-          onAction: reloadMarkers,
-          isMenu: true,
-          title: 'AuResgate',
-          titleStyle: TextStyle(fontSize: 20)),
+        title: 'AuResgate',
+        isMenu: true,
+        onAction: () => controller.loadRescueChamado(),
+      ),
       body: Stack(children: [
         Obx(() => Visibility(
               visible: controller.listChamadosRescue.length >= 0,
@@ -52,140 +51,52 @@ class MainPage extends GetView<MainController> {
                 mapToolbarEnabled: false,
               ),
             )),
-        Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  //TODO COLOCAR LEGENDA DE SOLICITAR RESGATE
-                  Obx(() => Visibility(
-                        visible: _loginController.userDto.isPerson!,
-                        child: FloatingActionButton(
-                          backgroundColor: Colors.blue,
-                          foregroundColor: Colors.white,
-                          onPressed: () {
-                            showModalBottomSheet(
-                                context: context,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(30),
-                                  ),
-                                ),
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                builder: (BuildContext context) {
-                                  return Container(
-                                    height: 250,
-                                    color: Colors.grey.shade600,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 50.0),
-                                      child: Column(
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 8.0),
-                                            child: Container(
-                                              height: 3,
-                                              width: 200,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              ButtonEdit(
-                                                isBottomPopup: true,
-                                                width: 100,
-                                                height: 100,
-                                                icon: Image.asset(
-                                                  'assets/icons/camera_black.png',
-                                                  scale: 8,
-                                                  fit: BoxFit.scaleDown,
-                                                  color: Colors.white,
-                                                ),
-                                                onPressed: () {
-                                                  controller
-                                                      .pickImage(
-                                                          ImageSource.camera)
-                                                      .then((value) {
-                                                    if (controller.image.path !=
-                                                        '') {
-                                                      Get.offNamed(Routes
-                                                          .REQUEST_RESCUE);
-                                                    } else {
-                                                      Get.offNamed(Routes.MAIN);
-                                                    }
-                                                  });
-                                                },
-                                              ),
-                                              SizedBox(
-                                                width: 50,
-                                              ),
-                                              ButtonEdit(
-                                                width: 100,
-                                                height: 100,
-                                                isBottomPopup: true,
-                                                icon: Image.asset(
-                                                  'assets/icons/gallery.png',
-                                                  scale: 8,
-                                                  fit: BoxFit.scaleDown,
-                                                ),
-                                                onPressed: () {
-                                                  controller
-                                                      .pickImage(
-                                                          ImageSource.gallery)
-                                                      .then((value) {
-                                                    if (controller.image.path !=
-                                                        '') {
-                                                      Get.offNamed(Routes
-                                                          .REQUEST_RESCUE);
-                                                    } else {
-                                                      Get.offNamed(Routes.MAIN);
-                                                    }
-                                                  });
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                });
-                            // Get.offNamed(Routes.REQUEST_RESCUE);
-                          },
-                          child: const Icon(
-                            Icons.add,
-                            size: 35,
-                          ),
-                        ),
-                      )),
-                  SizedBox(
-                    height: 27,
-                  ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //     bottom: 23,
-                  //   ),
-                  //   child: FloatingActionButton(
-                  //       backgroundColor: Colors.blue,
-                  //       foregroundColor: Colors.white,
-                  //       onPressed: () {
-                  //         // _googleMapController.animateCamera(
-                  //         //     CameraUpdate.newCameraPosition(
-                  //         //         _initialCameraPosition));
-                  //       },
-                  //       child: const Icon(
-                  //         Icons.center_focus_strong,
-                  //         size: 30,
-                  //       )),
-                  // )
-                ],
-              ),
-            ]))
       ]),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: SpeedDial(
+          visible: _loginController.userDto.isPerson!,
+          backgroundColor: MainColors.primaryColor,
+          icon: Icons.add,
+          activeIcon: Icons.close,
+          children: [
+            SpeedDialChild(
+                child: SvgPicture.asset(
+                  'assets/icons/collections.svg',
+                  height: 20,
+                  width: 20,
+                ),
+                backgroundColor: MainColors.primaryColor,
+                onTap: () {
+                  controller.pickImage(ImageSource.gallery).then((value) {
+                    if (controller.image.path != '') {
+                      Get.offNamed(Routes.REQUEST_RESCUE);
+                    } else {
+                      Get.offNamed(Routes.MAIN);
+                    }
+                  });
+                }),
+            SpeedDialChild(
+              child: SvgPicture.asset(
+                'assets/icons/photo_camera.svg',
+                height: 20,
+                width: 20,
+              ),
+              backgroundColor: MainColors.primaryColor,
+              onTap: () {
+                controller.pickImage(ImageSource.camera).then((value) {
+                  if (controller.image.path != '') {
+                    Get.offNamed(Routes.REQUEST_RESCUE);
+                  } else {
+                    Get.offNamed(Routes.MAIN);
+                  }
+                });
+              },
+            ),
+          ],
+        ),
+      ),
     );
 
     //

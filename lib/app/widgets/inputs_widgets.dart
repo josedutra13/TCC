@@ -40,9 +40,6 @@ class MainInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      // child: Container(
-      //   width: width ?? MediaQuery.of(context).size.width * 0.9,
-      //   height: 60,
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
@@ -61,12 +58,16 @@ class MainInput extends StatelessWidget {
                   color: Colors.grey[400],
                   fontSize: 16,
                   fontWeight: FontWeight.w500),
+          floatingLabelStyle: GoogleFonts.titilliumWeb(
+              color: MainColors.primaryColor,
+              fontSize: 16,
+              fontWeight: FontWeight.w500),
           alignLabelWithHint: true,
           suffixIcon: isPassword
               ? InkWell(
                   onTap: onTap,
                   child: Icon(
-                    showPass ? Icons.visibility_off : Icons.remove_red_eye,
+                    showPass ? Icons.remove_red_eye : Icons.visibility_off,
                     color: MainColors.blackColor,
                   ))
               : null,
@@ -85,12 +86,15 @@ class DropDownInput extends StatelessWidget {
   final String labelText;
   final List<DropdownMenuItem<dynamic>>? items;
   final Function(dynamic)? onChanged;
+  final bool isFocus;
+
   const DropDownInput(
       {Key? key,
       this.validator,
       this.labelText = '',
       this.items,
-      this.onChanged})
+      this.onChanged,
+      this.isFocus = false})
       : super(key: key);
 
   @override
@@ -103,8 +107,17 @@ class DropDownInput extends StatelessWidget {
           decoration: InputDecoration(
               alignLabelWithHint: true,
               labelText: labelText,
-              labelStyle: GoogleFonts.titilliumWeb(
-                  color: Colors.grey.shade400,
+              labelStyle: isFocus
+                  ? GoogleFonts.titilliumWeb(
+                      color: MainColors.primaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500)
+                  : GoogleFonts.titilliumWeb(
+                      color: Colors.grey[400],
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
+              floatingLabelStyle: GoogleFonts.titilliumWeb(
+                  color: MainColors.primaryColor,
                   fontSize: 16,
                   fontWeight: FontWeight.w500),
               focusedBorder: UnderlineInputBorder(

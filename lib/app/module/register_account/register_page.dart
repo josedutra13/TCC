@@ -1,10 +1,6 @@
 import 'package:auresgate/app/data/models/cidade_model.dart';
 import 'package:auresgate/app/data/models/estado_model.dart';
-
-import 'package:auresgate/app/input_widgets/register_input.dart';
 import 'package:auresgate/app/module/register_account/register_controller.dart';
-import 'package:auresgate/app/module/register_account/widgets/radio_button_widget.dart';
-import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:auresgate/app/widgets/appBar_widgets.dart';
 import 'package:auresgate/app/widgets/button_widgets.dart';
 import 'package:auresgate/app/widgets/inputs_widgets.dart';
@@ -12,10 +8,8 @@ import 'package:auresgate/app/widgets/title_register.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/services.dart';
 import 'package:flux_validator_dart/flux_validator_dart.dart';
-import '../../../colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class RegisterPage extends GetView<RegisterController> {
   //STATE OPTIONS -------------------
@@ -46,12 +40,9 @@ class RegisterPage extends GetView<RegisterController> {
 
   @override
   Widget build(BuildContext context) {
-    // const double thumbRadius = 12;
-    // const double tickMarkRadius = 8;
-
     return Scaffold(
         appBar: AppPageBarWidget(
-          isMenu: false,
+          hasIcon: false,
           onBack: () => Get.back(),
           title: 'Cadastro',
         ),
@@ -97,199 +88,6 @@ class RegisterPage extends GetView<RegisterController> {
                 elevation: 0,
               ),
             )));
-
-    // return Scaffold(
-    //     backgroundColor: Colors.cyan[300],
-    //     body: SafeArea(
-    //         child: SingleChildScrollView(
-    //       child: Stack(
-    //         children: [
-
-    //                           Obx(() => SelectInput(
-    //                                 label: 'ESTADO',
-    //                                 placeholder: Padding(
-    //                                   padding: const EdgeInsets.only(left: 8.0),
-    //                                   child: Text(
-    //                                     'Selecione uma estado',
-    //                                     style: TextStyle(
-    //                                         color: Colors.grey,
-    //                                         fontSize: 16,
-    //                                         fontWeight: FontWeight.w600),
-    //                                   ),
-    //                                 ),
-    //                                 dropDownvalue: controller.isSelectedState
-    //                                     ? controller.selectedStates.id
-    //                                         .toString()
-    //                                     : null,
-    //                                 onChanged: (value) {
-    //                                   controller.selectedState(value);
-    //                                 },
-    //                                 items: statesOptions(controller.states),
-    //                               )),
-    //                           Obx(() => SelectInput(
-    //                               label: 'CIDADE',
-    //                               placeholder: Padding(
-    //                                 padding: const EdgeInsets.only(left: 8.0),
-    //                                 child: Text(
-    //                                   'Selecione uma cidade',
-    //                                   style: TextStyle(
-    //                                       color: Colors.grey,
-    //                                       fontSize: 16,
-    //                                       fontWeight: FontWeight.w600),
-    //                                 ),
-    //                               ),
-    //                               dropDownvalue: controller.isSelectedState &&
-    //                                       controller.isSelectedCity
-    //                                   ? controller.selectedCity.id.toString()
-    //                                   : null,
-    //                               onChanged: (value) {
-    //                                 controller.selectedCitys(value);
-    //                                 controller.onChangeUser(
-    //                                     cidade: int.parse(value!));
-    //                               },
-    //                               items: controller.isSelectedState
-    //                                   ? cityOptions(controller.citys)
-    //                                   : null)),
-    //                           RegisterInput(
-    //                               label: 'BAIRRO',
-    //                               placeholder: 'Informe seu bairro',
-    //                               onChanged: (value) =>
-    //                                   controller.onChangeUser(bairro: value)),
-    //                           RegisterInput(
-    //                               label: 'NUMERO',
-    //                               placeholder: 'Informe numero do lote',
-    //                               onChanged: (value) => controller.onChangeUser(
-    //                                   numero: int.parse(value))),
-    //                           RegisterInput(
-    //                               label: 'COMPLEMENTO',
-    //                               placeholder: 'Informação complementar',
-    //                               onChanged: (value) => controller.onChangeUser(
-    //                                   complemento: value)),
-    //                           CNPJInput(
-    //                               label: 'CNPJ',
-    //                               isOng: controller.isOng,
-    //                               placeholder: 'Informe o CNPJ',
-    //                               onChanged: (value) =>
-    //                                   controller.onChangeUser(cnpj: value)),
-    //                           Padding(
-    //                             padding: const EdgeInsets.only(top: 2.0),
-    //                             child: Row(
-    //                               children: [
-    //                                 IdadeInput(
-    //                                     label: 'Idade',
-    //                                     isPerson: controller.isPessoa,
-    //                                     isPersonSelected: controller.isPessoa,
-    //                                     placeholder: 'Idade',
-    //                                     onChanged: (value) =>
-    //                                         controller.onChangeUser(
-    //                                             idade: int.parse(value))),
-    //                                 Padding(
-    //                                     padding: const EdgeInsets.only(
-    //                                         left: 10.0, bottom: 3.0, top: 5),
-    //                                     child: SexInput(
-    //                                       items: controller.sex,
-    //                                       label: 'Sexo',
-    //                                       isPerson: controller.isPessoa,
-    //                                       onChanged: (value) {
-    //                                         controller.selectedSexValue =
-    //                                             value.toString();
-    //                                         controller.onChangeUser(
-    //                                             sexo: value);
-    //                                       },
-    //                                       dropDownvalue:
-    //                                           controller.selectedSexValue,
-    //                                     ))
-    //                               ],
-    //                             ),
-    //                           ),
-    //                           Obx(() => Row(
-    //                                 children: [
-    //                                   RadioButton(
-    //                                     groupT: controller.optUsers,
-    //                                     value: 1,
-    //                                     text: 'ONG',
-    //                                     onChanged: (value) {
-    //                                       controller.optUsers = value;
-    //                                       controller.isPessoa = false;
-    //                                       controller.isOng = true;
-    //                                     },
-    //                                   ),
-    //                                   RadioButton(
-    //                                     groupT: controller.optUsers,
-    //                                     value: 2,
-    //                                     text: 'PESSOA',
-    //                                     onChanged: (value) {
-    //                                       controller.optUsers = value;
-    //                                       controller.isPessoa = true;
-    //                                       controller.isOng = false;
-    //                                     },
-    //                                   )
-    //                                 ],
-    //                               )),
-    //                           Padding(
-    //                             padding: const EdgeInsets.only(
-    //                                 top: 10.0, bottom: 20),
-    //                             child: Row(
-    //                               mainAxisAlignment:
-    //                                   MainAxisAlignment.spaceBetween,
-    //                               children: [
-    //                                 Expanded(
-    //                                     child: Container(
-    //                                   height: 50,
-    //                                   child: ElevatedButton(
-    //                                     style: ElevatedButton.styleFrom(
-    //                                         primary: Colors.red,
-    //                                         shape: RoundedRectangleBorder(
-    //                                             borderRadius:
-    //                                                 BorderRadius.circular(30.0),
-    //                                             side: BorderSide(
-    //                                                 color: Colors.red,
-    //                                                 width: 2))),
-    //                                     child: Text(
-    //                                       'CANCELAR',
-    //                                       style: TextStyle(fontSize: 20),
-    //                                     ),
-    //                                     onPressed: () {
-    //                                       Get.offNamed(Routes.LOGIN);
-    //                                     },
-    //                                   ),
-    //                                 )),
-    //                                 Expanded(
-    //                                     child: Padding(
-    //                                   padding: const EdgeInsets.only(left: 5.0),
-    //                                   child: Container(
-    //                                     height: 50,
-    //                                     child: ElevatedButton(
-    //                                       style: ElevatedButton.styleFrom(
-    //                                           primary: Colors.green,
-    //                                           shape: RoundedRectangleBorder(
-    //                                               borderRadius:
-    //                                                   BorderRadius.circular(
-    //                                                       30.0),
-    //                                               side: BorderSide(
-    //                                                   color: Colors.green,
-    //                                                   width: 2))),
-    //                                       child: Text(
-    //                                         'CONFIRMAR',
-    //                                         style: TextStyle(fontSize: 20),
-    //                                       ),
-    //                                       onPressed: () {
-    //                                         controller.onSave();
-    //                                         //Get.offNamed(Routes.LOGIN);
-    //                                       },
-    //                                     ),
-    //                                   ),
-    //                                 ))
-    //                               ],
-    //                             ),
-    //                           )
-    //                         ],
-    //                       )),
-    //                 ),
-    //               ))
-    //         ],
-    //       ),
-    //     )));
   }
 
   List<Step> _constructStep() {
@@ -302,6 +100,7 @@ class RegisterPage extends GetView<RegisterController> {
           title: Text(''),
           content: Form(
             key: controller.formData,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               children: [
                 Center(
@@ -309,6 +108,12 @@ class RegisterPage extends GetView<RegisterController> {
                         TitleRegister(title: 'Informações de acesso a conta')),
                 DropDownInput(
                   labelText: 'Selecione o tipo de conta',
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Informe o tipo de conta';
+                    }
+                    return null;
+                  },
                   items: controller.typeAccount.map((e) {
                     return DropdownMenuItem(
                       child: Text(e),
@@ -317,6 +122,7 @@ class RegisterPage extends GetView<RegisterController> {
                   }).toList(),
                   onChanged: (value) {
                     controller.accountTypeController.text = value.toString();
+
                     if (controller.accountTypeController.text ==
                         'Pessoa Fisica') {
                       controller.isPessoa = true;
@@ -344,7 +150,11 @@ class RegisterPage extends GetView<RegisterController> {
                 MainInput(
                   labelText: 'Senha',
                   controller: controller.passwordController,
-                  obscureText: true,
+                  obscureText: !controller.showPass,
+                  onTap: () {
+                    controller.showPass = !controller.showPass;
+                  },
+                  showPass: controller.showPass,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Digite uma senha!';
@@ -362,12 +172,12 @@ class RegisterPage extends GetView<RegisterController> {
                 MainInput(
                   labelText: 'Confirme sua senha',
                   controller: controller.confirmController,
-                  obscureText: controller.showPass,
+                  obscureText: !controller.showConfirmPass,
                   isPassword: true,
                   onTap: () {
-                    controller.showPass = !controller.showPass;
+                    controller.showConfirmPass = !controller.showConfirmPass;
                   },
-                  showPass: controller.showPass,
+                  showPass: controller.showConfirmPass,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Digite sua confirmação de senha!';
@@ -388,6 +198,7 @@ class RegisterPage extends GetView<RegisterController> {
         title: Text(''),
         content: Form(
           key: controller.formDataRegister,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             children: [
               Center(child: TitleRegister(title: 'Informações de cadastro')),
@@ -412,53 +223,38 @@ class RegisterPage extends GetView<RegisterController> {
               controller.isPessoa
                   ? Row(
                       children: [
-                        MainInput(
-                          labelText: 'Idade',
-                          width: 152,
-                          controller: controller.ageController,
-                          onChanged: (value) {
-                            controller.onChangeUser(nome: value);
-                          },
+                        Container(
+                          width: 164,
+                          child: MainInput(
+                            labelText: 'Idade',
+                            controller: controller.ageController,
+                            onChanged: (value) {
+                              controller.onChangeUser(
+                                  idade: int.tryParse(value));
+                            },
+                          ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
+                          padding: const EdgeInsets.only(left: 15.0, bottom: 5),
                           child: Container(
-                            width: 152,
-                            height: 57,
-                            child: DropdownButtonFormField(
-                              items: controller.sex.map((e) {
-                                return DropdownMenuItem(
-                                  child: Text(e),
-                                  value: e,
-                                );
-                              }).toList(),
-                              validator: (value) {
-                                if (value == null) {
-                                  return 'Informe o tipo de conta';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              decoration: InputDecoration(
-                                  labelText: 'Sexo',
-                                  labelStyle: GoogleFonts.titilliumWeb(
-                                      color: Colors.grey.shade400,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: MainColors.primaryColor)),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: MainColors.primaryColor))),
-                              onChanged: (value) {
-                                controller.sexController.text =
-                                    value.toString();
-                                controller.selectedSexValue = value.toString();
-                                controller.onChangeUser(sexo: value.toString());
-                              },
-                            ),
-                          ),
+                              width: 164,
+                              child: DropDownInput(
+                                items: controller.sex.map((e) {
+                                  return DropdownMenuItem(
+                                    child: Text(e),
+                                    value: e,
+                                  );
+                                }).toList(),
+                                labelText: 'Sexo',
+                                onChanged: (value) {
+                                  controller.sexController.text =
+                                      value.toString();
+                                  controller.selectedSexValue =
+                                      value.toString();
+                                  controller.onChangeUser(
+                                      sexo: value.toString());
+                                },
+                              )),
                         ),
                       ],
                     )
@@ -466,7 +262,7 @@ class RegisterPage extends GetView<RegisterController> {
                       labelText: 'CNPJ',
                       controller: controller.cnpjController,
                       onChanged: (value) {
-                        controller.onChangeUser(nome: value);
+                        controller.onChangeUser(cnpj: value);
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -511,6 +307,7 @@ class RegisterPage extends GetView<RegisterController> {
           isActive: controller.currentStep >= 2,
           content: Form(
             key: controller.formAddress,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               children: [
                 TitleRegister(
@@ -521,7 +318,6 @@ class RegisterPage extends GetView<RegisterController> {
                     items: statesOptions(controller.states),
                     onChanged: (value) {
                       controller.stateController.text = value.toString();
-                      print(value);
                       controller.selectedState(value);
                     },
                     validator: (value) {
@@ -532,15 +328,13 @@ class RegisterPage extends GetView<RegisterController> {
                     }),
                 DropDownInput(
                     labelText: 'Cidade',
-                    items: Estados.listaEstados.map((e) {
-                      return DropdownMenuItem(
-                        child: Text(e),
-                        value: e,
-                      );
-                    }).toList(),
+                    items: controller.isSelectedState
+                        ? cityOptions(controller.citys)
+                        : null,
                     onChanged: (value) {
                       controller.cityController.text = value.toString();
-                      controller.selectedCitys(value.toString());
+                      controller.selectedCitys(value);
+                      controller.onChangeUser(cidade: int.tryParse(value));
                     },
                     validator: (value) {
                       if (value == null) {
@@ -550,9 +344,23 @@ class RegisterPage extends GetView<RegisterController> {
                     }),
                 MainInput(
                   labelText: 'Bairro',
+                  controller: controller.districtController,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Digite seu bairro';
+                    }
+                    return null;
+                  },
+                  onChanged: (district) {
+                    controller.onChangeUser(bairro: district);
+                  },
                 ),
                 MainInput(
                   labelText: 'Número',
+                  controller: controller.numberController,
+                  onChanged: (number) {
+                    controller.onChangeUser(numero: int.tryParse(number));
+                  },
                 )
               ],
             ),

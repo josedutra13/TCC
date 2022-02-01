@@ -15,42 +15,28 @@ class RecoverPassController extends GetxController {
   set showPassword(bool value) => this._showPassword.value = value;
   bool get showPassword => this._showPassword.value;
 
+  final _invalidEmail = false.obs;
+  bool get invalidEmail => _invalidEmail.value;
+  set invalidEmail(bool value) => _invalidEmail.value = value;
+
   TextEditingController emailText = TextEditingController();
   TextEditingController passwordText = TextEditingController();
   TextEditingController confirmPassText = TextEditingController();
+  final formAlter = GlobalKey<FormState>();
 
   void emailConfirmation(BuildContext context) async {
     var response = await _loginRepository.emailConfirm(emailText.text);
+    print('[LOG] :: ${response!.id}');
 
-    if (response != null) {
-      print('[LOG] :: ${response.id}');
+    if (formAlter.currentState!.validate()) {
       if (response.id != null) {
         _userDto.value = response;
-        Get.toNamed(Routes.ALTER_PASS);
+
+        Get.offNamed(
+          Routes.ALTER_PASS,
+        );
       } else {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 100.0),
-                child: AlertDialog(
-                  content: Container(
-                      height: 20,
-                      child: Row(
-                        children: [
-                          Text('Email não encontrado'),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Icon(
-                              Icons.info,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ],
-                      )),
-                ),
-              );
-            });
+        _invalidEmail.value = true;
       }
     }
   }

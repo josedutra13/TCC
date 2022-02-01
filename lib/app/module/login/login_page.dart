@@ -15,6 +15,7 @@ class LoginPage extends GetView<LoginController> {
       body: SingleChildScrollView(
         child: Form(
           key: controller.formLogin,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -27,37 +28,40 @@ class LoginPage extends GetView<LoginController> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 20, left: 20, bottom: 5),
-                child: Focus(
-                    onFocusChange: (focus) => focus
-                        ? controller.onFocusLogin = true
-                        : controller.onFocusLogin = false,
-                    child: MainInput(
-                      labelText: 'Usuário',
-                      controller: controller.usuarioText,
-                      isFocus: controller.onFocusLogin,
-                      validator: (value) =>
-                          value!.length < 3 ? 'User muito pequeno' : null,
-                    )),
-              ),
-              Padding(
                   padding:
-                      const EdgeInsets.only(right: 20, left: 20, bottom: 5),
-                  child: Focus(
-                    onFocusChange: (focus) => focus
-                        ? controller.onFocusPass = true
-                        : controller.onFocusPass = false,
-                    child: MainInput(
-                      labelText: 'Senha',
-                      controller: controller.senhaText,
-                      isFocus: controller.onFocusPass,
-                      obscureText: true,
-                      isPassword: true,
-                    ),
+                      const EdgeInsets.only(right: 25, left: 25, bottom: 5),
+                  child: MainInput(
+                    labelText: 'Usuário',
+                    controller: controller.usuarioText,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Digite seu usuário para prosseguir';
+                      } else if (value.length < 3) {
+                        return 'Usuário muito pequeno';
+                      } else if (controller.invalidLogin) {}
+                    },
                   )),
+              Padding(
+                padding: const EdgeInsets.only(right: 25, left: 25, bottom: 5),
+                child: Obx(
+                  () => MainInput(
+                    labelText: 'Senha',
+                    controller: controller.senhaText,
+                    obscureText: !controller.showPass,
+                    onTap: () {
+                      controller.showPass = !controller.showPass;
+                    },
+                    showPass: controller.showPass,
+                    isPassword: true,
+                    validator: (value) => controller.invalidLogin
+                        ? 'Usuario ou senha invalida'
+                        : null,
+                  ),
+                ),
+              ),
               InkWell(
                 onTap: () {
-                  Get.offNamed(Routes.RECOVER_PASS);
+                  Get.toNamed(Routes.RECOVER_PASS);
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 30.0, top: 8),
@@ -74,11 +78,7 @@ class LoginPage extends GetView<LoginController> {
                     width: MediaQuery.of(context).size.width * 0.87,
                     height: MediaQuery.of(context).size.width * 0.11,
                     child: ElevatedButton(
-                        onPressed: () {
-                          if (controller.formLogin.currentState!.validate()) {
-                            controller.loginUser(context);
-                          }
-                        },
+                        onPressed: () => controller.login(),
                         style: ElevatedButton.styleFrom(
                             shadowColor: MainColors.primaryColor,
                             primary: MainColors.primaryColor,
@@ -141,9 +141,7 @@ class LoginPage extends GetView<LoginController> {
                     width: MediaQuery.of(context).size.width * 0.87,
                     height: MediaQuery.of(context).size.width * 0.11,
                     child: ElevatedButton(
-                        onPressed: () {
-                          controller.loginUser(context);
-                        },
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
                             primary: MainColors.whiteColor,
                             shape: RoundedRectangleBorder(

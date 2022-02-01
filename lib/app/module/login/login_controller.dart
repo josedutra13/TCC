@@ -8,13 +8,6 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   final LoginRepository _loginRepository;
   LoginController(this._loginRepository);
-  final _onFocusLogin = false.obs;
-  bool get onFocusLogin => _onFocusLogin.value;
-  set onFocusLogin(bool value) => _onFocusLogin.value = value;
-
-  final _onFocusPass = false.obs;
-  bool get onFocusPass => _onFocusPass.value;
-  set onFocusPass(bool value) => _onFocusPass.value = value;
 
   final _userDto = UserDTO.empty().obs;
   UserDTO get userDto => _userDto.value;
@@ -23,44 +16,61 @@ class LoginController extends GetxController {
   bool get invalidLogin => _invalidLogin.value;
   set invalidLogin(bool value) => _invalidLogin.value = value;
 
+  final _showPass = false.obs;
+  bool get showPass => _showPass.value;
+  set showPass(bool value) => _showPass.value = value;
+
   TextEditingController usuarioText = TextEditingController();
   TextEditingController senhaText = TextEditingController();
   final formLogin = GlobalKey<FormState>();
 
-  void loginUser(BuildContext context) async {
+  Future<void> login() async {
     var response =
         await _loginRepository.login(usuarioText.text, senhaText.text);
-
-    if (response != null) {
-      if (response.id != null) {
+    if (formLogin.currentState!.validate()) {
+      if (response!.id != null) {
         _userDto.value = response;
         Get.toNamed(Routes.MAIN);
       } else {
         _invalidLogin.value = true;
-        // showDialog(
-        //     context: context,
-        //     builder: (BuildContext context) {
-        //       return Padding(
-        //         padding: const EdgeInsets.only(top: 100.0),
-        //         child: AlertDialog(
-        //           content: Container(
-        //               height: 20,
-        //               child: Row(
-        //                 children: [
-        //                   Text('Usuario ou senha invalido'),
-        //                   Padding(
-        //                     padding: const EdgeInsets.only(left: 8.0),
-        //                     child: Icon(
-        //                       Icons.info,
-        //                       color: Colors.red,
-        //                     ),
-        //                   ),
-        //                 ],
-        //               )),
-        //         ),
-        //       );
-        //     });
       }
     }
+  }
+
+  Future<UserDTO> loginUser() async {
+    var response =
+        await _loginRepository.login(usuarioText.text, senhaText.text);
+    return response!;
+    // if (response != null) {
+    //   if (response.id != null) {
+    //     _userDto.value = response;
+    //     Get.toNamed(Routes.MAIN);
+    //   } else {
+    //     _invalidLogin.value = true;
+    //     // showDialog(
+    //     //     context: context,
+    //     //     builder: (BuildContext context) {
+    //     //       return Padding(
+    //     //         padding: const EdgeInsets.only(top: 100.0),
+    //     //         child: AlertDialog(
+    //     //           content: Container(
+    //     //               height: 20,
+    //     //               child: Row(
+    //     //                 children: [
+    //     //                   Text('Usuario ou senha invalido'),
+    //     //                   Padding(
+    //     //                     padding: const EdgeInsets.only(left: 8.0),
+    //     //                     child: Icon(
+    //     //                       Icons.info,
+    //     //                       color: Colors.red,
+    //     //                     ),
+    //     //                   ),
+    //     //                 ],
+    //     //               )),
+    //     //         ),
+    //     //       );
+    //     //     });
+    //   }
+    // }
   }
 }

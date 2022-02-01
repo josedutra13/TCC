@@ -85,9 +85,9 @@ class _SolicitateLocationPageState extends State<SolicitateLocationPage> {
           logout: onLogout,
         ),
         appBar: AppPageBarWidget(
-            onAction: help,
-            title: 'AuResgate',
-            titleStyle: TextStyle(fontSize: 20)),
+          title: 'Auresgate',
+          onAction: help,
+        ),
         body: GoogleMap(
           myLocationButtonEnabled: false,
           zoomControlsEnabled: true,

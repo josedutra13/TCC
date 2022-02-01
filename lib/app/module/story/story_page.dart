@@ -42,16 +42,13 @@ class StoryPage extends GetView<StoryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan[300],
-      appBar: AppPageStoryWidget(
-          onBack: onBack,
-          onAction: () {
-            help(context);
-          },
-          // onBack: onBack,
-          isMenu: false,
-          title: 'HISTÓRICO DE OCORRÊNCIAS',
-          titleStyle: TextStyle(fontSize: 15)),
+      appBar: AppPageBarWidget(
+        title: 'Histórico de ocorrências',
+        onBack: onBack,
+        hasIcon: true,
+      ),
+      // AppPageStoryWidget(
+      //     onBack: onBack,
       body: Obx(() => ListView(
             children: [...controller.listStory(context: context)],
           )),

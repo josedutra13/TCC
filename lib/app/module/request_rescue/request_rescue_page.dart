@@ -4,6 +4,10 @@ import 'package:auresgate/app/module/register_account/widgets/radio_button_widge
 
 import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
+import 'package:auresgate/app/widgets/appBar_widgets.dart';
+import 'package:auresgate/app/widgets/button_widgets.dart';
+import 'package:auresgate/app/widgets/inputs_widgets.dart';
+import 'package:auresgate/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,190 +20,93 @@ class RequestRescuePage extends GetView<RequestRescueController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan[300],
+      appBar: AppPageBarWidget(
+        title: 'Solicita resgate',
+        hasIcon: true,
+      ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30.0, bottom: 25),
-                    child: Text('SOLICITAR RESGATE',
-                        style: GoogleFonts.bebasNeue(
-                            color: Colors.white, fontSize: 40)),
-                  ),
-                ],
-              ),
-            ),
-            Stack(
-              children: [
-                //CONTAINER DE DESCRIÇÃO
-                Padding(
-                    padding: const EdgeInsets.only(top: 90.0),
-                    child: Center(
-                        child: Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 70.0),
-                            child: Text(
-                              'Descrição',
-                              style: GoogleFonts.bebasNeue(
-                                  color: Colors.grey,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20.0),
-                            child: Center(
-                              child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.75,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.3,
-                                  decoration: BoxDecoration(
-                                      color: Colors.lightBlue.shade300,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
-                                  child: TextFormField(
-                                    onChanged: (descricao) {
-                                      controller.onChangeSolicitation(
-                                          descricao: descricao);
-                                    },
-                                    minLines: null,
-                                    maxLines: null,
-                                    expands: true,
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20))),
-                                    style: TextStyle(color: Colors.white),
-                                  )),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ))),
-                //
-
-                // IMAGEM DE PERFIL DO ANIMAL
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: Center(
-                    //TODO REFACTORY PARA COLOCAR BORDA BRANCA
-                    child: ClipOval(
-                      child: Image.file(
-                        _mainController.image,
-                        width: 150,
-                        height: 150,
-                        fit: BoxFit.cover,
-                      ),
+        child: Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // IMAGEM DE PERFIL DO ANIMAL
+              Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 20),
+                child: Center(
+                  //TODO REFACTORY PARA COLOCAR BORDA BRANCA
+                  child: ClipOval(
+                    child: Image.file(
+                      _mainController.image,
+                      width: 150,
+                      height: 150,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 10),
-              child: Text(
-                'Estado do animal:',
-                style: GoogleFonts.roboto(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w800),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12.0, bottom: 10),
-              child: Obx(() => Row(
-                    children: [
-                      RadioButton(
-                        groupT: controller.optUsers,
-                        value: 1,
-                        color: Colors.red,
-                        text: 'URGENTE',
-                        onChanged: (value) {
-                          controller.optUsers = value;
-                          controller.onChangeSolicitation(estado: 'URGENTE');
-                        },
-                      ),
-                      RadioButton(
-                        groupT: controller.optUsers,
-                        value: 2,
-                        color: Colors.green,
-                        text: 'SAUDÁVEL',
-                        onChanged: (value) {
-                          controller.optUsers = value;
-                          controller.onChangeSolicitation(estado: 'SAUDÁVEL');
-                        },
-                      )
-                    ],
+              Text('Descrição',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: MainColors.primaryColor,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w400,
                   )),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Column(
-                children: [
-                  Center(
-                    child: Container(
-                      width: 350,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.green.shade400,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                side: BorderSide(
-                                    color: Colors.green.shade400, width: 2))),
-                        child: Text(
-                          'MARCAR LOCALIZAÇÃO',
-                          style: TextStyle(fontSize: 20),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 160,
+                  child: TextFormField(
+                    expands: true,
+                    enabled: true,
+                    minLines: null,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                        floatingLabelStyle: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w500,
                         ),
-                        onPressed: () {
-                          Get.toNamed(Routes.SOLICITATE_LOCATION);
-                        },
-                      ),
-                    ),
+                        labelStyle: TextStyle(color: Colors.transparent),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10)))),
                   ),
-                  // CANCELAR
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                    child: Container(
-                      width: 350,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.red.shade300,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                side: BorderSide(
-                                    color: Colors.red.shade300, width: 2))),
-                        child: Text(
-                          'VOLTAR',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          Get.offNamed(Routes.MAIN);
-                        },
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            )
-          ],
+
+              Padding(
+                padding: const EdgeInsets.all(0),
+                child: DropDownInput(
+                  labelText: 'Estado do animal',
+                  items: controller.animalState.map((e) {
+                    return DropdownMenuItem(
+                      child: Text(e),
+                      value: e,
+                    );
+                  }).toList(),
+                  onChanged: (value) =>
+                      {controller.onChangeSolicitation(estado: value)},
+                ),
+              ),
+              SizedBox(
+                height: 110,
+              ),
+              ButtonWidget(
+                buttonText: 'Marcar localização',
+                onPressed: () {
+                  Get.toNamed(Routes.SOLICITATE_LOCATION);
+                },
+              ),
+              ButtonWidget(
+                  isBack: true,
+                  buttonText: 'Voltar',
+                  onPressed: () {
+                    Get.back();
+                  }),
+            ],
+          ),
         ),
       ),
     );

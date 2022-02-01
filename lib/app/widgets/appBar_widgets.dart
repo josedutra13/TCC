@@ -8,7 +8,7 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final Color? color;
   final double? elevation;
   final TextStyle? titleStyle;
-  final VoidCallback? onMenu;
+  final bool hasIcon;
   final Function()? onBack;
   final VoidCallback? onAction;
   final String? actionButtonLabel;
@@ -18,7 +18,6 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppPageBarWidget({
     Key? key,
     required this.title,
-    this.onMenu,
     this.onAction,
     this.actionButtonLabel,
     this.leading,
@@ -27,6 +26,7 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
     this.elevation,
     this.isMenu = false,
     this.onBack,
+    this.hasIcon = true,
   }) : super(key: key);
 
   void actionHandle() {
@@ -37,31 +37,32 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-
     return AppBar(
       elevation: elevation,
-      backgroundColor: MainColors.whiteColor,
-      iconTheme: const IconThemeData(color: Colors.white),
+      iconTheme: isMenu
+          ? IconThemeData(color: MainColors.primaryColor)
+          : IconThemeData(color: MainColors.whiteColor),
       automaticallyImplyLeading: true,
-      leading: onMenu != null
-          ? IconButton(
-              icon: Icon(
-                Icons.menu,
-                color: MainColors.primaryColor,
-              ),
-              onPressed: onMenu)
-          : IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: MainColors.primaryColor,
-              ),
-              onPressed: onBack),
+      leading: isMenu
+          ? null
+          : hasIcon
+              ? IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: MainColors.primaryColor,
+                  ),
+                  onPressed: onBack)
+              : IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: MainColors.primaryColor,
+                  ),
+                  onPressed: onBack),
       title: Text(title,
           textAlign: TextAlign.justify,
           style: titleStyle ??
               GoogleFonts.titilliumWeb(
-                  fontSize: 25,
+                  fontSize: 23,
                   color: MainColors.primaryColor,
                   fontWeight: FontWeight.w600)),
       actions: <Widget>[
@@ -69,16 +70,10 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
           IconButton(
             icon: Icon(
               isMenu ? Icons.replay : Icons.help,
-              color: MainColors.whiteColor,
+              color: MainColors.primaryColor,
             ),
             onPressed: onAction,
           )
-        // Button(
-        //     padding:
-        //         const EdgeInsets.only(top: 10.0, bottom: 10.0, right: 20.0),
-        //     onPressed: actionHandle,
-        //     title: actionButtonLabel!,
-        //     type: buttonType == null ? ButtonTypes.PRIMARY : buttonType!),
       ],
       centerTitle: true,
     );
@@ -144,12 +139,6 @@ class AppPageStoryWidget extends StatelessWidget
             ),
             onPressed: onAction,
           )
-        // Button(
-        //     padding:
-        //         const EdgeInsets.only(top: 10.0, bottom: 10.0, right: 20.0),
-        //     onPressed: actionHandle,
-        //     title: actionButtonLabel!,
-        //     type: buttonType == null ? ButtonTypes.PRIMARY : buttonType!),
       ],
       centerTitle: false,
     );

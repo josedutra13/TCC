@@ -21,6 +21,7 @@ import 'package:auresgate/app/module/solicitate_location/solicitate_location_bin
 import 'package:auresgate/app/module/story/story_binding.dart';
 import 'package:auresgate/app/module/story/story_page.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
+import 'package:auresgate/app/widgets/success_page_widget.dart';
 import 'package:get/get.dart';
 
 class AppPages {
@@ -61,6 +62,7 @@ class AppPages {
         page: () => EditRescuePage(),
         binding: EditRescueBinding()),
     GetPage(
-        name: Routes.STORY, page: () => StoryPage(), binding: StoryBinding())
+        name: Routes.STORY, page: () => StoryPage(), binding: StoryBinding()),
+    GetPage(name: Routes.SUCCESSPAGE, page: () => SucessPage())
   ];
 }

@@ -53,6 +53,10 @@ class RegisterController extends GetxController {
   bool get showPass => _showPass.value;
   set showPass(bool value) => _showPass.value = value;
 
+  final _showConfirmPass = false.obs;
+  bool get showConfirmPass => _showConfirmPass.value;
+  set showConfirmPass(bool value) => _showConfirmPass.value = value;
+
   final _isTheLast = false.obs;
   bool get isTheLast => _isTheLast.value;
   set isTheLast(bool value) => _isTheLast.value = value;
@@ -149,21 +153,33 @@ class RegisterController extends GetxController {
   }
 
   saveStep1(context) {
-    // if (formData.currentState!.validate()) {
-    goToNextStep(context);
-    // }
+    if (formData.currentState!.validate()) {
+      goToNextStep(context);
+    }
   }
 
   saveStep2(context) {
-    // if (formDataRegister.currentState!.validate()) {
-    goToNextStep(context);
-    //   _isTheLast.value = true;
-    // }
+    if (formDataRegister.currentState!.validate()) {
+      goToNextStep(context);
+      _isTheLast.value = true;
+    }
   }
 
-  saveStep3(context) {}
+  saveStep3(context) {
+    if (formAddress.currentState!.validate()) {
+      onSave().then((value) {
+        if (value == null) {
+          Get.toNamed(Routes.SUCCESSPAGE,
+              arguments: 'Cadastro realido \n com sucesso!');
+          Future.delayed(Duration(seconds: 3), () {
+            Get.offAllNamed(Routes.LOGIN);
+          });
+        }
+      });
+    }
+  }
 
-  void onSave() async {
+  Future<dynamic> onSave() async {
     _pessoa.value = _pessoaEditing.value;
     _ong.value = _ongEditing.value;
     var response;
@@ -173,9 +189,7 @@ class RegisterController extends GetxController {
       response = await _ongRepository.createOng(ong);
     }
 
-    if (response == null) {
-      Get.offNamed(Routes.LOGIN);
-    }
+    return response;
   }
 
   void goToNextStep(BuildContext context) {

@@ -8,6 +8,7 @@ import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:http_parser/http_parser.dart';
@@ -35,9 +36,8 @@ class RequestRescueController extends GetxController {
   set marking(value) => _marking.value = value;
   get marking => this._marking.value;
 
-  final _optUsers = 0.obs;
-  get optUsers => this._optUsers.value;
-  set optUsers(value) => this._optUsers.value = value;
+  final _animalState = <String>['Saúdavel', 'Urgente'].obs;
+  List<String> get animalState => _animalState.toList();
 
   void onChangeSolicitation(
       {String? estado,

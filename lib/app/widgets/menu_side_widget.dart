@@ -1,3 +1,4 @@
+import 'package:auresgate/colors.dart';
 import 'package:flutter/material.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -20,8 +21,9 @@ class NavDrawer extends StatelessWidget {
               child: Row(
                 children: [
                   Icon(
-                    Icons.menu,
-                    size: 45,
+                    Icons.close,
+                    size: 30,
+                    color: MainColors.primaryColor,
                   ),
                   // Padding(
                   //   padding: const EdgeInsets.only(left: 8.0),
@@ -35,22 +37,45 @@ class NavDrawer extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: ListTile(
-              leading: Icon(Icons.person),
-              title: Text(userName),
-              onTap: () => {},
+            padding: const EdgeInsets.only(
+              top: 20.0,
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.history),
-            title: Text('Histórico de Ocorrências'),
-            onTap: onHistory,
-          ),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Sair'),
-            onTap: logout,
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text(
+                    'Usuário',
+                    style:
+                        TextStyle(color: MainColors.primaryColor, fontSize: 12),
+                  ),
+                  subtitle: Text(
+                    userName,
+                    style:
+                        TextStyle(color: MainColors.blackColor, fontSize: 18),
+                  ),
+                  onTap: () => {},
+                ),
+                ListTile(
+                  title: Text(
+                    'Histórico',
+                    style:
+                        TextStyle(color: MainColors.primaryColor, fontSize: 12),
+                  ),
+                  subtitle: Text('Ocorrências',
+                      style: TextStyle(
+                          color: MainColors.blackColor, fontSize: 18)),
+                  onTap: onHistory,
+                ),
+                ListTile(
+                  title: Text(
+                    'Sair',
+                    style:
+                        TextStyle(color: MainColors.blackColor, fontSize: 18),
+                  ),
+                  onTap: logout,
+                ),
+              ],
+            ),
           ),
         ],
       ),

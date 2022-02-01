@@ -11,4 +11,5 @@ abstract class Routes {
   static const EDIT_RESCUE = '/edit_rescue';
   static const CAMERA = '/camera';
   static const STORY = '/story';
+  static const SUCCESSPAGE = '/success';
 }
