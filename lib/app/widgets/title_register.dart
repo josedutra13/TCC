@@ -12,6 +12,7 @@ class TitleRegister extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
+            fontFamily: 'Geomanist',
             color: MainColors.primaryColor,
             fontSize: 16,
             fontWeight: FontWeight.bold),

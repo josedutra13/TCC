@@ -61,10 +61,11 @@ class AppPageBarWidget extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title,
           textAlign: TextAlign.justify,
           style: titleStyle ??
-              GoogleFonts.titilliumWeb(
-                  fontSize: 23,
+              TextStyle(
                   color: MainColors.primaryColor,
-                  fontWeight: FontWeight.w600)),
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Geomanist',
+                  fontSize: 25)),
       actions: <Widget>[
         if (onAction != null)
           IconButton(

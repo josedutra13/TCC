@@ -36,41 +36,4 @@ class LoginController extends GetxController {
       }
     }
   }
-
-  Future<UserDTO> loginUser() async {
-    var response =
-        await _loginRepository.login(usuarioText.text, senhaText.text);
-    return response!;
-    // if (response != null) {
-    //   if (response.id != null) {
-    //     _userDto.value = response;
-    //     Get.toNamed(Routes.MAIN);
-    //   } else {
-    //     _invalidLogin.value = true;
-    //     // showDialog(
-    //     //     context: context,
-    //     //     builder: (BuildContext context) {
-    //     //       return Padding(
-    //     //         padding: const EdgeInsets.only(top: 100.0),
-    //     //         child: AlertDialog(
-    //     //           content: Container(
-    //     //               height: 20,
-    //     //               child: Row(
-    //     //                 children: [
-    //     //                   Text('Usuario ou senha invalido'),
-    //     //                   Padding(
-    //     //                     padding: const EdgeInsets.only(left: 8.0),
-    //     //                     child: Icon(
-    //     //                       Icons.info,
-    //     //                       color: Colors.red,
-    //     //                     ),
-    //     //                   ),
-    //     //                 ],
-    //     //               )),
-    //     //         ),
-    //     //       );
-    //     //     });
-    //   }
-    // }
-  }
 }

@@ -39,6 +39,9 @@ class RequestRescueController extends GetxController {
   final _animalState = <String>['Saúdavel', 'Urgente'].obs;
   List<String> get animalState => _animalState.toList();
 
+  TextEditingController description = TextEditingController();
+  final formDesc = GlobalKey<FormState>();
+
   void onChangeSolicitation(
       {String? estado,
       String? descricao,

@@ -159,7 +159,7 @@ class RegisterPage extends GetView<RegisterController> {
                     if (value!.isEmpty) {
                       return 'Digite uma senha!';
                     } else if (value.length < 8) {
-                      return 'Senha muito pequena!';
+                      return 'O tamanho minimo da senha e de 8 caracteres!';
                     } else {
                       return null;
                     }

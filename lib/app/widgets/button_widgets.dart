@@ -32,9 +32,10 @@ class ButtonWidget extends StatelessWidget {
                   side: BorderSide(color: MainColors.primaryColor)))),
           child: Text(
             buttonText!,
-            style: GoogleFonts.titilliumWeb(
+            style: TextStyle(
+                fontFamily: 'Geomanist',
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
                 color:
                     isBack ? MainColors.primaryColor : MainColors.whiteColor),
           ),

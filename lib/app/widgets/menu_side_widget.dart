@@ -25,13 +25,6 @@ class NavDrawer extends StatelessWidget {
                     size: 30,
                     color: MainColors.primaryColor,
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(left: 8.0),
-                  //   child: Text(
-                  //     'Menu',
-                  //     style: TextStyle(color: Colors.black, fontSize: 30),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -45,32 +38,47 @@ class NavDrawer extends StatelessWidget {
                 ListTile(
                   title: Text(
                     'Usuário',
-                    style:
-                        TextStyle(color: MainColors.primaryColor, fontSize: 12),
+                    style: TextStyle(
+                        fontFamily: 'Geomanist',
+                        fontWeight: FontWeight.w400,
+                        color: MainColors.primaryColor,
+                        fontSize: 12),
                   ),
                   subtitle: Text(
                     userName,
-                    style:
-                        TextStyle(color: MainColors.blackColor, fontSize: 18),
+                    style: TextStyle(
+                        fontFamily: 'Geomanist',
+                        fontWeight: FontWeight.w400,
+                        color: MainColors.blackColor,
+                        fontSize: 18),
                   ),
                   onTap: () => {},
                 ),
                 ListTile(
                   title: Text(
                     'Histórico',
-                    style:
-                        TextStyle(color: MainColors.primaryColor, fontSize: 12),
+                    style: TextStyle(
+                        fontFamily: 'Geomanist',
+                        fontWeight: FontWeight.w400,
+                        color: MainColors.primaryColor,
+                        fontSize: 12),
                   ),
                   subtitle: Text('Ocorrências',
                       style: TextStyle(
-                          color: MainColors.blackColor, fontSize: 18)),
+                          fontFamily: 'Geomanist',
+                          fontWeight: FontWeight.w400,
+                          color: MainColors.blackColor,
+                          fontSize: 18)),
                   onTap: onHistory,
                 ),
                 ListTile(
                   title: Text(
                     'Sair',
-                    style:
-                        TextStyle(color: MainColors.blackColor, fontSize: 18),
+                    style: TextStyle(
+                        fontFamily: 'Geomanist',
+                        fontWeight: FontWeight.w400,
+                        color: MainColors.blackColor,
+                        fontSize: 18),
                   ),
                   onTap: logout,
                 ),

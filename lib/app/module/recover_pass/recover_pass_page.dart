@@ -33,9 +33,12 @@ class RecoverPassPage extends GetView<RecoverPassController> {
                 ),
               ),
               Center(
-                child: Text('RECUPERAR SENHA',
-                    style: GoogleFonts.bebasNeue(
-                        color: MainColors.primaryColor, fontSize: 30)),
+                child: Text('Recuperar Senha',
+                    style: TextStyle(
+                        color: MainColors.primaryColor,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Geomanist',
+                        fontSize: 28)),
               ),
               MainInput(
                   labelText: 'Email',

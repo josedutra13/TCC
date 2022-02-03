@@ -43,20 +43,18 @@ class LoginPage extends GetView<LoginController> {
                   )),
               Padding(
                 padding: const EdgeInsets.only(right: 25, left: 25, bottom: 5),
-                child: Obx(
-                  () => MainInput(
-                    labelText: 'Senha',
-                    controller: controller.senhaText,
-                    obscureText: !controller.showPass,
-                    onTap: () {
-                      controller.showPass = !controller.showPass;
-                    },
-                    showPass: controller.showPass,
-                    isPassword: true,
-                    validator: (value) => controller.invalidLogin
-                        ? 'Usuario ou senha invalida'
-                        : null,
-                  ),
+                child: MainInput(
+                  labelText: 'Senha',
+                  controller: controller.senhaText,
+                  obscureText: !controller.showPass,
+                  onTap: () {
+                    controller.showPass = !controller.showPass;
+                  },
+                  showPass: controller.showPass,
+                  isPassword: true,
+                  validator: (value) => controller.invalidLogin
+                      ? 'Usuario ou senha invalida'
+                      : null,
                 ),
               ),
               InkWell(
@@ -64,10 +62,14 @@ class LoginPage extends GetView<LoginController> {
                   Get.toNamed(Routes.RECOVER_PASS);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 30.0, top: 8),
+                  padding: const EdgeInsets.only(right: 30.0, top: 5),
                   child: Text(
                     'Esqueci minha senha',
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(
+                        color: MainColors.blackColor,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Geomanist',
+                        fontSize: 15),
                   ),
                 ),
               ),
@@ -89,9 +91,10 @@ class LoginPage extends GetView<LoginController> {
                         child: Text(
                           'Entrar',
                           style: TextStyle(
-                              fontSize: 22,
                               color: MainColors.whiteColor,
-                              fontWeight: FontWeight.w500),
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'Geomanist',
+                              fontSize: 22),
                         )),
                   ),
                 ),
@@ -101,14 +104,25 @@ class LoginPage extends GetView<LoginController> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('Não tem uma conta? '),
+                    Text(
+                      'Não tem uma conta? ',
+                      style: TextStyle(
+                          color: MainColors.blackColor,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Geomanist',
+                          fontSize: 15),
+                    ),
                     InkWell(
                         onTap: () {
                           Get.toNamed(Routes.REGISTER);
                         },
                         child: Text(
                           'Crie agora',
-                          style: TextStyle(color: MainColors.primaryColor),
+                          style: TextStyle(
+                              color: MainColors.primaryColor,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Geomanist',
+                              fontSize: 15),
                         ))
                   ],
                 ),
@@ -124,11 +138,16 @@ class LoginPage extends GetView<LoginController> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 10.0, left: 10.0),
-                      child: Text('Ou entre com'),
+                      child: Text('Ou entre com',
+                          style: TextStyle(
+                              color: MainColors.blackColor,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Geomanist',
+                              fontSize: 15)),
                     ),
                     Container(
                       color: MainColors.primaryColor,
-                      width: MediaQuery.of(context).size.width * 0.31,
+                      width: MediaQuery.of(context).size.width * 0.28,
                       height: 1,
                     )
                   ],

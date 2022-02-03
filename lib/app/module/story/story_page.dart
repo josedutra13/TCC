@@ -1,6 +1,7 @@
 import 'package:auresgate/app/module/story/story_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:auresgate/app/widgets/appBar_widgets.dart';
+import 'package:auresgate/app/widgets/button_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,11 +48,14 @@ class StoryPage extends GetView<StoryController> {
         onBack: onBack,
         hasIcon: true,
       ),
-      // AppPageStoryWidget(
-      //     onBack: onBack,
       body: Obx(() => ListView(
             children: [...controller.listStory(context: context)],
           )),
+      floatingActionButton: ButtonWidget(
+        buttonText: 'Voltar',
+        isBack: true,
+        onPressed: () => Get.offNamed(Routes.MAIN),
+      ),
     );
   }
 }

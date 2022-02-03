@@ -27,14 +27,16 @@ class AlterPassController extends GetxController {
       this._showConfirmPassword.value = value;
   bool get showConfirmPassword => this._showConfirmPassword.value;
 
-  void changePassword() async {
+  Future<void> changePassword() async {
     if (formAlter.currentState!.validate()) {
       await _loginRepository.changePass(
           _recoverPassController.userDto, passwordText.text);
-      Get.offNamed(Routes.SUCCESSPAGE,
+      Get.toNamed(Routes.SUCCESSPAGE,
           arguments: 'Senha alterada \n com sucesso');
       Future.delayed(Duration(seconds: 3), () {
-        Get.offNamed(Routes.LOGIN);
+        Get.offAllNamed(
+          Routes.LOGIN,
+        );
       });
     }
   }

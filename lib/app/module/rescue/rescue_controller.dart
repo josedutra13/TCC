@@ -3,6 +3,7 @@ import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/module/main/main_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
@@ -28,6 +29,11 @@ class RescueController extends GetxController {
   bool get startRescue => _startRescue.value;
   set startRescue(bool value) => _startRescue.value = value;
 
+  final _animalStates = ['Urgente', 'Saudável'].obs;
+  List<String> get animalStates => _animalStates;
+
+  TextEditingController animalState = TextEditingController();
+
   @override
   void onInit() {
     super.onInit();
@@ -45,9 +51,9 @@ class RescueController extends GetxController {
 
   void checkButton() {
     if (_rescue.value.animal!.estado == 'URGENTE') {
-      _optUsers.value = 1;
+      animalState.text = 'Urgente';
     } else {
-      _optUsers.value = 2;
+      animalState.text = 'Saúdavel';
     }
   }
 
