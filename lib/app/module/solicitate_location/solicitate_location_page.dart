@@ -6,20 +6,12 @@ import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:auresgate/app/widgets/appBar_widgets.dart';
 import 'package:auresgate/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 //TODO REFAZER ISSO COMO UM STATELESS WIDGET
 class SolicitateLocationPage extends GetView<SolicitateLocationController> {
   const SolicitateLocationPage({Key? key}) : super(key: key);
-
-  // @override
-  // void dispose() {
-  //   _googleMapController.dispose();
-  //   super.dispose();
-  // }
 
   void help(context) {
     showDialog(
@@ -58,6 +50,7 @@ class SolicitateLocationPage extends GetView<SolicitateLocationController> {
             onAction: () {
               help(context);
             }),
+        //TODO RESOLVER BUG DE SETSTATE
         body: Obx(
           () => GoogleMap(
             myLocationButtonEnabled: false,

@@ -44,12 +44,16 @@ class CardStory extends StatelessWidget {
                     Row(
                       children: [
                         Text('PROCESSAMENTO : ',
-                            style: GoogleFonts.bebasNeue(
-                                fontSize: 20, letterSpacing: 1)),
+                            style: TextStyle(
+                              fontFamily: 'Geomanist',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16,
+                            )),
                         Text(status!,
-                            style: GoogleFonts.bebasNeue(
-                                fontSize: 20,
-                                letterSpacing: 1,
+                            style: TextStyle(
+                                fontFamily: 'Geomanist',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
                                 color: MainColors.primaryColor)),
                       ],
                     ),
@@ -58,8 +62,11 @@ class CardStory extends StatelessWidget {
                       child: Row(
                         children: [
                           Text('AÇÕES :',
-                              style: GoogleFonts.bebasNeue(
-                                  fontSize: 20, letterSpacing: 1)),
+                              style: TextStyle(
+                                  fontFamily: 'Geomanist',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                  letterSpacing: 1)),
                           IconButton(
                               onPressed: () {
                                 Get.offNamed(Routes.EDIT_RESCUE,

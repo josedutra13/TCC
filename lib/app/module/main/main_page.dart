@@ -71,9 +71,9 @@ class MainPage extends GetView<MainController> {
                 onTap: () {
                   controller.pickImage(ImageSource.gallery).then((value) {
                     if (controller.image.path != '') {
-                      Get.offNamed(Routes.REQUEST_RESCUE);
+                      Get.toNamed(Routes.REQUEST_RESCUE);
                     } else {
-                      Get.offNamed(Routes.MAIN);
+                      Get.toNamed(Routes.MAIN);
                     }
                   });
                 }),
@@ -87,9 +87,9 @@ class MainPage extends GetView<MainController> {
               onTap: () {
                 controller.pickImage(ImageSource.camera).then((value) {
                   if (controller.image.path != '') {
-                    Get.offNamed(Routes.REQUEST_RESCUE);
+                    Get.toNamed(Routes.REQUEST_RESCUE);
                   } else {
-                    Get.offNamed(Routes.MAIN);
+                    Get.toNamed(Routes.MAIN);
                   }
                 });
               },

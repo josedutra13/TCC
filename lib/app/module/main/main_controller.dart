@@ -11,6 +11,8 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../data/models/DTO/userDTO_model.dart';
+
 class MainController extends GetxController {
   final ChamadoRepository _chamadoRepository;
   LoginController _loginController = Get.find();
@@ -35,6 +37,9 @@ class MainController extends GetxController {
   final _image = File('').obs;
   File get image => _image.value;
   set image(File value) => _image.value = value;
+
+  final _userDto = UserDTO.empty().obs;
+  UserDTO get userDto => _userDto.value;
 
   MainController(this._chamadoRepository);
 
@@ -97,9 +102,6 @@ class MainController extends GetxController {
                   e.animal!.localizacao!.latitude!,
                   e.animal!.localizacao!.longitude!,
                 ),
-                infoWindow: InfoWindow(
-                  onTap: () {},
-                ),
                 icon: e.status == 'ANDAMENTO'
                     ? BitmapDescriptor.defaultMarkerWithHue(
                         BitmapDescriptor.hueOrange)
@@ -135,7 +137,7 @@ class MainController extends GetxController {
   }
 
 // CAMERA FUNCTIONS //
-  Future pickImage(ImageSource source) async {
+  Future<void> pickImage(ImageSource source) async {
     try {
       final imageF = await ImagePicker().pickImage(source: source);
       if (imageF == null) return;

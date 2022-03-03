@@ -41,20 +41,23 @@ class LoginPage extends GetView<LoginController> {
                       } else if (controller.invalidLogin) {}
                     },
                   )),
-              Padding(
-                padding: const EdgeInsets.only(right: 25, left: 25, bottom: 5),
-                child: MainInput(
-                  labelText: 'Senha',
-                  controller: controller.senhaText,
-                  obscureText: !controller.showPass,
-                  onTap: () {
-                    controller.showPass = !controller.showPass;
-                  },
-                  showPass: controller.showPass,
-                  isPassword: true,
-                  validator: (value) => controller.invalidLogin
-                      ? 'Usuario ou senha invalida'
-                      : null,
+              Obx(
+                () => Padding(
+                  padding:
+                      const EdgeInsets.only(right: 25, left: 25, bottom: 5),
+                  child: MainInput(
+                    labelText: 'Senha',
+                    controller: controller.senhaText,
+                    obscureText: !controller.showPass,
+                    onTap: () {
+                      controller.showPass = !controller.showPass;
+                    },
+                    showPass: controller.showPass,
+                    isPassword: true,
+                    validator: (value) => controller.invalidLogin
+                        ? 'Usuario ou senha invalida'
+                        : null,
+                  ),
                 ),
               ),
               InkWell(

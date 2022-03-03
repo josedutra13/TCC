@@ -7,13 +7,15 @@ class DescriptionWidget extends StatelessWidget {
   final String textRescue;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final String? initialValue;
   const DescriptionWidget(
       {Key? key,
       this.onChanged,
       this.isRescue = false,
       this.textRescue = '',
       this.controller = null,
-      this.validator = null})
+      this.validator = null,
+      this.initialValue})
       : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class DescriptionWidget extends StatelessWidget {
       alignment: Alignment.topCenter,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 17.0),
+          padding: const EdgeInsets.only(top: 20.0),
           child: Container(
             width: 344.0,
             height: 168.0,
@@ -36,7 +38,7 @@ class DescriptionWidget extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 17.0),
+          padding: const EdgeInsets.only(top: 20.0),
           child: Container(
             width: 136.0,
             height: 1.0,
@@ -56,7 +58,8 @@ class DescriptionWidget extends StatelessWidget {
             child: isRescue
                 ? Text(textRescue)
                 : TextFormField(
-                    controller: controller,
+                    controller: controller ?? null,
+                    initialValue: initialValue ?? null,
                     validator: validator,
                     expands: true,
                     minLines: null,

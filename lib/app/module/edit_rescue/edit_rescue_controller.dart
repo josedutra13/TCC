@@ -5,7 +5,6 @@ import 'package:auresgate/app/data/models/animal_model.dart';
 import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/main/main_controller.dart';
-import 'package:auresgate/app/module/rescue/rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,9 +13,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditRescueController extends GetxController {
+  String id = '';
   MainController mainController = Get.find();
   ChamadoRepository _chamadoRepository = ChamadoRepository();
-  String id = '';
 
   final _optUsers = 0.obs;
   get optUsers => this._optUsers.value;
@@ -42,29 +41,33 @@ class EditRescueController extends GetxController {
   set rescue(Chamado value) => _rescue.value = value;
 
   TextEditingController descriptionEdit = TextEditingController();
+  final _animalStates = ['Urgente', 'Saudável'].obs;
+  List<String> get animalStates => _animalStates;
+
+  TextEditingController animalState = TextEditingController();
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
 
     final param = Get.parameters;
+
     if (param['id'] != null) {
       id = param['id']!;
 
       loadInfoRescue();
-      checkButton();
-      print('ID => LOAD EDIT $id');
+
+      print('ID => LOAD $id');
     }
   }
 
-  void checkButton() {
-    if (rescue.animal!.estado == 'URGENTE') {
-      _optUsers.value = 1;
-    } else {
-      _optUsers.value = 2;
-    }
-  }
+  // void checkButton() {
+  //   if (_rescue.value.animal!.estado == 'Urgente') {
+  //     animalState.text = 'Urgente';
+  //   } else {
+  //     animalState.text = 'Saúdavel';
+  //   }
+  // }
 
   void loadInfoRescue() {
     mainController.listChamadosRescue.forEach((element) {
@@ -72,6 +75,7 @@ class EditRescueController extends GetxController {
         _rescue.value = element;
       }
     });
+    print('resgate:  ${rescue.animal!.descricao}');
   }
 
   void onEditAnimal(

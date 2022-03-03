@@ -228,6 +228,19 @@ class RegisterPage extends GetView<RegisterController> {
                           child: MainInput(
                             labelText: 'Idade',
                             controller: controller.ageController,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            validator: (age) {
+                              if (age!.isEmpty) {
+                                return 'Informe uma idade';
+                              } else if (int.tryParse(age)! < 14 ||
+                                  int.tryParse(age)! > 90) {
+                                return 'Informe uma idade entre 14 a 90 anos';
+                              }
+                              return null;
+                            },
                             onChanged: (value) {
                               controller.onChangeUser(
                                   idade: int.tryParse(value));
@@ -246,6 +259,8 @@ class RegisterPage extends GetView<RegisterController> {
                                   );
                                 }).toList(),
                                 labelText: 'Sexo',
+                                validator: (sex) =>
+                                    sex == null ? 'Informe um sexo' : null,
                                 onChanged: (value) {
                                   controller.sexController.text =
                                       value.toString();
@@ -358,6 +373,7 @@ class RegisterPage extends GetView<RegisterController> {
                 MainInput(
                   labelText: 'Número',
                   controller: controller.numberController,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   onChanged: (number) {
                     controller.onChangeUser(numero: int.tryParse(number));
                   },

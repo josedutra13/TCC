@@ -7,7 +7,6 @@ import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:auresgate/app/widgets/button_widgets.dart';
 import 'package:auresgate/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -42,16 +41,18 @@ class SolicitateLocationController extends GetxController {
     if (editRescueController.isEditing) {
       Get.offNamed(Routes.EDIT_RESCUE);
     } else {
-      Get.offNamed(Routes.REQUEST_RESCUE);
+      Get.back();
+      Get.back();
     }
   }
 
   void confirmBotton() {
     if (editRescueController.isEditing) {
+      print('CAI AQUI');
       editRescueController.onEditAnimal(
           latitude: tappedPoints[0].latitude,
           longitude: tappedPoints[0].longitude);
-      Get.offNamed(Routes.EDIT_RESCUE);
+      Get.toNamed(Routes.EDIT_RESCUE);
     } else {
       requestRescueController
         ..onChangeSolicitation(
@@ -116,7 +117,7 @@ class SolicitateLocationController extends GetxController {
                     height: MediaQuery.of(context).size.height * 0.065,
                     child: ButtonWidget(
                       onPressed: () {
-                        // Get.offNamed(Routes.REQUEST_RESCUE);
+                        Get.toNamed(Routes.REQUEST_RESCUE);
                         isCancel();
                       },
                       buttonText: 'Cancelar',

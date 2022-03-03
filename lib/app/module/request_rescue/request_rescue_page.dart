@@ -13,8 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RequestRescuePage extends GetView<RequestRescueController> {
-  MainController _mainController = Get.find();
-
   RequestRescuePage({Key? key}) : super(key: key);
 
   @override
@@ -29,71 +27,79 @@ class RequestRescuePage extends GetView<RequestRescueController> {
             fontSize: 23),
         hasIcon: true,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Form(
-            key: controller.formDesc,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // IMAGEM DE PERFIL DO ANIMAL
-                Padding(
-                  padding: const EdgeInsets.only(top: 5, bottom: 20),
-                  child: Center(
-                    //TODO REFACTORY PARA COLOCAR BORDA BRANCA
-                    child: ClipOval(
-                      child: Image.file(
-                        _mainController.image,
-                        width: 150,
-                        height: 150,
-                        fit: BoxFit.cover,
+      body: LayoutBuilder(
+        builder: (context, contraints) => SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: contraints.maxHeight),
+            child: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Form(
+                key: controller.formDesc,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // IMAGEM DE PERFIL DO ANIMAL
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2, bottom: 19),
+                        child: Center(
+                          //TODO REFACTORY PARA COLOCAR BORDA BRANCA
+                          child: ClipOval(
+                            child: Image.file(
+                              controller.mainController.image,
+                              width: 150,
+                              height: 150,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                      DescriptionWidget(
+                        controller: controller.description,
+                        validator: (value) =>
+                            value!.isEmpty ? 'Descrição obrigatoria' : null,
+                        onChanged: (value) =>
+                            controller.onChangeSolicitation(descricao: value),
+                      ),
+                      DropDownInput(
+                        labelText: 'Estado do animal',
+                        items: controller.animalState.map((e) {
+                          return DropdownMenuItem(
+                            child: Text(e),
+                            value: e,
+                          );
+                        }).toList(),
+                        validator: (value) => value == null
+                            ? 'Estado do animal obrigatorio'
+                            : null,
+                        onChanged: (value) =>
+                            {controller.onChangeSolicitation(estado: value)},
+                      ),
+
+                      SizedBox(
+                        height: 45,
+                      ),
+                      ButtonWidget(
+                        buttonText: 'Marcar localização',
+                        onPressed: () {
+                          if (controller.formDesc.currentState!.validate()) {
+                            Get.toNamed(
+                              Routes.SOLICITATE_LOCATION,
+                            );
+                          }
+                        },
+                      ),
+                      ButtonWidget(
+                          isBack: true,
+                          buttonText: 'Voltar',
+                          onPressed: () {
+                            Get.offNamed(Routes.MAIN);
+                          }),
+                    ],
                   ),
                 ),
-                DescriptionWidget(
-                  controller: controller.description,
-                  validator: (value) =>
-                      value!.isEmpty ? 'Descrição obrigatoria' : null,
-                  onChanged: (value) =>
-                      controller.onChangeSolicitation(descricao: value),
-                ),
-                DropDownInput(
-                  labelText: 'Estado do animal',
-                  items: controller.animalState.map((e) {
-                    return DropdownMenuItem(
-                      child: Text(e),
-                      value: e,
-                    );
-                  }).toList(),
-                  validator: (value) =>
-                      value == null ? 'Estado do animal obrigatorio' : null,
-                  onChanged: (value) =>
-                      {controller.onChangeSolicitation(estado: value)},
-                ),
-
-                SizedBox(
-                  height: 90,
-                ),
-                ButtonWidget(
-                  buttonText: 'Marcar localização',
-                  onPressed: () {
-                    if (controller.formDesc.currentState!.validate()) {
-                      Get.toNamed(
-                        Routes.SOLICITATE_LOCATION,
-                      );
-                    }
-                  },
-                ),
-                ButtonWidget(
-                    isBack: true,
-                    buttonText: 'Voltar',
-                    onPressed: () {
-                      Get.offNamed(Routes.MAIN);
-                    }),
-              ],
+              ),
             ),
           ),
         ),

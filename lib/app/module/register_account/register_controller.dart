@@ -170,7 +170,7 @@ class RegisterController extends GetxController {
       onSave().then((value) {
         if (value == null) {
           Get.toNamed(Routes.SUCCESSPAGE,
-              arguments: 'Cadastro realido \n com sucesso!');
+              arguments: 'Cadastro realizado \n com sucesso!');
           Future.delayed(Duration(seconds: 3), () {
             Get.offAllNamed(Routes.LOGIN);
           });

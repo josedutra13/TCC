@@ -35,7 +35,7 @@ class FinishRescueController extends GetxController {
     await _chamadoRepository
         .finalizarChamado(base64Image, int.parse(id))
         .whenComplete(() {
-      Get.offNamed(Routes.MAIN);
+      Get.offAllNamed(Routes.MAIN, predicate: (route) => true);
     });
   }
 }

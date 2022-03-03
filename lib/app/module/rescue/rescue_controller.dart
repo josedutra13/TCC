@@ -5,7 +5,6 @@ import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class RescueController extends GetxController {
   String id = '';
@@ -44,12 +43,12 @@ class RescueController extends GetxController {
       id = param['id']!;
 
       loadInfoRescue();
-      checkButton();
+      stateSelected();
       print('ID => LOAD $id');
     }
   }
 
-  void checkButton() {
+  void stateSelected() {
     if (_rescue.value.animal!.estado == 'URGENTE') {
       animalState.text = 'Urgente';
     } else {
@@ -58,6 +57,7 @@ class RescueController extends GetxController {
   }
 
   void loadInfoRescue() {
+    print('RESGATE ${mainController.listChamadosRescue}');
     mainController.listChamadosRescue.forEach((element) {
       if (id == element.id.toString()) {
         _rescue.value = element;

@@ -30,7 +30,7 @@ class LoginController extends GetxController {
     if (formLogin.currentState!.validate()) {
       if (response!.id != null) {
         _userDto.value = response;
-        Get.toNamed(Routes.MAIN);
+        Get.offNamed(Routes.MAIN);
       } else {
         _invalidLogin.value = true;
       }

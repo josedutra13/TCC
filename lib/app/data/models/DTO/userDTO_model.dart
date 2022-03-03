@@ -1,7 +1,7 @@
 class UserDTO {
   int? id;
-  late String? nome;
-  late bool? isPerson;
+  String? nome;
+  bool? isPerson;
 
   UserDTO({this.id, this.nome, this.isPerson});
 

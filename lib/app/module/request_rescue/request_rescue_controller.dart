@@ -16,7 +16,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class RequestRescueController extends GetxController {
   final ChamadoRepository _chamadoRepository;
   final LoginController _loginController = Get.find();
-  final MainController _mainController = Get.find();
+  final MainController mainController = Get.find();
 
   RequestRescueController(this._chamadoRepository);
 
@@ -55,8 +55,8 @@ class RequestRescueController extends GetxController {
   }
 
   void onConfirmRescue() async {
-    print('CAI AQUI ${_mainController.image.path}');
-    var path = _mainController.image.path;
+    print('CAI AQUI ${mainController.image.path}');
+    var path = mainController.image.path;
     File imageFile = File(path);
     List<int> imageBytes = imageFile.readAsBytesSync();
     String base64Image = base64.encode(imageBytes);
@@ -67,7 +67,11 @@ class RequestRescueController extends GetxController {
 
     var response = await _chamadoRepository.createChamado(chamadoDTO);
     if (response == null) {
-      Get.offNamed(Routes.MAIN);
+      Get.toNamed(Routes.SUCCESSPAGE,
+          arguments: 'Solicitação Resgate realizado \n com sucesso!');
+      Future.delayed(Duration(seconds: 3), () {
+        Get.offNamed(Routes.MAIN);
+      });
     }
   }
 }

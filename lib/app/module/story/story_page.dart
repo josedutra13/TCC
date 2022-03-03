@@ -40,21 +40,32 @@ class StoryPage extends GetView<StoryController> {
     Get.offNamed(Routes.MAIN);
   }
 
+  Future<bool> onWillPop() async {
+    print(Get.currentRoute == Routes.STORY);
+    if (Get.currentRoute == Routes.STORY) {
+      Get.offNamed(Routes.MAIN);
+    }
+    return Future.value(false);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppPageBarWidget(
-        title: 'Histórico de ocorrências',
-        onBack: onBack,
-        hasIcon: true,
-      ),
-      body: Obx(() => ListView(
-            children: [...controller.listStory(context: context)],
-          )),
-      floatingActionButton: ButtonWidget(
-        buttonText: 'Voltar',
-        isBack: true,
-        onPressed: () => Get.offNamed(Routes.MAIN),
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: Scaffold(
+        appBar: AppPageBarWidget(
+          title: 'Histórico de ocorrências',
+          onBack: onBack,
+          hasIcon: true,
+        ),
+        body: Obx(() => ListView(
+              children: [...controller.listStory(context: context)],
+            )),
+        floatingActionButton: ButtonWidget(
+          buttonText: 'Voltar',
+          isBack: true,
+          onPressed: () => Get.offNamed(Routes.MAIN),
+        ),
       ),
     );
   }
