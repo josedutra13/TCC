@@ -59,7 +59,7 @@ class RescuePage extends GetView<RescueController> {
                 controller: controller.animalState),
 
             SizedBox(
-              height: 67,
+              height: 54,
             ),
             ButtonWidget(
               buttonText: 'AuResgate',

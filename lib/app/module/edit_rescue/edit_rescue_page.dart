@@ -15,7 +15,7 @@ class EditRescuePage extends GetView<EditRescueController> {
   EditRescuePage({Key? key}) : super(key: key);
   Image imageRescue() {
     final decodedBytes =
-        Base64Decoder().convert(controller.rescue.animal!.imagem.toString());
+        Base64Decoder().convert(controller.rescue.animal!.imagem!);
     var image =
         Image.memory(decodedBytes, fit: BoxFit.cover, width: 150, height: 150);
     print('Imagem $image');
@@ -35,61 +35,66 @@ class EditRescuePage extends GetView<EditRescueController> {
         hasIcon: true,
       ),
 
-      body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 2, bottom: 19),
-                  child: Center(
-                    //TODO REFACTORY PARA COLOCAR BORDA BRANCA
-                    child: ClipOval(
-                      child: controller.isPicked
-                          ? imageRescue()
-                          : Image.file(
-                              controller.mainController.image,
-                              width: 150,
-                              height: 150,
-                              fit: BoxFit.cover,
-                            ),
+      body: LayoutBuilder(
+        builder: (context, contraints) => SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: contraints.maxHeight),
+            child: Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 2, bottom: 19),
+                      child: Center(
+                        //TODO REFACTORY PARA COLOCAR BORDA BRANCA
+                        child: ClipOval(
+                          child: controller.isPicked
+                              ? imageRescue()
+                              : Image.file(
+                                  controller.mainController.image,
+                                  width: 150,
+                                  height: 150,
+                                  fit: BoxFit.cover,
+                                ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                DescriptionWidget(
-                  initialValue: controller.rescue.animal!.descricao,
-                ),
-                DropDownInput(
-                  labelText: 'Estado do animal',
-                  items: controller.animalStates.map((e) {
-                    return DropdownMenuItem(
-                      child: Text(e),
-                      value: e,
-                    );
-                  }).toList(),
-                  onChanged: (state) {},
-                ),
-                ButtonWidget(
-                  buttonText: 'Salvar',
-                  onPressed: () {
-                    controller.updateRequest();
-                    Get.offNamed(Routes.MAIN);
-                  },
-                ),
-                ButtonWidget(
-                  buttonText: 'Voltar',
-                  isBack: true,
-                  onPressed: () {
-                    if (Get.previousRoute == Routes.STORY) {
-                      Get.offNamed(Routes.STORY);
-                    } else {
-                      Get.offNamed(Routes.MAIN);
-                    }
-                  },
-                )
-              ],
-            )),
+                    DescriptionWidget(
+                      initialValue: controller.rescue.animal!.descricao,
+                    ),
+                    DropDownInput(
+                      labelText: 'Estado do animal',
+                      items: controller.animalStates.map((e) {
+                        return DropdownMenuItem(
+                          child: Text(e),
+                          value: e,
+                        );
+                      }).toList(),
+                      onChanged: (state) {},
+                    ),
+                    ButtonWidget(
+                      buttonText: 'Salvar',
+                      onPressed: () {
+                        controller.updateRequest();
+                        Get.offNamed(Routes.MAIN);
+                      },
+                    ),
+                    ButtonWidget(
+                      buttonText: 'Voltar',
+                      isBack: true,
+                      onPressed: () {
+                        if (Get.previousRoute == Routes.STORY) {
+                          Get.offNamed(Routes.STORY);
+                        } else {
+                          Get.offNamed(Routes.MAIN);
+                        }
+                      },
+                    ),
+                  ],
+                )),
+          ),
+        ),
       ),
       // SingleChildScrollView(
       //   child: Obx(

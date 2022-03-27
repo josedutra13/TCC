@@ -10,17 +10,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../data/models/DTO/userDTO_model.dart';
+
 class StoryController extends GetxController {
+  final _userDto = UserDTO.empty().obs;
+  UserDTO get userDto => _userDto.value;
+
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-
+    final arguments = Get.arguments;
+    _userDto.value = arguments;
     listStory();
   }
 
   ChamadoRepository _chamadoRepository = ChamadoRepository();
-  LoginController _loginController = Get.find();
+  // LoginController _loginController = Get.find();
   MainController _mainController = Get.find();
 
   List listStory({BuildContext? context}) {
@@ -30,8 +36,8 @@ class StoryController extends GetxController {
       final decodedBytes = Base64Decoder().convert(e.animal!.imagem!);
       var image = Image.memory(decodedBytes,
           fit: BoxFit.cover, width: 100, height: 100);
-      if ((e.usuario_abriu_chamado!.id == _loginController.userDto.id ||
-              e.usuario_atendeu_chamado!.id == _loginController.userDto.id) &&
+      if ((e.usuario_abriu_chamado!.id == _userDto.value.id ||
+              e.usuario_atendeu_chamado!.id == _userDto.value.id) &&
           e.status != 'ANDAMENTO') {
         return CardStory(
           id: e.id.toString(),

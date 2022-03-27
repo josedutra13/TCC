@@ -15,7 +15,7 @@ import '../../data/models/DTO/userDTO_model.dart';
 
 class MainController extends GetxController {
   final ChamadoRepository _chamadoRepository;
-  LoginController _loginController = Get.find();
+  // MainController _mainController = Get.find();
 
   Rx<LatLng> center = LatLng(-15.777737, -47.878488).obs;
   Completer<GoogleMapController> gmapController = Completer();
@@ -46,14 +46,15 @@ class MainController extends GetxController {
   @override
   void onInit() {
     // getUserLocation();
+    final arguments = Get.arguments;
+    _userDto.value = arguments;
+    print('USERDTO ${_userDto.value.nome}');
     loadData();
-
     super.onInit();
   }
 
   void loadData() async {
     loadRescueChamado();
-
     print('loadData');
   }
 
@@ -66,7 +67,7 @@ class MainController extends GetxController {
     for (var i = 0; i < listChamadosRescue.length; i++) {
       idUserCreate = listChamadosRescue[0].usuario_abriu_chamado!.id;
     }
-    if (_loginController.userDto.id == idUserCreate) {
+    if (userDto.id == idUserCreate) {
       return true;
     } else {
       return false;
@@ -108,8 +109,7 @@ class MainController extends GetxController {
                     : BitmapDescriptor.defaultMarkerWithHue(
                         BitmapDescriptor.hueRed),
                 onTap: () {
-                  if (e.usuario_abriu_chamado!.id ==
-                      _loginController.userDto.id) {
+                  if (e.usuario_abriu_chamado!.id == userDto.id) {
                     Get.toNamed(Routes.EDIT_RESCUE,
                         parameters: {'id': e.id.toString()});
                   } else if (e.status == 'ANDAMENTO') {

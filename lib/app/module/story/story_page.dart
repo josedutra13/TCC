@@ -41,7 +41,6 @@ class StoryPage extends GetView<StoryController> {
   }
 
   Future<bool> onWillPop() async {
-    print(Get.currentRoute == Routes.STORY);
     if (Get.currentRoute == Routes.STORY) {
       Get.offNamed(Routes.MAIN);
     }
@@ -64,7 +63,8 @@ class StoryPage extends GetView<StoryController> {
         floatingActionButton: ButtonWidget(
           buttonText: 'Voltar',
           isBack: true,
-          onPressed: () => Get.offNamed(Routes.MAIN),
+          onPressed: () =>
+              Get.offNamed(Routes.MAIN, arguments: controller.userDto),
         ),
       ),
     );

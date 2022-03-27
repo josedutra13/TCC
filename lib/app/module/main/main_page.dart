@@ -13,8 +13,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 class MainPage extends GetView<MainController> {
-  final LoginController _loginController = Get.find();
-
   MainPage({Key? key}) : super(key: key);
   void onLogout() {
     Get.offAllNamed(Routes.LOGIN);
@@ -24,8 +22,9 @@ class MainPage extends GetView<MainController> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavDrawer(
-        userName: _loginController.userDto.nome.toString(),
-        onHistory: () => Get.offNamed(Routes.STORY),
+        userName: controller.userDto.nome!,
+        onHistory: () =>
+            Get.offNamed(Routes.STORY, arguments: controller.userDto),
         logout: onLogout,
       ),
       appBar: AppPageBarWidget(
@@ -56,7 +55,7 @@ class MainPage extends GetView<MainController> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 20.0),
         child: SpeedDial(
-          visible: _loginController.userDto.isPerson!,
+          visible: controller.userDto.isPerson!,
           backgroundColor: MainColors.primaryColor,
           icon: Icons.add,
           activeIcon: Icons.close,

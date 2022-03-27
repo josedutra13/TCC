@@ -27,8 +27,22 @@ class SolicitateLocationController extends GetxController {
   Set<Marker> get marker => _marker;
   set marker(Set<Marker> value) => _marker;
 
+  String descricao = '';
+  String estadoAnimal = '';
+
   void onLogout() {
     Get.offAllNamed(Routes.LOGIN);
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    final param = Get.parameters;
+    if (param['descricao'] != null && param['estadoAnimal'] != null) {
+      descricao = param['descricao']!;
+      estadoAnimal = param['estadoAnimal']!;
+    }
   }
 
   @override
@@ -47,18 +61,25 @@ class SolicitateLocationController extends GetxController {
   }
 
   void confirmBotton() {
+    //Edição de chamado
     if (editRescueController.isEditing) {
       print('CAI AQUI');
       editRescueController.onEditAnimal(
+          descricao: descricao,
+          estado: estadoAnimal,
           latitude: tappedPoints[0].latitude,
           longitude: tappedPoints[0].longitude);
       Get.toNamed(Routes.EDIT_RESCUE);
-    } else {
+    }
+    // Resgate
+    else {
       requestRescueController
         ..onChangeSolicitation(
+            descricao: descricao,
+            estado: estadoAnimal,
             latitude: tappedPoints[0].latitude,
             longitude: tappedPoints[0].longitude)
-        ..onConfirmRescue();
+        ..confirmRequestRescue();
     }
   }
 

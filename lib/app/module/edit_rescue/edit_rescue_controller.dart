@@ -51,7 +51,6 @@ class EditRescueController extends GetxController {
     super.onInit();
 
     final param = Get.parameters;
-
     if (param['id'] != null) {
       id = param['id']!;
 
@@ -75,7 +74,6 @@ class EditRescueController extends GetxController {
         _rescue.value = element;
       }
     });
-    print('resgate:  ${rescue.animal!.descricao}');
   }
 
   void onEditAnimal(

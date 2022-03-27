@@ -18,6 +18,7 @@ class RegisterController extends GetxController {
   RegisterController(this._personsRepository, this._stateRepository,
       this._cityRepository, this._ongRepository);
 
+  // REMOVER CONTROLLERS POIS ESTÁ SENDO USADO ONCHANGED PARA PEGAR INFORMAÇÕES DO USER
   //Step1 Dados de acesso
   final TextEditingController accountTypeController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();

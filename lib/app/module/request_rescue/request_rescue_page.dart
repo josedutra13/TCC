@@ -1,7 +1,3 @@
-import 'package:auresgate/app/module/edit_rescue/widgets/button_edit_widget.dart';
-import 'package:auresgate/app/module/main/main_controller.dart';
-import 'package:auresgate/app/module/register_account/widgets/radio_button_widget.dart';
-
 import 'package:auresgate/app/module/request_rescue/request_rescue_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:auresgate/app/widgets/appBar_widgets.dart';
@@ -19,7 +15,7 @@ class RequestRescuePage extends GetView<RequestRescueController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppPageBarWidget(
-        title: 'Solicita resgate',
+        title: 'Solicitar resgate',
         titleStyle: TextStyle(
             fontFamily: 'Geomanist',
             color: MainColors.primaryColor,
@@ -59,8 +55,6 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                         controller: controller.description,
                         validator: (value) =>
                             value!.isEmpty ? 'Descrição obrigatoria' : null,
-                        onChanged: (value) =>
-                            controller.onChangeSolicitation(descricao: value),
                       ),
                       DropDownInput(
                         labelText: 'Estado do animal',
@@ -73,8 +67,9 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                         validator: (value) => value == null
                             ? 'Estado do animal obrigatorio'
                             : null,
-                        onChanged: (value) =>
-                            {controller.onChangeSolicitation(estado: value)},
+                        onChanged: (value) => {
+                          controller.estadoAnimal.text = value,
+                        },
                       ),
 
                       SizedBox(
@@ -84,9 +79,12 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                         buttonText: 'Marcar localização',
                         onPressed: () {
                           if (controller.formDesc.currentState!.validate()) {
-                            Get.toNamed(
-                              Routes.SOLICITATE_LOCATION,
-                            );
+                            print('AQUI KRLLLL ${controller.description}');
+                            Get.offNamed(Routes.SOLICITATE_LOCATION,
+                                parameters: {
+                                  'descricao': controller.description.text,
+                                  'estadoAnimal': controller.estadoAnimal.text
+                                });
                           }
                         },
                       ),

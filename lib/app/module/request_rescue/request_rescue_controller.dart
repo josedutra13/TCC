@@ -40,6 +40,7 @@ class RequestRescueController extends GetxController {
   List<String> get animalState => _animalState.toList();
 
   TextEditingController description = TextEditingController();
+  TextEditingController estadoAnimal = TextEditingController();
   final formDesc = GlobalKey<FormState>();
 
   void onChangeSolicitation(
@@ -54,7 +55,7 @@ class RequestRescueController extends GetxController {
         longitude: longitude);
   }
 
-  void onConfirmRescue() async {
+  void confirmRequestRescue() async {
     print('CAI AQUI ${mainController.image.path}');
     var path = mainController.image.path;
     File imageFile = File(path);
@@ -62,7 +63,7 @@ class RequestRescueController extends GetxController {
     String base64Image = base64.encode(imageBytes);
 
     _chamadoDTO.value.animal = _animalEditing.value;
-    _chamadoDTO.value.loginDTO = _loginController.userDto;
+    _chamadoDTO.value.loginDTO = mainController.userDto;
     _chamadoDTO.value.img = base64Image;
 
     var response = await _chamadoRepository.createChamado(chamadoDTO);
@@ -70,7 +71,10 @@ class RequestRescueController extends GetxController {
       Get.toNamed(Routes.SUCCESSPAGE,
           arguments: 'Solicitação Resgate realizado \n com sucesso!');
       Future.delayed(Duration(seconds: 3), () {
-        Get.offNamed(Routes.MAIN);
+        Get.offNamed(
+          Routes.MAIN,
+        );
+        mainController.loadRescueChamado();
       });
     }
   }
