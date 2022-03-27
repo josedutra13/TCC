@@ -12,6 +12,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../data/models/DTO/chamadoDTO_model.dart';
+import '../../data/models/DTO/userDTO_model.dart';
+
 class EditRescueController extends GetxController {
   String id = '';
   MainController mainController = Get.find();
@@ -46,10 +49,14 @@ class EditRescueController extends GetxController {
 
   TextEditingController animalState = TextEditingController();
 
+  final _userDto = UserDTO.empty().obs;
+  UserDTO get userDto => _userDto.value;
+
+  final _chamadoDTO = ChamadoDTO.empty().obs;
+  ChamadoDTO get chamadoDTO => _chamadoDTO.value;
+
   @override
   void onInit() {
-    super.onInit();
-
     final param = Get.parameters;
     if (param['id'] != null) {
       id = param['id']!;
@@ -58,7 +65,21 @@ class EditRescueController extends GetxController {
 
       print('ID => LOAD $id');
     }
+
+    final arguments = Get.arguments;
+    _userDto.value = arguments;
+
+    super.onInit();
   }
+
+  @override
+  // void onReady() {
+  //   // TODO: implement onReady
+  //   super.onReady();
+  //   final arguments = Get.arguments;
+  //   _chamadoDTO.value = arguments;
+  //   print('CHAMADOS DTO ${_chamadoDTO.value}');
+  // }
 
   // void checkButton() {
   //   if (_rescue.value.animal!.estado == 'Urgente') {

@@ -7,14 +7,14 @@ import 'package:google_fonts/google_fonts.dart';
 class CardStory extends StatelessWidget {
   final Image? image;
   final String? status;
-  final String id;
   final VoidCallback onPressed;
+  final Function()? onPressedEdit;
   CardStory(
       {Key? key,
       this.image,
       this.status,
       required this.onPressed,
-      required this.id})
+      required this.onPressedEdit})
       : super(key: key);
 
   @override
@@ -68,10 +68,7 @@ class CardStory extends StatelessWidget {
                                   fontSize: 20,
                                   letterSpacing: 1)),
                           IconButton(
-                              onPressed: () {
-                                Get.offNamed(Routes.EDIT_RESCUE,
-                                    parameters: {'id': id});
-                              },
+                              onPressed: onPressedEdit,
                               icon: Image.asset(
                                 'assets/icons/edit.png',
                                 scale: 1,

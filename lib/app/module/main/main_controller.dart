@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../data/models/DTO/chamadoDTO_model.dart';
 import '../../data/models/DTO/userDTO_model.dart';
 
 class MainController extends GetxController {
@@ -51,6 +52,12 @@ class MainController extends GetxController {
     print('USERDTO ${_userDto.value.nome}');
     loadData();
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    googleMapController.dispose();
+    super.dispose();
   }
 
   void loadData() async {
@@ -110,8 +117,11 @@ class MainController extends GetxController {
                         BitmapDescriptor.hueRed),
                 onTap: () {
                   if (e.usuario_abriu_chamado!.id == userDto.id) {
-                    Get.toNamed(Routes.EDIT_RESCUE,
-                        parameters: {'id': e.id.toString()});
+                    Get.offNamed(
+                      Routes.EDIT_RESCUE,
+                      parameters: {'id': e.id.toString()},
+                      arguments: userDto,
+                    );
                   } else if (e.status == 'ANDAMENTO') {
                     Get.offNamed(Routes.FINISH_RESCUE,
                         parameters: {'id': e.id.toString()});

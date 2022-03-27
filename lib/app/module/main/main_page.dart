@@ -24,7 +24,7 @@ class MainPage extends GetView<MainController> {
       drawer: NavDrawer(
         userName: controller.userDto.nome!,
         onHistory: () =>
-            Get.offNamed(Routes.STORY, arguments: controller.userDto),
+            Get.toNamed(Routes.STORY, arguments: controller.userDto),
         logout: onLogout,
       ),
       appBar: AppPageBarWidget(
@@ -41,7 +41,7 @@ class MainPage extends GetView<MainController> {
                     : Set.of(controller.markers),
                 initialCameraPosition:
                     CameraPosition(target: controller.center.value, zoom: 14.0),
-                onMapCreated: controller.onMapCreated,
+                // onMapCreated: controller.onMapCreated,
                 zoomGesturesEnabled: true,
                 onCameraMove: controller.onCameraMove,
                 myLocationEnabled: true,

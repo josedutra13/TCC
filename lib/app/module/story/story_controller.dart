@@ -22,6 +22,7 @@ class StoryController extends GetxController {
     super.onInit();
     final arguments = Get.arguments;
     _userDto.value = arguments;
+    print('STORY USERDTO ${_userDto.value.nome}');
     listStory();
   }
 
@@ -40,10 +41,8 @@ class StoryController extends GetxController {
               e.usuario_atendeu_chamado!.id == _userDto.value.id) &&
           e.status != 'ANDAMENTO') {
         return CardStory(
-          id: e.id.toString(),
-          onPressed: () {
-            deleteRequest(context!, e.id!);
-          },
+          onPressedEdit: () => editRequestInStory(e.id.toString()),
+          onPressed: () => deleteRequest(context!, e.id!),
           image: image,
           status: e.status,
         );
@@ -55,6 +54,11 @@ class StoryController extends GetxController {
     }).toList();
     print('AQUIII $listStory');
     return listStory;
+  }
+
+  void editRequestInStory(String id) async {
+    Get.offNamed(Routes.EDIT_RESCUE,
+        parameters: {'id': id}, arguments: _mainController.userDto);
   }
 
   void deleteRequest(BuildContext context, int id) async {

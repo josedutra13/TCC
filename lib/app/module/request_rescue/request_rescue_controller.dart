@@ -68,12 +68,10 @@ class RequestRescueController extends GetxController {
 
     var response = await _chamadoRepository.createChamado(chamadoDTO);
     if (response == null) {
-      Get.toNamed(Routes.SUCCESSPAGE,
+      Get.offNamed(Routes.SUCCESSPAGE,
           arguments: 'Solicitação Resgate realizado \n com sucesso!');
       Future.delayed(Duration(seconds: 3), () {
-        Get.offNamed(
-          Routes.MAIN,
-        );
+        Get.offNamed(Routes.MAIN, arguments: _chamadoDTO.value);
         mainController.loadRescueChamado();
       });
     }
