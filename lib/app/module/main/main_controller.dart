@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:auresgate/app/data/models/chamado_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
-import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
@@ -11,12 +10,10 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../data/models/DTO/chamadoDTO_model.dart';
 import '../../data/models/DTO/userDTO_model.dart';
 
 class MainController extends GetxController {
   final ChamadoRepository _chamadoRepository;
-  // MainController _mainController = Get.find();
 
   Rx<LatLng> center = LatLng(-15.777737, -47.878488).obs;
   Completer<GoogleMapController> gmapController = Completer();
@@ -47,9 +44,6 @@ class MainController extends GetxController {
   @override
   void onInit() {
     // getUserLocation();
-    final arguments = Get.arguments;
-    _userDto.value = arguments;
-    print('USERDTO ${_userDto.value.nome}');
     loadData();
     super.onInit();
   }
@@ -117,11 +111,8 @@ class MainController extends GetxController {
                         BitmapDescriptor.hueRed),
                 onTap: () {
                   if (e.usuario_abriu_chamado!.id == userDto.id) {
-                    Get.offNamed(
-                      Routes.EDIT_RESCUE,
-                      parameters: {'id': e.id.toString()},
-                      arguments: userDto,
-                    );
+                    Get.offNamed(Routes.EDIT_RESCUE,
+                        parameters: {'id': e.id.toString()});
                   } else if (e.status == 'ANDAMENTO') {
                     Get.offNamed(Routes.FINISH_RESCUE,
                         parameters: {'id': e.id.toString()});
@@ -143,6 +134,8 @@ class MainController extends GetxController {
     if (listChamadosRescue.length == 0) {
       _isEmptyMarker.value = true;
     }
+
+    print('TODOS OS CHAMADOS ${listChamadosRescue.length}');
     loadMarkers();
   }
 

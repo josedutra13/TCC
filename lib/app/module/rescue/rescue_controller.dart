@@ -69,7 +69,7 @@ class RescueController extends GetxController {
     _startRescue.value = true;
     print('ID RESGATE = $id');
     _chamadoDTO.value.idChamado = int.parse(id);
-    _chamadoDTO.value.loginDTO = loginController.userDto;
+    // _chamadoDTO.value.loginDTO = loginController.userDto;
     await _chamadoRepository.associateChamado(chamadoDTO);
   }
 }

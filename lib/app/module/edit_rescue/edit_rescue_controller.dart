@@ -66,28 +66,11 @@ class EditRescueController extends GetxController {
       print('ID => LOAD $id');
     }
 
-    final arguments = Get.arguments;
-    _userDto.value = arguments;
+    // final arguments = Get.arguments;
+    // _userDto.value = arguments;
 
     super.onInit();
   }
-
-  @override
-  // void onReady() {
-  //   // TODO: implement onReady
-  //   super.onReady();
-  //   final arguments = Get.arguments;
-  //   _chamadoDTO.value = arguments;
-  //   print('CHAMADOS DTO ${_chamadoDTO.value}');
-  // }
-
-  // void checkButton() {
-  //   if (_rescue.value.animal!.estado == 'Urgente') {
-  //     animalState.text = 'Urgente';
-  //   } else {
-  //     animalState.text = 'Saúdavel';
-  //   }
-  // }
 
   void loadInfoRescue() {
     mainController.listChamadosRescue.forEach((element) {

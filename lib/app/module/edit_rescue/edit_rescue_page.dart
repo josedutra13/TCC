@@ -70,7 +70,7 @@ class EditRescuePage extends GetView<EditRescueController> {
                         ),
                       ),
                       DescriptionWidget(
-                        initialValue: controller.rescue.animal!.descricao,
+                        initialValue: controller.rescue.animal!.descricao!,
                       ),
                       DropDownInput(
                         labelText: 'Estado do animal',

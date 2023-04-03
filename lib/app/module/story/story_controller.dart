@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:auresgate/app/data/models/user_model.dart';
 import 'package:auresgate/app/data/repository/chamado_repository.dart';
 import 'package:auresgate/app/module/edit_rescue/edit_rescue_controller.dart';
 import 'package:auresgate/app/module/login/login_controller.dart';
@@ -11,34 +12,31 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../data/models/DTO/userDTO_model.dart';
+import '../../widgets/app_dependencies.dart';
 
 class StoryController extends GetxController {
-  final _userDto = UserDTO.empty().obs;
-  UserDTO get userDto => _userDto.value;
-
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    final arguments = Get.arguments;
-    _userDto.value = arguments;
-    print('STORY USERDTO ${_userDto.value.nome}');
-    listStory();
+    listStory(userDto: UserDTO());
   }
 
   ChamadoRepository _chamadoRepository = ChamadoRepository();
   // LoginController _loginController = Get.find();
   MainController _mainController = Get.find();
 
-  List listStory({BuildContext? context}) {
+  List listStory({BuildContext? context, required UserDTO userDto}) {
     var listStory;
+
     listStory = _mainController.listChamadosRescue.map((e) {
       print('IMAGEM: ${e.animal!.imagem}');
+      print('id: ${userDto.id}');
       final decodedBytes = Base64Decoder().convert(e.animal!.imagem!);
       var image = Image.memory(decodedBytes,
           fit: BoxFit.cover, width: 100, height: 100);
-      if ((e.usuario_abriu_chamado!.id == _userDto.value.id ||
-              e.usuario_atendeu_chamado!.id == _userDto.value.id) &&
+      if ((e.usuario_abriu_chamado!.id == userDto.id ||
+              e.usuario_atendeu_chamado!.id == userDto.id) &&
           e.status != 'ANDAMENTO') {
         return CardStory(
           onPressedEdit: () => editRequestInStory(e.id.toString()),
@@ -52,13 +50,12 @@ class StoryController extends GetxController {
         );
       }
     }).toList();
-    print('AQUIII $listStory');
+    print('CARD-STORY: $listStory');
     return listStory;
   }
 
   void editRequestInStory(String id) async {
-    Get.offNamed(Routes.EDIT_RESCUE,
-        parameters: {'id': id}, arguments: _mainController.userDto);
+    Get.offNamed(Routes.EDIT_RESCUE, parameters: {'id': id});
   }
 
   void deleteRequest(BuildContext context, int id) async {

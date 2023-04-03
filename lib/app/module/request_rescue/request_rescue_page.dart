@@ -84,7 +84,8 @@ class RequestRescuePage extends GetView<RequestRescueController> {
                                 parameters: {
                                   'descricao': controller.description.text,
                                   'estadoAnimal': controller.estadoAnimal.text
-                                });
+                                },
+                                arguments: controller.mainController.userDto);
                           }
                         },
                       ),

@@ -3,6 +3,7 @@ import 'package:auresgate/app/module/login/login_controller.dart';
 import 'package:auresgate/app/module/main/main_controller.dart';
 import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:auresgate/app/widgets/appBar_widgets.dart';
+import 'package:auresgate/app/widgets/app_dependencies.dart';
 import 'package:auresgate/app/widgets/menu_side_widget.dart';
 import 'package:auresgate/colors.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +21,12 @@ class MainPage extends GetView<MainController> {
 
   @override
   Widget build(BuildContext context) {
+    final dependencies = AppDependencies.of(context);
+
     return Scaffold(
       drawer: NavDrawer(
-        userName: controller.userDto.nome!,
-        onHistory: () =>
-            Get.toNamed(Routes.STORY, arguments: controller.userDto),
+        userName: dependencies.userDTO.nome!,
+        onHistory: () => Get.toNamed(Routes.STORY),
         logout: onLogout,
       ),
       appBar: AppPageBarWidget(
@@ -55,7 +57,7 @@ class MainPage extends GetView<MainController> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 20.0),
         child: SpeedDial(
-          visible: controller.userDto.isPerson!,
+          visible: dependencies.userDTO.isPerson!,
           backgroundColor: MainColors.primaryColor,
           icon: Icons.add,
           activeIcon: Icons.close,

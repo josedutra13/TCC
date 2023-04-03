@@ -83,7 +83,7 @@ class LoginPage extends GetView<LoginController> {
                     width: MediaQuery.of(context).size.width * 0.87,
                     height: MediaQuery.of(context).size.width * 0.11,
                     child: ElevatedButton(
-                        onPressed: () => controller.login(),
+                        onPressed: () => controller.login(context),
                         style: ElevatedButton.styleFrom(
                             shadowColor: MainColors.primaryColor,
                             primary: MainColors.primaryColor,

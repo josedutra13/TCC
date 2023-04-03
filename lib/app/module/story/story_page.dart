@@ -5,6 +5,8 @@ import 'package:auresgate/app/widgets/button_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/app_dependencies.dart';
+
 class StoryPage extends GetView<StoryController> {
   const StoryPage({Key? key}) : super(key: key);
   void help(BuildContext context) {
@@ -49,6 +51,7 @@ class StoryPage extends GetView<StoryController> {
 
   @override
   Widget build(BuildContext context) {
+    var dependencies = AppDependencies.of(context);
     return WillPopScope(
       onWillPop: onWillPop,
       child: Scaffold(
@@ -58,13 +61,15 @@ class StoryPage extends GetView<StoryController> {
           hasIcon: true,
         ),
         body: Obx(() => ListView(
-              children: [...controller.listStory(context: context)],
+              children: [
+                ...controller.listStory(
+                    context: context, userDto: dependencies.userDTO)
+              ],
             )),
         floatingActionButton: ButtonWidget(
           buttonText: 'Voltar',
           isBack: true,
-          onPressed: () =>
-              Get.offNamed(Routes.MAIN, arguments: controller.userDto),
+          onPressed: () => Get.offNamed(Routes.MAIN),
         ),
       ),
     );

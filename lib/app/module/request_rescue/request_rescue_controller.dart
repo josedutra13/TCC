@@ -11,6 +11,8 @@ import 'package:auresgate/app/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../widgets/app_dependencies.dart';
 // import 'package:http_parser/http_parser.dart';
 
 class RequestRescueController extends GetxController {
@@ -61,9 +63,11 @@ class RequestRescueController extends GetxController {
     File imageFile = File(path);
     List<int> imageBytes = imageFile.readAsBytesSync();
     String base64Image = base64.encode(imageBytes);
+    final context = Get.context;
+    final dependencies = AppDependencies.of(context!);
 
     _chamadoDTO.value.animal = _animalEditing.value;
-    _chamadoDTO.value.loginDTO = mainController.userDto;
+    _chamadoDTO.value.loginDTO = dependencies.userDTO;
     _chamadoDTO.value.img = base64Image;
 
     var response = await _chamadoRepository.createChamado(chamadoDTO);
